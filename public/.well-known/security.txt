@@ -1,0 +1,4 @@
+Contact: mailto:tim@tielo-digital.nl
+Expires: 2025-12-31T23:59:59.000Z
+Preferred-Languages: nl, en
+Canonical: https://meerimpactmarketing.nl/.well-known/security.txt
