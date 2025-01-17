@@ -150,7 +150,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm">
               © {currentYear} Meer Impact Marketing door{' '}
-              <a href="https://tielo-digital.nl/" className="text-sm hover:text-blue-500 transition-colors">
+              <a href="https://www.tielo-digital.nl/" className="text-sm hover:text-blue-500 transition-colors">
                 Tielo Digital
               </a>. Alle rechten voorbehouden.
             </p>
