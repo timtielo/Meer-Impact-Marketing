@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="300" viewBox="0 0 1200 300" version="1.0" xmlns="http://www.w3.org/2000/svg">
+  <g>
+    <!-- Hexagon with MI logo -->
+    <g transform="translate(50, 50)">
+      <path d="M100 0 L190 50 L190 150 L100 200 L10 150 L10 50 Z" fill="#253D77" />
+      <path d="M100 20 L100 180" stroke="#BCBA87" stroke-width="3" />
+      <path d="M60 60 L80 100 L100 60 L120 100 L140 60" stroke="#BCBA87" stroke-width="3" fill="none" />
+    </g>
+
+    <!-- MEER IMPACT text -->
+    <g transform="translate(250, 120)">
+      <text font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="#BCBA87">
+        <tspan>MEER</tspan>
+        <tspan x="250">IMPACT</tspan>
+      </text>
+    </g>
+
+    <!-- Marketing & Copy text -->
+    <g transform="translate(250, 200)">
+      <text font-family="Arial, sans-serif" font-size="36" fill="#BCBA87">
+        <tspan>Marketing & Copy</tspan>
+      </text>
+      <line x1="0" y1="45" x2="450" y2="45" stroke="#BCBA87" stroke-width="2" />
+    </g>
+  </g>
+</svg>

@@ -11,44 +11,54 @@ const contentfulClient = contentful.createClient({
   environment: process.env.VITE_CONTENTFUL_ENVIRONMENT || 'master',
 });
 
-const DOMAIN = 'https://meerimpactmarketing.nl';
+const DOMAIN = 'https://www.meerimpactmarketing.nl';
 const CURRENT_DATE = new Date().toISOString().split('T')[0];
 
-async function generateSitemapIndex() {
-  const sitemapIndex = `<?xml version="1.0" encoding="UTF-8"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <sitemap>
-    <loc>${DOMAIN}/pages-sitemap.xml</loc>
-    <lastmod>${CURRENT_DATE}</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>${DOMAIN}/blog-sitemap.xml</loc>
-    <lastmod>${CURRENT_DATE}</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>${DOMAIN}/diensten-sitemap.xml</loc>
-    <lastmod>${CURRENT_DATE}</lastmod>
-  </sitemap>
-</sitemapindex>`;
+// Static URLs configuration
+const STATIC_URLS = [
+  { url: '', changefreq: 'weekly', priority: '1.0' },
+  { url: 'contact', changefreq: 'monthly', priority: '0.7' },
+  { url: 'gratis-guide', changefreq: 'monthly', priority: '0.7' },
+  { url: 'marketing-analyse', changefreq: 'monthly', priority: '0.7' },
+  { url: 'testimonials', changefreq: 'monthly', priority: '0.7' },
+  { url: 'privacy', changefreq: 'yearly', priority: '0.3' },
+  { url: 'voorwaarden', changefreq: 'yearly', priority: '0.3' },
+];
 
-  await fs.writeFile('public/sitemap.xml', sitemapIndex);
-  console.log('Generated sitemap index');
-}
+const SERVICE_URLS = [
+  { url: 'diensten', changefreq: 'monthly', priority: '0.8' },
+  { url: 'diensten/meta-ads', changefreq: 'monthly', priority: '0.8' },
+  { url: 'diensten/email-marketing', changefreq: 'monthly', priority: '0.8' },
+];
 
-async function generateBlogSitemap() {
+async function generateSitemap() {
   try {
+    // Fetch blog posts from Contentful
     console.log('Fetching blog posts from Contentful...');
     const response = await contentfulClient.getEntries({
       content_type: 'pageBlogPost',
       order: '-fields.publishedDate',
-      limit: 1000,
       select: ['fields.slug', 'fields.publishedDate']
     });
 
-    console.log(`Found ${response.items.length} blog posts`);
-
-    const blogSitemap = `<?xml version="1.0" encoding="UTF-8"?>
+    // Generate sitemap content
+    const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Main Pages -->
+${STATIC_URLS.map(page => `  <url>
+    <loc>${DOMAIN}${page.url ? `/${page.url}` : ''}</loc>
+    <changefreq>${page.changefreq}</changefreq>
+    <priority>${page.priority}</priority>
+  </url>`).join('\n')}
+
+  <!-- Services Pages -->
+${SERVICE_URLS.map(page => `  <url>
+    <loc>${DOMAIN}/${page.url}</loc>
+    <changefreq>${page.changefreq}</changefreq>
+    <priority>${page.priority}</priority>
+  </url>`).join('\n')}
+
+  <!-- Blog Pages -->
   <url>
     <loc>${DOMAIN}/blog</loc>
     <changefreq>weekly</changefreq>
@@ -62,10 +72,11 @@ ${response.items.map(post => `  <url>
   </url>`).join('\n')}
 </urlset>`;
 
-    await fs.writeFile('public/blog-sitemap.xml', blogSitemap);
-    console.log('Generated blog sitemap');
+    // Save sitemap.xml
+    await fs.writeFile('public/sitemap.xml', sitemap);
+    console.log('Generated sitemap.xml');
 
-    // Also save the slugs for reference
+    // Save blog slugs for reference
     const slugsList = response.items.map(post => ({
       slug: post.fields.slug,
       publishedDate: new Date(post.fields.publishedDate).toLocaleDateString('nl-NL'),
@@ -76,112 +87,9 @@ ${response.items.map(post => `  <url>
     console.log('Saved blog slugs to blog-slugs.json');
 
   } catch (error) {
-    console.error('Error generating blog sitemap:', error);
-    // Create a basic blog sitemap if Contentful fails
-    const basicBlogSitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>${DOMAIN}/blog</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-</urlset>`;
-    
-    await fs.writeFile('public/blog-sitemap.xml', basicBlogSitemap);
-    console.log('Generated basic blog sitemap due to error');
-  }
-}
-
-async function generatePagesSitemap() {
-  const pagesSitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>${DOMAIN}</loc>
-    <lastmod>${CURRENT_DATE}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>${DOMAIN}/contact</loc>
-    <lastmod>${CURRENT_DATE}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>${DOMAIN}/gratis-guide</loc>
-    <lastmod>${CURRENT_DATE}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>${DOMAIN}/marketing-analyse</loc>
-    <lastmod>${CURRENT_DATE}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>${DOMAIN}/testimonials</loc>
-    <lastmod>${CURRENT_DATE}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>${DOMAIN}/privacy</loc>
-    <lastmod>${CURRENT_DATE}</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>${DOMAIN}/voorwaarden</loc>
-    <lastmod>${CURRENT_DATE}</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-</urlset>`;
-
-  await fs.writeFile('public/pages-sitemap.xml', pagesSitemap);
-  console.log('Generated pages sitemap');
-}
-
-async function generateDienstenSitemap() {
-  const dienstenSitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>${DOMAIN}/diensten</loc>
-    <lastmod>${CURRENT_DATE}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>${DOMAIN}/diensten/meta-ads</loc>
-    <lastmod>${CURRENT_DATE}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>${DOMAIN}/diensten/email-marketing</loc>
-    <lastmod>${CURRENT_DATE}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-</urlset>`;
-
-  await fs.writeFile('public/diensten-sitemap.xml', dienstenSitemap);
-  console.log('Generated diensten sitemap');
-}
-
-async function generateAllSitemaps() {
-  try {
-    console.log('Starting sitemap generation...');
-    await generateSitemapIndex();
-    await generatePagesSitemap();
-    await generateBlogSitemap();
-    await generateDienstenSitemap();
-    console.log('All sitemaps generated successfully!');
-  } catch (error) {
-    console.error('Error generating sitemaps:', error);
+    console.error('Error generating sitemap:', error);
     process.exit(1);
   }
 }
 
-generateAllSitemaps();
+generateSitemap();
