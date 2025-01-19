@@ -63,6 +63,7 @@ export default function EmailMarketing() {
           name="description" 
           content="Start met email marketing en bouw een waardevolle klantendatabase. Kosteneffectief, meetbaar en direct resultaat." 
         />
+        <link rel="canonical" href="https://www.meerimpactmarketing.nl/diensten/email-marketing" />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-white via-blue-50/30 to-white pt-32 pb-16">

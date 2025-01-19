@@ -20,6 +20,7 @@ export default function MarketingAnalyse() {
           name="description" 
           content="Ontvang een gratis, persoonlijke marketing analyse voor jouw bedrijf. Binnen 48 uur inzicht in je groeikansen." 
         />
+        <link rel="canonical" href="https://www.meerimpactmarketing.nl/marketing-analyse" />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-white via-blue-50/30 to-white pt-32 pb-16">

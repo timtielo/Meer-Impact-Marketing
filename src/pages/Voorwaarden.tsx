@@ -10,6 +10,7 @@ export default function Voorwaarden() {
           name="description" 
           content="Lees onze algemene voorwaarden voor informatie over onze dienstverlening en overeenkomsten." 
         />
+        <link rel="canonical" href="https://www.meerimpactmarketing.nl/voorwaarden" />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-white via-blue-50/30 to-white pt-32 pb-16">

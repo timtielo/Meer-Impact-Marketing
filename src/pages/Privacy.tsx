@@ -10,6 +10,7 @@ export default function Privacy() {
           name="description" 
           content="Lees onze privacy policy om te begrijpen hoe wij uw gegevens beschermen en gebruiken." 
         />
+          <link rel="canonical" href="https://www.meerimpactmarketing.nl/privacy" />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-white via-blue-50/30 to-white pt-32 pb-16">

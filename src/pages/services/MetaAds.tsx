@@ -52,6 +52,7 @@ export default function MetaAds() {
           name="description" 
           content="Bereik meer klanten met effectieve Facebook en Instagram advertenties. Ontdek hoe wij je helpen groeien met Meta Ads." 
         />
+        <link rel="canonical" href="https://www.meerimpactmarketing.nl/diensten/meta-ads" />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-white via-blue-50/30 to-white pt-32 pb-16">

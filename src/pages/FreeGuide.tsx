@@ -57,6 +57,7 @@ export default function FreeGuide() {
           name="description" 
           content="Download onze gratis guide en leer hoe je snel nieuwe klanten krijgt met Meta Ads. Praktische tips en strategieën voor Facebook en Instagram advertenties." 
         />
+         <link rel="canonical" href="https://www.meerimpactmarketing.nl/gratis-guide" />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-white via-blue-50/30 to-white pt-32 pb-16">

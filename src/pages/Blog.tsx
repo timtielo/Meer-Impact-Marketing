@@ -71,6 +71,7 @@ export default function Blog() {
           name="description" 
           content="Ontdek de laatste marketing trends, tips en strategieën in onze blog. Expert advies over SEO, social media, content marketing en meer." 
         />
+         <link rel="canonical" href="https://www.meerimpactmarketing.nl/blog" />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-white via-blue-50/30 to-white pt-32 pb-16">
