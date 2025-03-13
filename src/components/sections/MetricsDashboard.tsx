@@ -5,21 +5,21 @@ import { Link } from 'react-router-dom';
 const metrics = [
   {
     icon: Users,
-    value: "3+",
+    value: "6+",
     label: "Tevreden Klanten",
     description: "Succesvolle samenwerkingen"
   },
   {
     icon: TrendingUp,
-    value: "300%",
+    value: "453%",
     label: "Gemiddelde ROI",
     description: "Return on Investment"
   },
   {
     icon: LineChart,
-    value: "€2000+",
+    value: "€20000+",
     label: "Extra Omzet",
-    description: "Voor onze klanten in 2024"
+    description: "Voor onze klanten"
   },
   {
     icon: Award,

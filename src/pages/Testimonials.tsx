@@ -15,12 +15,30 @@ const testimonials = [
     role: "Mede-eigenaar",
     company: "Strength2Strength",
     quote: "Ik werk sinds anderhalve maand samen met Lars (Meer Impact Marketing) en ik wil graag even mijn ervaring delen.\n\nIk houd het kort maar krachtig:\nProfessioneel, duidelijk, meedenkend, neemt initiatief, communiceert duidelijk, levert zijn dienst met zorg, staat open voor feedback/kritiek en de behoefte van de klant staat bij hem op 1."
+  },
+  {
+    name: "Vybrand Media",
+    role: "Marketing Bureau",
+    company: "",
+    quote: "Onze samenwerking met Meer Impact Marketing was goed. Lars is erg goed in structuur en dat was voor ons erg fijn werken! We raden MIM dan ook aan iedereen aan."
+  },
+  {
+    name: "Joey Angel",
+    role: "Ondernemer",
+    company: "",
+    quote: "Zeer goede ervaring met Lars, Heb het werken als zeer prettig ervaren."
+  },
+  {
+    name: "Tim Tielkemeijer",
+    role: "Eigenaar",
+    company: "Praktijk Tielo",
+    quote: "Fijn om mee samen te werken."
   }
 ];
 
 const stats = [
-  { value: "3+", label: "Tevreden Klanten" },
-  { value: "300%", label: "Gemiddelde ROI" },
+  { value: "6+", label: "Tevreden Klanten" },
+  { value: "450%", label: "Gemiddelde ROI" },
   { value: "100%", label: "Klanttevredenheid" }
 ];
 
@@ -64,7 +82,7 @@ export default function Testimonials() {
           </div>
 
           {/* Testimonials Grid */}
-          <div className="grid md:grid-cols-2 gap-12 mb-20">
+          <div className="grid md:grid-cols-2 gap-8 mb-20">
             {testimonials.map((testimonial, index) => (
               <div 
                 key={index}
@@ -90,7 +108,7 @@ export default function Testimonials() {
                   <div className="border-t border-gray-100 pt-6">
                     <p className="font-bold text-gray-900">{testimonial.name}</p>
                     <p className="text-gray-600">
-                      {testimonial.role} bij {testimonial.company}
+                      {testimonial.role}{testimonial.company && ` bij ${testimonial.company}`}
                     </p>
                   </div>
                 </div>
