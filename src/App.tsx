@@ -16,6 +16,8 @@ import Privacy from './pages/Privacy';
 import Voorwaarden from './pages/Voorwaarden';
 import MetaAds from './pages/services/MetaAds';
 import EmailMarketing from './pages/services/EmailMarketing';
+import Visitekaartje from './pages/Visitekaartje';
+import VisitekaartjeSuccess from './pages/VisitekaartjeSuccess';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -49,6 +51,8 @@ function App() {
             <Route path="/marketing-analyse-bedankt" element={<MarketingAnalyseBedankt />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/voorwaarden" element={<Voorwaarden />} />
+            <Route path="/visitekaartje" element={<Visitekaartje />} />
+            <Route path="/visitekaartje-success" element={<VisitekaartjeSuccess />} />
           </Routes>
         </main>
         <Footer />
