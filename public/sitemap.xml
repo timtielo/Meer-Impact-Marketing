@@ -3,43 +3,43 @@
   <!-- Main Pages -->
   <url>
     <loc>https://www.meerimpactmarketing.nl</loc>
-    <lastmod>2025-01-20</lastmod>
+    <lastmod>2025-03-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.meerimpactmarketing.nl/contact</loc>
-    <lastmod>2025-01-20</lastmod>
+    <lastmod>2025-03-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.meerimpactmarketing.nl/gratis-guide</loc>
-    <lastmod>2025-01-20</lastmod>
+    <lastmod>2025-03-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.meerimpactmarketing.nl/marketing-analyse</loc>
-    <lastmod>2025-01-20</lastmod>
+    <lastmod>2025-03-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.meerimpactmarketing.nl/testimonials</loc>
-    <lastmod>2025-01-20</lastmod>
+    <lastmod>2025-03-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.meerimpactmarketing.nl/privacy</loc>
-    <lastmod>2025-01-20</lastmod>
+    <lastmod>2025-03-14</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://www.meerimpactmarketing.nl/voorwaarden</loc>
-    <lastmod>2025-01-20</lastmod>
+    <lastmod>2025-03-14</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -47,19 +47,19 @@
   <!-- Services Pages -->
   <url>
     <loc>https://www.meerimpactmarketing.nl/diensten</loc>
-    <lastmod>2025-01-20</lastmod>
+    <lastmod>2025-03-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.meerimpactmarketing.nl/diensten/meta-ads</loc>
-    <lastmod>2025-01-20</lastmod>
+    <lastmod>2025-03-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.meerimpactmarketing.nl/diensten/email-marketing</loc>
-    <lastmod>2025-01-20</lastmod>
+    <lastmod>2025-03-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -67,49 +67,19 @@
   <!-- Blog Pages -->
   <url>
     <loc>https://www.meerimpactmarketing.nl/blog</loc>
-    <lastmod>2025-01-20</lastmod>
+    <lastmod>2025-03-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.meerimpactmarketing.nl/blog/humanoids-take-the-stage-the-growing-role-of-human-like-robots-in-society</loc>
-    <lastmod>2025-01-04</lastmod>
+    <loc>https://www.meerimpactmarketing.nl/blog/zo-stel-je-in-6-stappen-een-ijzersterke-marketingstrategie-op</loc>
+    <lastmod>2025-03-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.meerimpactmarketing.nl/blog/introducing-the-latest-and-greatest-tools-for-developers</loc>
-    <lastmod>2022-12-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.meerimpactmarketing.nl/blog/the-rise-of-robots-how-advanced-technology-is-changing</loc>
-    <lastmod>2022-12-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.meerimpactmarketing.nl/blog/how-ar-will-transform-our-lives-in-2050</loc>
-    <lastmod>2022-12-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.meerimpactmarketing.nl/blog/creating-sustainable-cities-and-the-role-of-green-urbanism</loc>
-    <lastmod>2022-12-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.meerimpactmarketing.nl/blog/quantum-computing-how-it-works-and-what-it-means-for-the-future</loc>
-    <lastmod>2022-12-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.meerimpactmarketing.nl/blog/exploring-the-intersection-of-technology-and-art</loc>
-    <lastmod>2022-12-04</lastmod>
+    <loc>https://www.meerimpactmarketing.nl/blog/dit-is-waarom-jouw-perfecte-product-nog-niet-goed-verkoopt</loc>
+    <lastmod>2025-03-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
