@@ -6,8 +6,8 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const contentfulClient = contentful.createClient({
-  space: process.env.VITE_CONTENTFUL_SPACE_ID,
-  accessToken: process.env.VITE_CONTENTFUL_ACCESS_TOKEN,
+  space: process.env.VITE_CONTENTFUL_SPACE_ID || 'w68zf4gcgfih',
+  accessToken: process.env.VITE_CONTENTFUL_ACCESS_TOKEN || 'eSFtCTz8uA5vu1WuXgAAdYEt7kSHx-a_ASbdCrKpl20',
   environment: process.env.VITE_CONTENTFUL_ENVIRONMENT || 'master',
 });
 
@@ -126,6 +126,16 @@ ${STATIC_URLS.map(page => `  <url>
 
     await fs.writeFile('public/pages-sitemap.xml', pagesSitemap);
     console.log('Generated pages-sitemap.xml');
+
+    // Generate blog-slugs.json
+    const blogSlugs = response.items.map(post => ({
+      slug: post.fields.slug,
+      publishedDate: new Date(post.fields.publishedDate).toLocaleDateString('en-US'),
+      url: `${DOMAIN}/blog/${post.fields.slug}`
+    }));
+
+    await fs.writeFile('public/blog-slugs.json', JSON.stringify(blogSlugs, null, 2));
+    console.log('Generated blog-slugs.json');
 
   } catch (error) {
     console.error('Error generating sitemap:', error);
