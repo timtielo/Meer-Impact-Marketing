@@ -31,28 +31,7 @@ const SERVICE_URLS = [
   { url: 'diensten/email-marketing', changefreq: 'monthly', priority: '0.8' },
 ];
 
-async function generateSitemapIndex() {
-  const sitemapIndex = `<?xml version="1.0" encoding="UTF-8"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <sitemap>
-    <loc>${DOMAIN}/pages-sitemap.xml</loc>
-    <lastmod>${CURRENT_DATE}</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>${DOMAIN}/blog-sitemap.xml</loc>
-    <lastmod>${CURRENT_DATE}</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>${DOMAIN}/diensten-sitemap.xml</loc>
-    <lastmod>${CURRENT_DATE}</lastmod>
-  </sitemap>
-</sitemapindex>`;
-
-  await fs.writeFile('public/sitemap-index.xml', sitemapIndex);
-  console.log('Generated sitemap-index.xml');
-}
-
-async function generateSitemaps() {
+async function generateSitemap() {
   try {
     // Fetch blog posts from Contentful
     console.log('Fetching blog posts from Contentful...');
@@ -62,9 +41,26 @@ async function generateSitemaps() {
       select: ['fields.slug', 'fields.publishedDate']
     });
 
-    // Generate blog sitemap
-    const blogSitemap = `<?xml version="1.0" encoding="UTF-8"?>
+    // Generate sitemap content
+    const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Main Pages -->
+${STATIC_URLS.map(page => `  <url>
+    <loc>${DOMAIN}${page.url ? `/${page.url}` : ''}</loc>
+    <lastmod>${CURRENT_DATE}</lastmod>
+    <changefreq>${page.changefreq}</changefreq>
+    <priority>${page.priority}</priority>
+  </url>`).join('\n')}
+
+  <!-- Services Pages -->
+${SERVICE_URLS.map(page => `  <url>
+    <loc>${DOMAIN}/${page.url}</loc>
+    <lastmod>${CURRENT_DATE}</lastmod>
+    <changefreq>${page.changefreq}</changefreq>
+    <priority>${page.priority}</priority>
+  </url>`).join('\n')}
+
+  <!-- Blog Pages -->
   <url>
     <loc>${DOMAIN}/blog</loc>
     <lastmod>${CURRENT_DATE}</lastmod>
@@ -79,38 +75,11 @@ ${response.items.map(post => `  <url>
   </url>`).join('\n')}
 </urlset>`;
 
-    await fs.writeFile('public/blog-sitemap.xml', blogSitemap);
-    console.log('Generated blog-sitemap.xml');
+    // Save sitemap.xml
+    await fs.writeFile('public/sitemap.xml', sitemap);
+    console.log('Generated sitemap.xml');
 
-    // Generate services sitemap
-    const servicesSitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${SERVICE_URLS.map(page => `  <url>
-    <loc>${DOMAIN}/${page.url}</loc>
-    <lastmod>${CURRENT_DATE}</lastmod>
-    <changefreq>${page.changefreq}</changefreq>
-    <priority>${page.priority}</priority>
-  </url>`).join('\n')}
-</urlset>`;
-
-    await fs.writeFile('public/diensten-sitemap.xml', servicesSitemap);
-    console.log('Generated diensten-sitemap.xml');
-
-    // Generate pages sitemap
-    const pagesSitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${STATIC_URLS.map(page => `  <url>
-    <loc>${DOMAIN}${page.url ? `/${page.url}` : ''}</loc>
-    <lastmod>${CURRENT_DATE}</lastmod>
-    <changefreq>${page.changefreq}</changefreq>
-    <priority>${page.priority}</priority>
-  </url>`).join('\n')}
-</urlset>`;
-
-    await fs.writeFile('public/pages-sitemap.xml', pagesSitemap);
-    console.log('Generated pages-sitemap.xml');
-
-    // Generate blog-slugs.json
+    // Generate blog-slugs.json for client-side use
     const blogSlugs = response.items.map(post => ({
       slug: post.fields.slug,
       publishedDate: new Date(post.fields.publishedDate).toLocaleDateString('en-US'),
@@ -120,13 +89,10 @@ ${STATIC_URLS.map(page => `  <url>
     await fs.writeFile('public/blog-slugs.json', JSON.stringify(blogSlugs, null, 2));
     console.log('Generated blog-slugs.json');
 
-    // Generate sitemap index
-    await generateSitemapIndex();
-
   } catch (error) {
-    console.error('Error generating sitemaps:', error);
+    console.error('Error generating sitemap:', error);
     process.exit(1);
   }
 }
 
-generateSitemaps();
+generateSitemap();
