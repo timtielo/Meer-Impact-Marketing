@@ -47,6 +47,7 @@ async function generateSitemap() {
   <!-- Main Pages -->
 ${STATIC_URLS.map(page => `  <url>
     <loc>${DOMAIN}${page.url ? `/${page.url}` : ''}</loc>
+    <lastmod>${CURRENT_DATE}</lastmod>
     <changefreq>${page.changefreq}</changefreq>
     <priority>${page.priority}</priority>
   </url>`).join('\n')}
@@ -54,6 +55,7 @@ ${STATIC_URLS.map(page => `  <url>
   <!-- Services Pages -->
 ${SERVICE_URLS.map(page => `  <url>
     <loc>${DOMAIN}/${page.url}</loc>
+    <lastmod>${CURRENT_DATE}</lastmod>
     <changefreq>${page.changefreq}</changefreq>
     <priority>${page.priority}</priority>
   </url>`).join('\n')}
@@ -61,6 +63,7 @@ ${SERVICE_URLS.map(page => `  <url>
   <!-- Blog Pages -->
   <url>
     <loc>${DOMAIN}/blog</loc>
+    <lastmod>${CURRENT_DATE}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -76,15 +79,53 @@ ${response.items.map(post => `  <url>
     await fs.writeFile('public/sitemap.xml', sitemap);
     console.log('Generated sitemap.xml');
 
-    // Save blog slugs for reference
-    const slugsList = response.items.map(post => ({
-      slug: post.fields.slug,
-      publishedDate: new Date(post.fields.publishedDate).toLocaleDateString('nl-NL'),
-      url: `${DOMAIN}/blog/${post.fields.slug}`
-    }));
+    // Generate blog sitemap
+    const blogSitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${DOMAIN}/blog</loc>
+    <lastmod>${CURRENT_DATE}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+${response.items.map(post => `  <url>
+    <loc>${DOMAIN}/blog/${post.fields.slug}</loc>
+    <lastmod>${new Date(post.fields.publishedDate).toISOString().split('T')[0]}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>`).join('\n')}
+</urlset>`;
 
-    await fs.writeFile('public/blog-slugs.json', JSON.stringify(slugsList, null, 2));
-    console.log('Saved blog slugs to blog-slugs.json');
+    await fs.writeFile('public/blog-sitemap.xml', blogSitemap);
+    console.log('Generated blog-sitemap.xml');
+
+    // Generate services sitemap
+    const servicesSitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${SERVICE_URLS.map(page => `  <url>
+    <loc>${DOMAIN}/${page.url}</loc>
+    <lastmod>${CURRENT_DATE}</lastmod>
+    <changefreq>${page.changefreq}</changefreq>
+    <priority>${page.priority}</priority>
+  </url>`).join('\n')}
+</urlset>`;
+
+    await fs.writeFile('public/diensten-sitemap.xml', servicesSitemap);
+    console.log('Generated diensten-sitemap.xml');
+
+    // Generate pages sitemap
+    const pagesSitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${STATIC_URLS.map(page => `  <url>
+    <loc>${DOMAIN}${page.url ? `/${page.url}` : ''}</loc>
+    <lastmod>${CURRENT_DATE}</lastmod>
+    <changefreq>${page.changefreq}</changefreq>
+    <priority>${page.priority}</priority>
+  </url>`).join('\n')}
+</urlset>`;
+
+    await fs.writeFile('public/pages-sitemap.xml', pagesSitemap);
+    console.log('Generated pages-sitemap.xml');
 
   } catch (error) {
     console.error('Error generating sitemap:', error);

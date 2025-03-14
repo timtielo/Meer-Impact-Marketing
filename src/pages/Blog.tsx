@@ -16,6 +16,7 @@ export default function Blog() {
         const response = await contentfulClient.getEntries({
           content_type: 'pageBlogPost',
           order: '-fields.publishedDate',
+          include: 2,
         });
 
         const formattedPosts = response.items.map((item: any) => ({
@@ -40,11 +41,14 @@ export default function Blog() {
           }),
           title: item.fields.title,
           shortDescription: item.fields.shortDescription,
-          featuredImage: {
-            url: item.fields.featuredImage.fields.file.url,
-            title: item.fields.featuredImage.fields.title,
-          },
+          featuredImage: item.fields.featuredImage?.fields.file
+            ? {
+                url: item.fields.featuredImage.fields.file.url,
+                title: item.fields.featuredImage.fields.title,
+              }
+            : undefined,
           content: item.fields.content,
+          url: `/blog/${item.fields.slug}`,
         }));
 
         // Set the first post as featured and remove it from the regular posts list
@@ -71,7 +75,7 @@ export default function Blog() {
           name="description" 
           content="Ontdek de laatste marketing trends, tips en strategieën in onze blog. Expert advies over SEO, social media, content marketing en meer." 
         />
-         <link rel="canonical" href="https://www.meerimpactmarketing.nl/blog" />
+        <link rel="canonical" href="https://www.meerimpactmarketing.nl/blog" />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-white via-blue-50/30 to-white pt-32 pb-16">
@@ -102,39 +106,41 @@ export default function Blog() {
                     Uitgelichte Blog Post
                   </h2>
                   <Link
-                    to={`/blog/${featuredPost.slug}`}
+                    to={featuredPost.url}
                     className="group block bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300"
                   >
-                    <div className="aspect-w-16 aspect-h-9 relative">
-                      <img
-                        src={`https:${featuredPost.featuredImage.url}`}
-                        alt={featuredPost.featuredImage.title}
-                        className="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                      <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-                        <h3 className="text-3xl font-bold mb-4 group-hover:text-blue-300 transition-colors">
-                          {featuredPost.title}
-                        </h3>
-                        {featuredPost.shortDescription && (
-                          <p className="text-lg text-white/90 mb-4">
-                            {featuredPost.shortDescription}
-                          </p>
-                        )}
-                        <div className="flex items-center justify-between text-sm text-white/80">
-                          {featuredPost.author && (
-                            <div className="flex items-center">
-                              <User className="h-4 w-4 mr-1" />
-                              {featuredPost.author.name}
-                            </div>
+                    {featuredPost.featuredImage && (
+                      <div className="aspect-w-16 aspect-h-9 relative">
+                        <img
+                          src={`https:${featuredPost.featuredImage.url}?w=1200&h=600&fit=fill`}
+                          alt={featuredPost.featuredImage.title}
+                          className="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                        <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                          <h3 className="text-3xl font-bold mb-4 group-hover:text-blue-300 transition-colors">
+                            {featuredPost.title}
+                          </h3>
+                          {featuredPost.shortDescription && (
+                            <p className="text-lg text-white/90 mb-4">
+                              {featuredPost.shortDescription}
+                            </p>
                           )}
-                          <div className="flex items-center">
-                            <Clock className="h-4 w-4 mr-1" />
-                            {featuredPost.publishedDate}
+                          <div className="flex items-center justify-between text-sm text-white/80">
+                            {featuredPost.author && (
+                              <div className="flex items-center">
+                                <User className="h-4 w-4 mr-1" />
+                                {featuredPost.author.name}
+                              </div>
+                            )}
+                            <div className="flex items-center">
+                              <Clock className="h-4 w-4 mr-1" />
+                              {featuredPost.publishedDate}
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
+                    )}
                   </Link>
                 </div>
               )}
@@ -144,13 +150,13 @@ export default function Blog() {
                 {posts.map((post) => (
                   <Link
                     key={post.slug}
-                    to={`/blog/${post.slug}`}
+                    to={post.url}
                     className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
                   >
-                    {post.featuredImage?.url && (
+                    {post.featuredImage && (
                       <div className="aspect-w-16 aspect-h-9 relative">
                         <img
-                          src={`https:${post.featuredImage.url}`}
+                          src={`https:${post.featuredImage.url}?w=600&h=400&fit=fill`}
                           alt={post.featuredImage.title}
                           className="object-cover w-full h-48 group-hover:scale-105 transition-transform duration-300"
                         />
