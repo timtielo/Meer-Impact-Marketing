@@ -10,7 +10,7 @@ const copySitemaps = () => {
     name: 'copy-sitemaps',
     closeBundle: () => {
       const sitemapFiles = [
-        'sitemap.xml',
+        'sitemap-index.xml',
         'blog-sitemap.xml',
         'diensten-sitemap.xml',
         'pages-sitemap.xml',
@@ -24,6 +24,8 @@ const copySitemaps = () => {
         if (fs.existsSync(sourcePath)) {
           fs.copyFileSync(sourcePath, destPath);
           console.log(`Copied ${file} to dist directory`);
+        } else {
+          console.warn(`Warning: ${file} not found in public directory`);
         }
       });
     }
