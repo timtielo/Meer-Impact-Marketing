@@ -75,7 +75,7 @@ export default function Footer() {
                   Blog
                 </Link>
               </li>
-                <li>
+              <li>
                 <Link to="/testimonials" className="hover:text-blue-500 transition-colors">
                   Succesverhalen
                 </Link>
@@ -99,10 +99,20 @@ export default function Footer() {
               </li>
               <li>
                 <Link to="/diensten/email-marketing" className="hover:text-blue-500 transition-colors">
-                  Email marketing
+                  Email Marketing
                 </Link>
               </li>
-                 <li>
+              <li>
+                <Link to="/diensten/copywriting" className="hover:text-blue-500 transition-colors">
+                  Copywriting
+                </Link>
+              </li>
+              <li>
+                <Link to="/diensten/social-media-management" className="hover:text-blue-500 transition-colors">
+                  Social Media Management
+                </Link>
+              </li>
+              <li>
                 <Link to="/diensten/" className="hover:text-blue-500 transition-colors">
                   Alle diensten
                 </Link>

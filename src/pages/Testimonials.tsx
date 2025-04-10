@@ -17,6 +17,12 @@ const testimonials = [
     quote: "Ik werk sinds anderhalve maand samen met Lars (Meer Impact Marketing) en ik wil graag even mijn ervaring delen.\n\nIk houd het kort maar krachtig:\nProfessioneel, duidelijk, meedenkend, neemt initiatief, communiceert duidelijk, levert zijn dienst met zorg, staat open voor feedback/kritiek en de behoefte van de klant staat bij hem op 1."
   },
   {
+    name: "Jorn",
+    role: "Eigenaar",
+    company: "Betere Mobiliteit",
+    quote: "Lars ondersteunt me bij het beheren van mijn Facebook- en Instagram-advertenties en doet dit op een overzichtelijke manier. Hij legt helder uit wat hij test en waarom hij bepaalde keuzes maakt. Daarnaast denkt hij actief mee over de inhoud van de advertenties en content. Ook geeft hij waardevolle feedback om de resultaten steeds te verbeteren. Dankzij zijn aanpak en betrokkenheid is de samenwerking met Lars heel prettig en doeltreffend. Een aanrader in deze wereld van sociale media cowboys."
+  },
+  {
     name: "Vybrand Media",
     role: "Marketing Bureau",
     company: "",
@@ -38,7 +44,7 @@ const testimonials = [
 
 const stats = [
   { value: "6+", label: "Tevreden Klanten" },
-  { value: "450%", label: "Gemiddelde ROI" },
+  { value: "453%", label: "Gemiddelde ROI" },
   { value: "100%", label: "Klanttevredenheid" }
 ];
 

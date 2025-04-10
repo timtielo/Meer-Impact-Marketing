@@ -5,6 +5,8 @@ import { Link, useLocation } from 'react-router-dom';
 const services = [
   { name: 'Meta Ads', path: '/diensten/meta-ads' },
   { name: 'Email Marketing', path: '/diensten/email-marketing' },
+  { name: 'Copywriting', path: '/diensten/copywriting' },
+  { name: 'Social Media Management', path: '/diensten/social-media-management' },
 ];
 
 export default function Header() {

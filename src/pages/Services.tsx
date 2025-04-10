@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import { Facebook, Mail, BarChart, Target, Users, Zap, ArrowRight } from 'lucide-react';
+import { Facebook, Mail, PenTool, Share2, BarChart, Target, Users, Zap, ArrowRight } from 'lucide-react';
 
 const services = [
   {
@@ -27,6 +27,30 @@ const services = [
     ],
     path: "/diensten/email-marketing",
     image: "https://images.unsplash.com/photo-1579275542618-a1dfed5f54ba?auto=format&fit=crop&q=80&w=2000"
+  },
+  {
+    title: "Copywriting",
+    description: "Professionele teksten die waarde leveren voor je publiek en meer leads genereren.",
+    icon: PenTool,
+    benefits: [
+      "Waarde leveren voor het publiek",
+      "Meer leads/klanten aantrekken",
+      "Online aanwezigheid vergroten"
+    ],
+    path: "/diensten/copywriting",
+    image: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&q=80&w=2000"
+  },
+  {
+    title: "Social Media Management",
+    description: "Professioneel beheer van je social media kanalen voor meer bereik en engagement.",
+    icon: Share2,
+    benefits: [
+      "Vergroten van het volgers-aantal",
+      "Vergroten van het bereik",
+      "Waardevolle content creatie"
+    ],
+    path: "/diensten/social-media-management",
+    image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&q=80&w=2000"
   }
 ];
 
@@ -76,7 +100,7 @@ export default function Services() {
         <title>Online Marketing Diensten | Meer Impact Marketing</title>
         <meta 
           name="description" 
-          content="Ontdek onze effectieve online marketing diensten: Meta Ads en Email Marketing. Boost jouw online zichtbaarheid en ROI met bewezen strategieën." 
+          content="Ontdek onze effectieve online marketing diensten: Meta Ads, Email Marketing, Copywriting en Social Media Management. Boost jouw online zichtbaarheid en ROI met bewezen strategieën." 
         />
          <link rel="canonical" href="https://www.meerimpactmarketing.nl/diensten" />
         <script type="application/ld+json">
@@ -98,7 +122,7 @@ export default function Services() {
           </div>
 
           {/* Services Grid */}
-          <div className="grid lg:grid-cols-2 gap-12 mb-32">
+          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-12 mb-32">
             {services.map((service, index) => (
               <div 
                 key={index}
