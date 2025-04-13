@@ -21,6 +21,7 @@ import SocialMediaManagement from './pages/services/SocialMediaManagement';
 import Visitekaartje from './pages/Visitekaartje';
 import VisitekaartjeSuccess from './pages/VisitekaartjeSuccess';
 import GuideLanding from './pages/GuideLanding';
+import MarketingLanding from './pages/MarketingLanding';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -37,8 +38,9 @@ function App() {
     <Router>
       <ScrollToTop />
       <Routes>
-        {/* Landing page route without header/footer */}
+        {/* Landing pages without header/footer */}
         <Route path="/guide" element={<GuideLanding />} />
+        <Route path="/marketing" element={<MarketingLanding />} />
         
         {/* Routes with header and footer */}
         <Route element={

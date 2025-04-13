@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Target, Users, BarChart, Zap, CheckCircle, ArrowRight } from 'lucide-react';
+import { Facebook, Instagram, Target, Users, BarChart, Zap, CheckCircle, ArrowRight, Code, LineChart } from 'lucide-react';
 
 const benefits = [
   "Bereik precies de juiste doelgroep",
@@ -30,17 +30,25 @@ const process = [
     description: "We analyseren je huidige situatie, doelgroep en concurrentie"
   },
   {
+    title: "Pixel Setup",
+    description: "We installeren en configureren de Meta Pixel voor nauwkeurige tracking"
+  },
+  {
     title: "Strategie",
     description: "We ontwikkelen een op maat gemaakte advertentiestrategie"
   },
   {
     title: "Implementatie",
     description: "We zetten je campagnes op en optimaliseren continu"
-  },
-  {
-    title: "Rapportage",
-    description: "Je ontvangt regelmatig inzicht in de resultaten"
   }
+];
+
+const pixelBenefits = [
+  "Nauwkeurige conversie tracking",
+  "Retargeting mogelijkheden",
+  "Custom audiences opbouwen",
+  "Gedetailleerde gebruikersdata",
+  "ROI meting en optimalisatie"
 ];
 
 export default function MetaAds() {
@@ -93,6 +101,75 @@ export default function MetaAds() {
                   </li>
                 ))}
               </ul>
+            </div>
+          </div>
+
+          {/* Meta Pixel Section */}
+          <div className="mb-32">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-medium mb-6">
+                <Code className="h-4 w-4 mr-2" />
+                Meta Pixel Setup
+              </div>
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">
+                Professionele Meta Pixel Installatie
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                De Meta Pixel is cruciaal voor het succes van je advertenties. Wij zorgen voor een correcte installatie en configuratie.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-12">
+              <div className="bg-white p-8 rounded-2xl shadow-lg">
+                <div className="bg-blue-100 p-4 rounded-xl inline-block mb-6">
+                  <LineChart className="h-8 w-8 text-blue-600" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                  Waarom de Meta Pixel belangrijk is
+                </h3>
+                <ul className="space-y-4">
+                  {pixelBenefits.map((benefit, index) => (
+                    <li key={index} className="flex items-start">
+                      <CheckCircle className="h-6 w-6 text-green-500 mt-0.5 mr-3 flex-shrink-0" />
+                      <span className="text-gray-600">{benefit}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                  Onze Meta Pixel service
+                </h3>
+                <ul className="space-y-6">
+                  <li className="flex items-start">
+                    <div className="bg-blue-600 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold mr-4 flex-shrink-0">
+                      1
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-1">Technische Implementatie</h4>
+                      <p className="text-gray-600">Correcte installatie van de pixel code op je website</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start">
+                    <div className="bg-blue-600 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold mr-4 flex-shrink-0">
+                      2
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-1">Event Setup</h4>
+                      <p className="text-gray-600">Configuratie van specifieke events voor conversie tracking</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start">
+                    <div className="bg-blue-600 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold mr-4 flex-shrink-0">
+                      3
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-1">Testing & Verificatie</h4>
+                      <p className="text-gray-600">Grondige testing om correcte werking te garanderen</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
 
