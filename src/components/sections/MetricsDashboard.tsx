@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 const metrics = [
   {
     icon: Users,
-    value: "6+",
+    value: "6",
     label: "Tevreden Klanten",
-    description: "Succesvolle samenwerkingen"
+    description: "Al 6 succesvolle samenwerkingen"
   },
   {
     icon: TrendingUp,

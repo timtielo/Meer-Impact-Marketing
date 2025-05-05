@@ -43,7 +43,7 @@ const testimonials = [
 ];
 
 const stats = [
-  { value: "6+", label: "Tevreden Klanten" },
+  { value: "6", label: "Tevreden Klanten" },
   { value: "453%", label: "Gemiddelde ROI" },
   { value: "100%", label: "Klanttevredenheid" }
 ];
