@@ -29,6 +29,8 @@ const SERVICE_URLS = [
   { url: 'diensten', changefreq: 'monthly', priority: '0.8' },
   { url: 'diensten/meta-ads', changefreq: 'monthly', priority: '0.8' },
   { url: 'diensten/email-marketing', changefreq: 'monthly', priority: '0.8' },
+  { url: 'diensten/copywriting', changefreq: 'monthly', priority: '0.8' },
+  { url: 'diensten/social-media-management', changefreq: 'monthly', priority: '0.8' },
 ];
 
 async function generateSitemap() {
