@@ -15,7 +15,7 @@ export default function Home() {
           name="description"
           content="Verhoog jouw online zichtbaarheid en conversies met onze bewezen marketingstrategieën. Specialist in SEO, SEA en social media marketing."
         />
-        <link rel="canonical" href="https://meerimpactmarketing.nl" />
+        <link rel="canonical" href="https://www.meerimpactmarketing.nl" />
       </Helmet>
 
       <Hero />

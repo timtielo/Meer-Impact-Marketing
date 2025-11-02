@@ -17,8 +17,8 @@ export default function Seo({ seo, type = 'website', schema }: SeoProps) {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'Meer Impact Marketing',
-    url: 'https://meerimpactmarketing.nl',
-    logo: 'https://meerimpactmarketing.nl/logo-horizontal.png',
+    url: 'https://www.meerimpactmarketing.nl',
+    logo: 'https://www.meerimpactmarketing.nl/logo-horizontal.png',
     description: 'Online Marketing Bureau gespecialiseerd in Meta Ads en Social Media Marketing',
     address: {
       '@type': 'PostalAddress',

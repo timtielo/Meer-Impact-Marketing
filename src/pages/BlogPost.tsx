@@ -111,7 +111,7 @@ export default function BlogPost() {
           seo={{
             pageTitle: `${post.title} | Meer Impact Marketing Blog`,
             pageDescription: post.shortDescription,
-            canonicalUrl: `https://meerimpactmarketing.nl/blog/${post.slug}`,
+            canonicalUrl: `https://www.meerimpactmarketing.nl/blog/${post.slug}`,
             nofollow: false,
             noindex: false,
             shareImages: post.featuredImage

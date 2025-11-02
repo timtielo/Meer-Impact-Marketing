@@ -90,7 +90,7 @@ export default function Services() {
         '@type': 'Organization',
         name: 'Meer Impact Marketing'
       },
-      url: `https://meerimpactmarketing.nl${service.path}`
+      url: `https://www.meerimpactmarketing.nl${service.path}`
     }))
   };
 
