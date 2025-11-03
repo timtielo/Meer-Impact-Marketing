@@ -16,10 +16,12 @@ export default function FreeGuideBedankt() {
     <>
       <Helmet>
         <title>Bedankt voor je aanvraag! | Meer Impact Marketing</title>
-        <meta 
-          name="description" 
-          content="Je gratis Meta Ads guide is onderweg naar je inbox. Ontdek nu ook hoe wij je kunnen helpen met een gratis marketing analyse." 
+        <meta
+          name="description"
+          content="Je gratis Meta Ads guide is onderweg naar je inbox. Ontdek nu ook hoe wij je kunnen helpen met een gratis marketing analyse."
         />
+        <link rel="canonical" href="https://www.meerimpactmarketing.nl/gratis-guide-bedankt" />
+        <meta name="robots" content="noindex,nofollow" />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-white via-blue-50/30 to-white pt-32 pb-16">

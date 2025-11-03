@@ -7,10 +7,12 @@ export default function VisitekaartjeSuccess() {
     <>
       <Helmet>
         <title>Linktree | Meer Impact Marketing</title>
-        <meta 
-          name="description" 
-          content="De social Linktree van Meer Impact Marketing." 
+        <meta
+          name="description"
+          content="De social Linktree van Meer Impact Marketing."
         />
+        <link rel="canonical" href="https://www.meerimpactmarketing.nl/visitekaartje-success" />
+        <meta name="robots" content="noindex,nofollow" />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-white via-blue-50/30 to-white pt-32 pb-16">

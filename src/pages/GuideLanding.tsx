@@ -74,10 +74,11 @@ export default function GuideLanding() {
     <>
       <Helmet>
         <title>Gratis Meta Ads Guide | Meer Impact Marketing</title>
-        <meta 
-          name="description" 
-          content="Download onze gratis guide en leer hoe je snel nieuwe klanten krijgt met Meta Ads. Praktische tips en strategieën voor Facebook en Instagram advertenties." 
+        <meta
+          name="description"
+          content="Download onze gratis guide en leer hoe je snel nieuwe klanten krijgt met Meta Ads. Praktische tips en strategieën voor Facebook en Instagram advertenties."
         />
+        <link rel="canonical" href="https://www.meerimpactmarketing.nl/guide" />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-orange-50 py-16 px-4">

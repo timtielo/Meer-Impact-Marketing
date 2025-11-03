@@ -52,10 +52,11 @@ export default function SocialMedia() {
     <>
       <Helmet>
         <title>Social Media Marketing | Meer Impact Marketing</title>
-        <meta 
-          name="description" 
-          content="Professioneel social media beheer voor meer bereik en engagement. Ontdek hoe wij je online aanwezigheid versterken." 
+        <meta
+          name="description"
+          content="Professioneel social media beheer voor meer bereik en engagement. Ontdek hoe wij je online aanwezigheid versterken."
         />
+        <link rel="canonical" href="https://www.meerimpactmarketing.nl/diensten/social-media" />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-white via-blue-50/30 to-white pt-32 pb-16">

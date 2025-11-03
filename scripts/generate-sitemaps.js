@@ -31,6 +31,13 @@ const SERVICE_URLS = [
   { url: 'diensten/email-marketing', changefreq: 'monthly', priority: '0.8' },
   { url: 'diensten/copywriting', changefreq: 'monthly', priority: '0.8' },
   { url: 'diensten/social-media-management', changefreq: 'monthly', priority: '0.8' },
+  { url: 'diensten/social-media', changefreq: 'monthly', priority: '0.8' },
+];
+
+const LANDING_URLS = [
+  { url: 'guide', changefreq: 'monthly', priority: '0.7' },
+  { url: 'marketing', changefreq: 'monthly', priority: '0.7' },
+  { url: 'visitekaartje', changefreq: 'monthly', priority: '0.5' },
 ];
 
 async function generateSitemap() {
@@ -56,6 +63,14 @@ ${STATIC_URLS.map(page => `  <url>
 
   <!-- Services Pages -->
 ${SERVICE_URLS.map(page => `  <url>
+    <loc>${DOMAIN}/${page.url}</loc>
+    <lastmod>${CURRENT_DATE}</lastmod>
+    <changefreq>${page.changefreq}</changefreq>
+    <priority>${page.priority}</priority>
+  </url>`).join('\n')}
+
+  <!-- Landing Pages -->
+${LANDING_URLS.map(page => `  <url>
     <loc>${DOMAIN}/${page.url}</loc>
     <lastmod>${CURRENT_DATE}</lastmod>
     <changefreq>${page.changefreq}</changefreq>

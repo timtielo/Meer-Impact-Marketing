@@ -31,10 +31,11 @@ export default function MarketingLanding() {
     <>
       <Helmet>
         <title>Gratis Marketing Analyse | Meer Impact Marketing</title>
-        <meta 
-          name="description" 
-          content="Ontvang een gratis, persoonlijke marketing analyse voor jouw bedrijf. Binnen 48 uur inzicht in je groeikansen." 
+        <meta
+          name="description"
+          content="Ontvang een gratis, persoonlijke marketing analyse voor jouw bedrijf. Binnen 48 uur inzicht in je groeikansen."
         />
+        <link rel="canonical" href="https://www.meerimpactmarketing.nl/marketing" />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-orange-50 py-16 px-4">

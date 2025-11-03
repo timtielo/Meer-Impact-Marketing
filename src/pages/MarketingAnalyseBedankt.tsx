@@ -39,10 +39,12 @@ export default function MarketingAnalyseBedankt() {
     <>
       <Helmet>
         <title>Bedankt voor je aanvraag! | Meer Impact Marketing</title>
-        <meta 
-          name="description" 
-          content="Je marketing analyse aanvraag is ontvangen. We nemen binnen 24 uur contact met je op met onze bevindingen." 
+        <meta
+          name="description"
+          content="Je marketing analyse aanvraag is ontvangen. We nemen binnen 24 uur contact met je op met onze bevindingen."
         />
+        <link rel="canonical" href="https://www.meerimpactmarketing.nl/marketing-analyse-bedankt" />
+        <meta name="robots" content="noindex,nofollow" />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-white via-blue-50/30 to-white pt-32 pb-16">
