@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import WhatsAppWidget from './components/WhatsAppWidget';
 import Home from './pages/Home';
 import Services from './pages/Services';
 import Testimonials from './pages/Testimonials';
@@ -37,11 +38,12 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
+      <WhatsAppWidget />
       <Routes>
         {/* Landing pages without header/footer */}
         <Route path="/guide" element={<GuideLanding />} />
         <Route path="/marketing" element={<MarketingLanding />} />
-        
+
         {/* Routes with header and footer */}
         <Route element={
           <>
