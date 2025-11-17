@@ -42,7 +42,7 @@ export default function Contact() {
           name="description" 
           content="Neem contact op met ons marketing team voor een gratis strategiegesprek. Ontdek hoe wij jouw bedrijf kunnen helpen groeien." 
         />
-       <link rel="canonical" href="https://www.meerimpactmarketing.nl/contact" />
+        <link rel="canonical" href="https://www.meerimpactmarketing.nl/contact" />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-white via-blue-50/30 to-white pt-32 pb-16">

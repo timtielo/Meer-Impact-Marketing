@@ -102,7 +102,7 @@ export default function Services() {
           name="description" 
           content="Ontdek onze effectieve online marketing diensten: Meta Ads, Email Marketing, Copywriting en Social Media Management. Boost jouw online zichtbaarheid en ROI met bewezen strategieën." 
         />
-         <link rel="canonical" href="https://www.meerimpactmarketing.nl/diensten" />
+        <link rel="canonical" href="https://www.meerimpactmarketing.nl/diensten" />
         <script type="application/ld+json">
           {JSON.stringify(servicesSchema)}
         </script>

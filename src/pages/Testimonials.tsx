@@ -57,7 +57,7 @@ export default function Testimonials() {
           name="description" 
           content="Ontdek wat onze klanten zeggen over onze marketing diensten. Echte verhalen van echte ondernemers die resultaat hebben behaald met onze aanpak." 
         />
-         <link rel="canonical" href="https://www.meerimpactmarketing.nl/testimonials" />
+        <link rel="canonical" href="https://www.meerimpactmarketing.nl/testimonials" />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-white via-blue-50/30 to-white pt-32 pb-16">
