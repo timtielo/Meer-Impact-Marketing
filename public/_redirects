@@ -1,1 +1,6 @@
-/* /index.html 200
+# PostHog reverse proxy (EU) — MOET boven de SPA catch-all staan, anders vangt /* de events af
+/ph/static/*  https://eu-assets.i.posthog.com/static/:splat  200!
+/ph/*  https://eu.i.posthog.com/:splat  200!
+
+# SPA fallback
+/*  /index.html  200
