@@ -12,6 +12,10 @@ if (import.meta.env.VITE_POSTHOG_KEY) {
     defaults: '2025-05-24',
     person_profiles: 'identified_only',
     cookieless_mode: 'always',
+    // Cookieless race-fix: de lib slaat de initiële pageview over omdat de
+    // cookieless-bevestiging (remote config) er 1ms na init nog niet is.
+    // Daarom vuren we 'm zelf zodra de lib volledig geladen is.
+    loaded: (ph) => ph.capture('$pageview'),
   });
 }
 
