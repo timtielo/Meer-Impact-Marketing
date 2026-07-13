@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -32,6 +32,8 @@ export default function MarketingAnalysisForm({ className = '' }: MarketingAnaly
     bron: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [hp, setHp] = useState(''); // honeypot: only bots fill this
+  const renderedAt = useRef(Date.now());
 
   const formatWebsite = (url: string): string => {
     if (!url) return url;
@@ -54,10 +56,13 @@ export default function MarketingAnalysisForm({ className = '' }: MarketingAnaly
     try {
       const formattedData = {
         ...formData,
-        website: formatWebsite(formData.website)
+        website: formatWebsite(formData.website),
+        _form: 'analyse',
+        _hp: hp,
+        _ts: renderedAt.current,
       };
 
-      const response = await fetch('https://hook.eu2.make.com/x6nvmo3czy1rww6cg9bosjg9pygq81z8', {
+      const response = await fetch('/.netlify/functions/submit-lead', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -84,6 +89,20 @@ export default function MarketingAnalysisForm({ className = '' }: MarketingAnaly
 
   return (
     <form onSubmit={handleSubmit} className={`space-y-6 ${className}`}>
+      {/* Honeypot — hidden from humans, catches bots that fill every field */}
+      <div className="absolute left-[-9999px] top-[-9999px]" aria-hidden="true">
+        <label htmlFor="nickname">Laat dit veld leeg</label>
+        <input
+          type="text"
+          id="nickname"
+          name="nickname"
+          tabIndex={-1}
+          autoComplete="off"
+          value={hp}
+          onChange={(e) => setHp(e.target.value)}
+        />
+      </div>
+
       <div className="grid md:grid-cols-2 gap-6">
         <div>
           <label htmlFor="voornaam" className="block text-sm font-medium text-gray-700 mb-1">
