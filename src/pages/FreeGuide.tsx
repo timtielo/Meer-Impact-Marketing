@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { FileText, CheckCircle, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -10,18 +10,20 @@ export default function FreeGuide() {
     email: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [hp, setHp] = useState(''); // honeypot: only bots fill this
+  const renderedAt = useRef(Date.now());
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('https://hook.eu2.make.com/hz0sixm7gxoxr5xa35rfsdoj2f8b9y1q', {
+      const response = await fetch('/.netlify/functions/submit-lead', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, _form: 'guide', _hp: hp, _ts: renderedAt.current }),
       });
 
       if (response.ok) {
@@ -95,6 +97,10 @@ export default function FreeGuide() {
 
             <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
               <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="absolute left-[-9999px] top-[-9999px]" aria-hidden="true">
+                  <label htmlFor="nickname">Laat dit veld leeg</label>
+                  <input type="text" id="nickname" name="nickname" tabIndex={-1} autoComplete="off" value={hp} onChange={(e) => setHp(e.target.value)} />
+                </div>
                 <div>
                   <label htmlFor="voornaam" className="block text-sm font-medium text-gray-700 mb-1">
                     Voornaam *
