@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin } from 'lucide-react';
+import TieloCredit from './TieloCredit'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -159,11 +160,9 @@ export default function Footer() {
         <div className="mt-12 pt-8 border-t border-gray-800">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm">
-              © {currentYear} Meer Impact Marketing door{' '}
-              <a href="https://www.tielo-digital.nl/" className="text-sm hover:text-blue-500 transition-colors">
-                Tielo Digital
-              </a>. Alle rechten voorbehouden.
+              © {currentYear} Meer Impact Marketing. Alle rechten voorbehouden.
             </p>
+            <TieloCredit variant="badge" />
             <div className="flex space-x-6 mt-4 md:mt-0">
               <Link to="/privacy" className="text-sm hover:text-blue-500 transition-colors">
                 Privacy Policy
