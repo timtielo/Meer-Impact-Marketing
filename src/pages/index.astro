@@ -1,5 +1,267 @@
 ---
-// Placeholder root during the design phase, jumps to the section showcase.
-// Replaced by the real homepage during migration.
-return Astro.redirect('/blokken');
+import { getCollection } from 'astro:content';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Navbar from '../components/ui/Navbar.astro';
+import Footer from '../components/ui/Footer.astro';
+import '../styles/sections.css';
+
+export const prerender = true;
+
+const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+const featured = (await getCollection('cases')).find((c) => c.data.featured);
+const posts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => +b.data.publishDate - +a.data.publishDate)
+  .slice(0, 3);
+
+// Echte cijfers van de live site (MetricsDashboard)
+const stats = [
+  { n: '453%', l: 'gemiddelde ROI', accent: true },
+  { n: '6', l: 'tevreden klanten' },
+  { n: '€20.000+', l: 'extra omzet voor klanten' },
+  { n: '100%', l: 'klanttevredenheid' },
+];
+
+// "De meest gemaakte marketingkeuzes" (live site)
+const choices = [
+  { t: 'Alles zelf doen?', d: 'Als je genoeg tijd hebt, is dit een optie. Maar vaak leidt het tot gemiste kansen, half werk en stress. Jouw tijd kan beter besteed worden aan waar jij goed in bent.' },
+  { t: 'Een algemeen marketingkantoor?', d: 'Standaardoplossingen, lange wachttijden en onpersoonlijke communicatie. Campagnes die niet aansluiten bij jouw behoeften. Dat kost je tijd én klanten.' },
+  { t: 'Niet doen of uitstellen?', d: 'Elke dag zonder actie betekent gemiste kansen, omzet en groei. Klanten wachten niet op jou. Waarom wachten als je vandaag stappen kunt zetten?' },
+];
+
+// "Wat maakt jou anders?" (live site)
+const diffs = [
+  { t: 'Garantie', d: 'Jij neemt niet al het risico, dat delen we. Een win-win is de basis van een goede samenwerking.' },
+  { t: 'Resultaat', d: 'Geen loze beloftes, maar meetbare groei. De focus ligt op leads en omzet.' },
+  { t: 'Flexibiliteit', d: 'We passen ons aan jouw behoeften aan, of je nu een groot project of kleinere ondersteuning nodig hebt.' },
+  { t: 'Specialisatie', d: 'Geen allesdoeners, maar experts. We richten ons op de branches waar we echt impact maken.' },
+];
+
+// Echte testimonials van de live site (directe klantquotes, geen Google-reviews)
+const testimonials = [
+  { name: 'Mees van Zuidam', role: 'Mede-eigenaar, Strength2Strength', quote: 'Professioneel, duidelijk, meedenkend, neemt initiatief en levert zijn dienst met zorg. Hij staat open voor feedback en de behoefte van de klant staat bij hem op 1.' },
+  { name: 'Niek Speel', role: 'Mede-eigenaar, EnergieStudent', quote: 'Lars is creatief, grondig in zijn onderzoek en een goede luisteraar. Enorm gedreven en leergierig. Daardoor konden we obstakels overwinnen en steeds meer positieve impact maken.' },
+];
+
+const svcIcon = (name: string) =>
+  name === 'Meta Ads' ? '◈' : name === 'Meekijksessie' ? '⧉' : name === 'SEO' ? '⌕' : name === 'Email Marketing' ? '✉' : name === 'Copywriting' ? '✎' : '◐';
 ---
+<SiteLayout
+  title="Meer Impact Marketing, gegarandeerd meer klanten"
+  description="Meer leads en klanten met Meta Ads en SEO. Specialist voor personal trainers, sportscholen en coaches. 453% gemiddelde ROI, 100% klanttevredenheid."
+  ogImage="/og/index.png"
+>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    name: 'Meer Impact Marketing',
+    description: 'Meta Ads en SEO voor personal trainers, sportscholen en coaches.',
+    url: 'https://www.meerimpactmarketing.nl',
+    email: 'lars@meerimpactmarketing.nl',
+    areaServed: 'NL',
+    knowsAbout: ['Meta Ads', 'Facebook Ads', 'Instagram Ads', 'SEO', 'Email Marketing'],
+  })} />
+
+  <Navbar />
+
+  <!-- HERO -->
+  <header class="mi-hero">
+    <div class="mi-hero__glow"></div>
+    <div class="mi-wrap mi-hero__grid">
+      <div>
+        <span class="mi-badge"><i class="mi-dot"></i> Boost je online aanwezigheid</span>
+        <h1 class="mi-display"><span class="hl">Meer</span> groei, <span class="hl">meer</span> klanten, <span class="hl">meer</span> impact.</h1>
+        <p class="mi-hero__sub">Wij sturen je Meta Ads en SEO op één cijfer: leads die klant worden. Voor personal trainers, sportscholen en coaches. Gegarandeerd.</p>
+        <div class="mi-hero__cta">
+          <a href="#analyse" class="mi-btn mi-btn--primary mi-btn--lg mi-arrowp">Start jouw groei <span class="mi-arrow">→</span></a>
+          <a href="#cases" class="mi-btn mi-btn--ghost mi-btn--lg">Bekijk cases</a>
+        </div>
+        <div class="mi-hero__trust">
+          <div class="mi-avatars"><span></span><span></span><span></span></div>
+          <span><b class="mi-num">100%</b> klanttevredenheid · 453% gem. ROI</span>
+        </div>
+      </div>
+
+      <div class="mi-panel mi-reveal">
+        <div class="mi-panel__bar">
+          <span class="mi-tl mi-tl--r"></span><span class="mi-tl mi-tl--y"></span><span class="mi-tl mi-tl--g"></span>
+          <span class="mi-panel__title">Campagne · voorbeeldrapportage</span>
+          <span class="mi-panel__live"><span class="mi-live">live</span></span>
+        </div>
+        <div class="mi-panel__body">
+          <div class="mi-kpis">
+            <div class="mi-stat"><div class="mi-stat__label"><span>Besteed</span></div><div class="mi-stat__value" style="font-size:1.4rem" data-count>€1.240</div></div>
+            <div class="mi-stat"><div class="mi-stat__label"><span>Leads</span></div><div class="mi-stat__value" style="font-size:1.4rem" data-count>73</div></div>
+            <div class="mi-stat mi-stat--hot"><div class="mi-stat__label"><span>ROAS</span></div><div class="mi-stat__value" style="font-size:1.4rem" data-count>4,2×</div></div>
+          </div>
+          <div class="mi-chart">
+            <div class="mi-chart__cap"><span>Leads · laatste 30 dagen</span><span class="mi-delta mi-delta--up">▲ 61%</span></div>
+            <svg class="mi-spark" viewBox="0 0 320 90" preserveAspectRatio="none">
+              <defs><linearGradient id="homeFill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#f2600c" stop-opacity="0.28"/><stop offset="1" stop-color="#f2600c" stop-opacity="0"/></linearGradient></defs>
+              <path d="M0,78 L46,72 L92,74 L138,58 L184,48 L230,32 L276,20 L320,8 L320,90 L0,90 Z" fill="url(#homeFill)"/>
+              <path class="line" d="M0,78 L46,72 L92,74 L138,58 L184,48 L230,32 L276,20 L320,8" fill="none" stroke="#f2600c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:.4rem;align-items:center"><span class="mi-mono" style="color:var(--mi-faint)">DOELGROEP</span><span class="mi-pill">Personal trainers</span><span class="mi-pill">25 km</span></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- STATS (echte cijfers) -->
+  <section class="mi-statband">
+    <div class="mi-wrap"><div class="mi-statband__grid">
+      {stats.map((s) => (
+        <div class="mi-statband__item">
+          <div class:list={['mi-statband__num', { accent: s.accent }]} data-count>{s.n}</div>
+          <div class="mi-statband__lab">{s.l}</div>
+        </div>
+      ))}
+    </div></div>
+  </section>
+
+  <!-- DIENSTEN -->
+  <section class="mi-section mi-wrap" id="diensten">
+    <div class="sec-head" style="max-width:640px;margin-bottom:2.5rem">
+      <span class="mi-overline">Diensten</span>
+      <h2 class="mi-h2" style="margin-top:.5rem">Waar we het verschil maken</h2>
+      <p class="mi-lede" style="margin-top:.6rem">Elke dienst is gekoppeld aan een echte case, zodat je ziet wat het oplevert.</p>
+    </div>
+    <div class="svc-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem" data-stagger>
+      {services.map((s) => (
+        <article class:list={['mi-card', 'mi-svc', 'mi-lift', 'mi-glow', 'mi-reveal', { 'mi-card--feature': s.data.hero }]}>
+          <div class="mi-svc__icon">{svcIcon(s.data.name)}</div>
+          <span class="mi-tag">{s.data.tag}</span>
+          <h3 style="margin-top:.5rem">{s.data.name}</h3>
+          <p>{s.data.summary}</p>
+          <a class="mi-svc__link mi-arrowp" href={`/diensten/${s.id}`}>Meer over {s.data.name} <span class="mi-arrow">→</span></a>
+        </article>
+      ))}
+    </div>
+    <style>{`@media(max-width:860px){#diensten .svc-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){#diensten .svc-grid{grid-template-columns:1fr}}`}</style>
+  </section>
+
+  <!-- MARKETINGKEUZES -->
+  <section class="mi-section" style="background:var(--mi-surface-2)">
+    <div class="mi-wrap">
+      <div class="sec-head" style="max-width:640px;margin-bottom:2.5rem">
+        <span class="mi-overline">Herkenbaar?</span>
+        <h2 class="mi-h2" style="margin-top:.5rem">De meest gemaakte marketingkeuzes <span class="mi-muted">(en waarom ze niet werken)</span></h2>
+      </div>
+      <div class="mi-cardgrid" data-stagger>
+        {choices.map((c) => (
+          <article class="mi-card mi-reveal">
+            <h3 class="mi-h3" style="margin-bottom:.6rem">{c.t}</h3>
+            <p class="mi-muted" style="font-size:var(--fs-body-s)">{c.d}</p>
+          </article>
+        ))}
+      </div>
+      <div style="text-align:center;margin-top:2.5rem"><a href="#analyse" class="mi-btn mi-btn--primary mi-arrowp">Kies voor een betere aanpak <span class="mi-arrow">→</span></a></div>
+    </div>
+  </section>
+
+  <!-- DIFFERENTIATORS -->
+  <section class="mi-section mi-wrap">
+    <div class="sec-head" style="max-width:640px;margin-bottom:2.5rem">
+      <span class="mi-overline">Wat maakt ons anders</span>
+      <h2 class="mi-h2" style="margin-top:.5rem">"Oké, wat maakt jou anders?"</h2>
+    </div>
+    <div class="diff-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem 2.5rem" data-stagger>
+      {diffs.map((d) => (
+        <div class="mi-reveal" style="padding:1.4rem 0;border-top:3px solid var(--mi-orange)">
+          <h3 class="mi-h3" style="margin-bottom:.5rem">{d.t}</h3>
+          <p class="mi-muted">{d.d}</p>
+        </div>
+      ))}
+    </div>
+    <style>{`@media(max-width:720px){.diff-grid{grid-template-columns:1fr !important}}`}</style>
+  </section>
+
+  <!-- FEATURED CASE -->
+  {featured && (
+    <section class="mi-section mi-wrap" id="cases">
+      <div class="sec-head" style="max-width:640px;margin-bottom:2rem">
+        <span class="mi-overline">Uitgelichte case</span>
+        <h2 class="mi-h2" style="margin-top:.5rem">Resultaten die tellen</h2>
+      </div>
+      <div class="mi-casefeat mi-reveal">
+        <div class="mi-casefeat__banner">
+          {featured.data.results.map((r, i) => (
+            <div class="mi-casefeat__kpi"><div class:list={['n', { accent: i === 0 }]} data-count>{r.value}</div><div class="l">{r.label}</div></div>
+          ))}
+        </div>
+        <div class="mi-casefeat__body">
+          <div class="mi-casefeat__meta">
+            <strong>{featured.data.client}</strong>
+            <span class="mi-tag mi-tag--ink">{featured.data.segment}</span><span class="mi-tag">{featured.data.service}</span>
+          </div>
+          <p class="mi-muted" style="max-width:60ch">{featured.data.summary}</p>
+          {featured.data.before && featured.data.after && (
+            <div class="mi-beforeafter">
+              <div class="mi-beforeafter__side before"><div class="mi-beforeafter__tag">Voor</div><div class="mi-beforeafter__val">{featured.data.before}</div></div>
+              <div class="mi-beforeafter__arrow">→</div>
+              <div class="mi-beforeafter__side after"><div class="mi-beforeafter__tag">Na</div><div class="mi-beforeafter__val">{featured.data.after}</div></div>
+            </div>
+          )}
+          {featured.data.quote && <blockquote class="mi-casefeat__quote">{featured.data.quote}</blockquote>}
+          <div class="mi-casefeat__byline"><span class="av"></span><div>{featured.data.quoteBy}</div></div>
+          <p class="ph-note" style="font-size:var(--fs-caption);color:var(--mi-faint);font-style:italic;margin-top:1rem">Voorbeeldcase, echte cijfers volgen bij oplevering.</p>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- TESTIMONIALS (echte klantquotes) -->
+  <section class="mi-section" style="background:var(--mi-surface-2)">
+    <div class="mi-wrap">
+      <div class="sec-head" style="max-width:640px;margin-bottom:2.5rem">
+        <span class="mi-overline">Wat klanten zeggen</span>
+        <h2 class="mi-h2" style="margin-top:.5rem">Ondernemers die met ons groeiden</h2>
+      </div>
+      <div class="mi-cardgrid" style="grid-template-columns:repeat(2,1fr)" data-stagger>
+        {testimonials.map((t) => (
+          <article class="mi-card mi-quote mi-quote--anchor mi-reveal">
+            <p>"{t.quote}"</p>
+            <div class="mi-quote__by"><span class="av"></span><div><b>{t.name}</b><span>{t.role}</span></div></div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- KENNISBANK TEASER -->
+  {posts.length > 0 && (
+    <section class="mi-section mi-wrap">
+      <div style="display:flex;justify-content:space-between;align-items:end;flex-wrap:wrap;gap:1rem;margin-bottom:2rem">
+        <div class="sec-head" style="margin:0"><span class="mi-overline">Kennisbank</span><h2 class="mi-h2" style="margin-top:.5rem">Leer het zelf, of laat het ons doen</h2></div>
+        <a href="/kennisbank" class="mi-btn mi-btn--ghost mi-btn--sm">Alle artikelen</a>
+      </div>
+      <div class="mi-cardgrid" data-stagger>
+        {posts.map((p) => (
+          <a class="mi-card mi-mediacard mi-lift mi-glow mi-reveal mi-arrowp" href={`/kennisbank/${p.id}`} style="text-decoration:none">
+            <div class="mi-mediacard__img mi-ph"></div>
+            <div class="mi-mediacard__body">
+              <span class="mi-tag mi-tag--blue" style="align-self:flex-start">{p.data.category}</span>
+              <h3>{p.data.title}</h3>
+              <div class="mi-mediacard__foot"><span class="av"></span><span>{p.data.author}</span><span class="mi-arrow" style="margin-left:auto;color:var(--mi-orange)">→</span></div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- CTA -->
+  <section class="mi-section mi-wrap" id="analyse">
+    <div class="mi-cta mi-reveal">
+      <div class="mi-cta__glow"></div>
+      <div class="mi-cta__inner">
+        <h2>Klaar voor meer klanten?</h2>
+        <p>Vraag een gratis marketinganalyse aan. Geen verplichtingen, wel een concreet plan binnen 1 werkdag.</p>
+        <a href="/marketing-analyse" class="mi-btn mi-btn--primary mi-btn--lg mi-magnetic mi-arrowp">Vraag gratis analyse aan <span class="mi-arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</SiteLayout>
