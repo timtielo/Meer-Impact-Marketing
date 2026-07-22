@@ -10,8 +10,12 @@ interface Props {
   title: string;
   description?: string;
   noindex?: boolean;
+  ogImage?: string; // e.g. "/og/diensten/meta-ads.png"; defaults to the branded default
 }
-const { title, description = '', noindex = false } = Astro.props;
+const { title, description = '', noindex = false, ogImage = '/og/default.png' } = Astro.props;
+const site = Astro.site ?? new URL('https://www.meerimpactmarketing.nl');
+const canonical = new URL(Astro.url.pathname, site);
+const ogImageUrl = new URL(ogImage, site);
 ---
 <!doctype html>
 <html lang="nl">
@@ -21,6 +25,19 @@ const { title, description = '', noindex = false } = Astro.props;
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
     {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonical.href} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Meer Impact Marketing" />
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:url" content={canonical.href} />
+    <meta property="og:image" content={ogImageUrl.href} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    {description && <meta name="twitter:description" content={description} />}
+    <meta name="twitter:image" content={ogImageUrl.href} />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
