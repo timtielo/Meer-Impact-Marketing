@@ -48,7 +48,7 @@ if (reveals.length) {
     }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
     reveals.forEach((el) => io.observe(el));
     // safety net: some embedded browsers don't fire IO for already-visible
-    // elements — reveal anything in the viewport once, after load.
+    // elements, reveal anything in the viewport once, after load.
     const sweep = () => reveals.forEach((el) => {
       const r = el.getBoundingClientRect();
       if (r.top < window.innerHeight * 0.98 && r.bottom > 0) reveal(el);

@@ -1,5 +1,5 @@
 /* ============================================================================
-   Meer Impact — "Ad Manager" component system. Class-based, token-driven.
+   Meer Impact, "Ad Manager" component system. Class-based, token-driven.
    Loaded globally; consumed by the styleguide and (later) the real pages.
    ========================================================================== */
 
@@ -101,6 +101,14 @@ a { color: inherit; }
 .mi-delta { display: inline-flex; align-items: center; gap: 0.2rem; font-family: var(--font-display); font-variant-numeric: tabular-nums; font-size: var(--fs-body-s); font-weight: 600; padding: 0.15rem 0.45rem; border-radius: var(--radius-xs); }
 .mi-delta--up { background: var(--mi-up-tint); color: var(--mi-up); }
 .mi-delta--down { background: var(--mi-down-tint); color: var(--mi-down); }
+
+/* review source badge (Google / Werkspot) */
+.mi-source { display: inline-flex; align-items: center; gap: 0.4rem; font-size: var(--fs-caption); font-weight: 600; color: var(--mi-muted); white-space: nowrap; }
+.mi-source__g { flex-shrink: 0; }
+.mi-source__name { color: var(--mi-slate); }
+.mi-source__rating { color: var(--mi-orange); }
+.mi-source__wp { font-family: var(--font-display); font-weight: 700; color: #ff6a13; letter-spacing: -0.01em; }
+.mi-quote__by .mi-source { margin-left: auto; }
 
 /* ---- forms --------------------------------------------------------------- */
 .mi-field { display: flex; flex-direction: column; gap: var(--sp-2); }

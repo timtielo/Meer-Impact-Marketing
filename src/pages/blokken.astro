@@ -2,6 +2,7 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import Navbar from '../components/ui/Navbar.astro';
 import Footer from '../components/ui/Footer.astro';
+import ReviewSource from '../components/ui/ReviewSource.astro';
 import '../styles/sections.css';
 
 const bandStats = [
@@ -26,7 +27,7 @@ const plans = [
   { name: 'Schaal', price: 'Op maat', who: 'Meerdere locaties / merken', feats: ['Alles uit Groei', 'Eigen strateeg', 'Creatives + copy', 'Wekelijks overleg'], hot: false },
 ];
 ---
-<SiteLayout title="Blokken — Ad Manager | Meer Impact" noindex>
+<SiteLayout title="Blokken, Ad Manager | Meer Impact" noindex>
   <Navbar />
 
   <!-- HERO -->
@@ -43,7 +44,8 @@ const plans = [
         </div>
         <div class="mi-hero__trust">
           <div class="mi-avatars"><span></span><span></span><span></span><span></span></div>
-          <span><b class="mi-num">4,9</b> <span class="mi-stars">★★★★★</span> · 40+ ondernemers</span>
+          <ReviewSource source="google" rating="4,9" />
+          <span>· 40+ ondernemers</span>
         </div>
       </div>
 
@@ -113,7 +115,7 @@ const plans = [
       <div class="col-2 mi-reveal mi-lift mi-glow"><div class="mi-stat__label"><span>ROAS</span><span class="mi-delta mi-delta--up">▲ 0,6</span></div><div class="mi-stat__value" style="color:var(--mi-orange)" data-count>4,2×</div></div>
       <div class="col-2 mi-reveal mi-lift mi-glow">
         <span class="mi-tag mi-tag--blue">Targeting</span>
-        <div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.6rem"><span class="mi-pill">Vrouwen 25–44</span><span class="mi-pill">15 km</span><span class="mi-pill">Fitness</span></div>
+        <div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.6rem"><span class="mi-pill">Vrouwen 25-44</span><span class="mi-pill">15 km</span><span class="mi-pill">Fitness</span></div>
       </div>
       <div class="col-3 mi-reveal mi-lift mi-glow"><span class="mi-tag mi-tag--ink">Done-with-you</span><h3 class="mi-h3" style="margin-top:.5rem;font-size:1.2rem">Meekijksessie</h3><p class="mi-muted" style="font-size:var(--fs-body-s)">Live meekijken terwijl jij zelf de knoppen leert.</p></div>
       <div class="col-3 mi-reveal mi-lift mi-glow"><span class="mi-tag">Groei</span><h3 class="mi-h3" style="margin-top:.5rem;font-size:1.2rem">SEO &amp; kennisbank</h3><p class="mi-muted" style="font-size:var(--fs-body-s)">Beter vindbaar in Google, doorzoekbare how-to's.</p></div>
@@ -142,8 +144,8 @@ const plans = [
           <div class="mi-beforeafter__arrow">→</div>
           <div class="mi-beforeafter__side after"><div class="mi-beforeafter__tag">Na</div><div class="mi-beforeafter__val">50 / mnd</div><p class="mi-muted" style="font-size:var(--fs-body-s);margin-top:.3rem">aanvragen, elke week</p></div>
         </div>
-        <blockquote class="mi-casefeat__quote">Eindelijk marketing die gewoon leads oplevert — en ik snap nu zelf wat er gebeurt.</blockquote>
-        <div class="mi-casefeat__byline"><span class="av"></span><div><b style="color:var(--mi-ink)">Mark de Vries</b> · eigenaar PT Studio Amsterdam <span class="mi-quote__src">Google ★ 5,0</span></div></div>
+        <blockquote class="mi-casefeat__quote">Eindelijk marketing die gewoon leads oplevert, en ik snap nu zelf wat er gebeurt.</blockquote>
+        <div class="mi-casefeat__byline"><span class="av"></span><div><b style="color:var(--mi-ink)">Mark de Vries</b> · eigenaar PT Studio Amsterdam</div><span style="margin-left:auto"><ReviewSource source="google" rating="5,0" /></span></div>
       </div>
     </div>
   </section>
@@ -176,25 +178,26 @@ const plans = [
       <span class="mi-overline">Wat klanten zeggen</span>
       <blockquote style="margin-top:var(--sp-4)">"Sinds Meer Impact onze ads doet, komt er elke week een nieuwe aanmelding binnen. En de kosten per lead? <span style="color:var(--mi-orange)">gehalveerd</span>."</blockquote>
       <div class="mi-quote__by" style="justify-content:center;margin-top:var(--sp-5)"><span class="av"></span><div style="text-align:left"><b>Lisa Bergsma</b><span>eigenaar Studio Kracht</span></div></div>
+      <div style="margin-top:.85rem"><ReviewSource source="google" rating="5,0" /></div>
     </div>
     <div class="mi-testiwall" data-stagger>
-      <div class="mi-card mi-quote mi-quote--anchor mi-reveal"><p>"Van 12 naar 50 proeflessen per maand. Ik hoef zelf niks meer te bedenken."</p><div class="mi-quote__by"><span class="av"></span><div><b>Mark de Vries</b><span>PT Studio Amsterdam</span></div><span class="mi-quote__src">Google</span></div></div>
-      <div class="mi-card mi-quote mi-reveal"><p>"Eindelijk snap ik wat mijn advertenties doen. De meekijksessies zijn goud waard."</p><div class="mi-quote__by"><span class="av"></span><div><b>Sanne Willems</b><span>Coach Rotterdam</span></div><span class="mi-quote__src">Werkspot</span></div></div>
-      <div class="mi-card mi-quote mi-reveal"><p>"We staan nu bovenaan in Google voor onze stad. Elke week nieuwe leden."</p><div class="mi-quote__by"><span class="av"></span><div><b>Tom Jansen</b><span>Sportschool Utrecht</span></div><span class="mi-quote__src">Google</span></div></div>
-      <div class="mi-card mi-quote mi-reveal"><p>"Duidelijke rapportage, korte lijnen, echte groei. Precies wat ik zocht."</p><div class="mi-quote__by"><span class="av"></span><div><b>Nadia el Amrani</b><span>FitLab</span></div><span class="mi-quote__src">Google</span></div></div>
+      <div class="mi-card mi-quote mi-quote--anchor mi-reveal"><p>"Van 12 naar 50 proeflessen per maand. Ik hoef zelf niks meer te bedenken."</p><div class="mi-quote__by"><span class="av"></span><div><b>Mark de Vries</b><span>PT Studio Amsterdam</span></div><ReviewSource source="google" rating="5,0" /></div></div>
+      <div class="mi-card mi-quote mi-reveal"><p>"Eindelijk snap ik wat mijn advertenties doen. De meekijksessies zijn goud waard."</p><div class="mi-quote__by"><span class="av"></span><div><b>Sanne Willems</b><span>Coach Rotterdam</span></div><ReviewSource source="werkspot" rating="4,9" /></div></div>
+      <div class="mi-card mi-quote mi-reveal"><p>"We staan nu bovenaan in Google voor onze stad. Elke week nieuwe leden."</p><div class="mi-quote__by"><span class="av"></span><div><b>Tom Jansen</b><span>Sportschool Utrecht</span></div><ReviewSource source="google" rating="5,0" /></div></div>
+      <div class="mi-card mi-quote mi-reveal"><p>"Duidelijke rapportage, korte lijnen, echte groei. Precies wat ik zocht."</p><div class="mi-quote__by"><span class="av"></span><div><b>Nadia el Amrani</b><span>FitLab</span></div><ReviewSource source="google" rating="5,0" /></div></div>
     </div>
   </section>
 
   <!-- BLOG -->
   <section class="mi-section mi-wrap">
     <span class="mi-overline">Kennisbank</span>
-    <h2 class="mi-h2" style="margin:.5rem 0 var(--sp-5)">Leer het zelf — of laat het ons doen</h2>
+    <h2 class="mi-h2" style="margin:.5rem 0 var(--sp-5)">Leer het zelf, of laat het ons doen</h2>
     <div class="mi-blogfeat mi-reveal mi-zoom mi-arrowp" style="margin-bottom:var(--sp-4)">
       <div class="mi-blogfeat__img mi-ph">uitgelicht artikel</div>
       <div class="mi-blogfeat__body">
         <span class="mi-tag mi-tag--blue">Uitgelicht</span>
         <h3>De complete Meta Ads-funnel voor personal trainers</h3>
-        <p class="mi-muted">Van eerste advertentie tot betalende klant — het hele plan, met budgetten en voorbeelden.</p>
+        <p class="mi-muted">Van eerste advertentie tot betalende klant, het hele plan, met budgetten en voorbeelden.</p>
         <div class="mi-mediacard__foot"><span class="av"></span><span>Lars · 9 min lezen</span><span class="mi-arrow" style="margin-left:auto;color:var(--mi-orange)">Lees verder →</span></div>
       </div>
     </div>
@@ -242,7 +245,7 @@ const plans = [
       <div class="mi-cta__float mi-cta__float--r"><div class="n" data-count>4,2×</div><div class="l">ROAS</div></div>
       <div class="mi-cta__inner">
         <h2>Klaar voor meer klanten uit Meta &amp; Google?</h2>
-        <p>Vraag een gratis marketinganalyse aan. Geen verplichtingen — wel een concreet plan binnen 1 werkdag.</p>
+        <p>Vraag een gratis marketinganalyse aan. Geen verplichtingen, wel een concreet plan binnen 1 werkdag.</p>
         <a href="#" class="mi-btn mi-btn--primary mi-btn--lg mi-magnetic mi-arrowp">Vraag gratis analyse aan <span class="mi-arrow">→</span></a>
       </div>
     </div>
