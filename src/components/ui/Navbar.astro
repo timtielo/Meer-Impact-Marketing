@@ -20,19 +20,23 @@ const links = [
     </a>
 
     <div class="mi-navbar__links">
-      <details class="mi-mega">
-        <summary>Diensten
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </summary>
-        <div class="mi-mega__panel">
-          {services.map((s) => (
-            <a class="mi-mega__item" href={s.href}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18" stroke="currentColor" stroke-width="2"/></svg>
-              <span><b>{s.name}</b><span>{s.desc}</span></span>
-            </a>
-          ))}
+      <div class="mi-drop" data-drop>
+        <button type="button" class="mi-drop__btn" aria-expanded="false" aria-haspopup="true" aria-controls="drop-diensten">
+          Diensten
+          <svg class="mi-drop__caret" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="mi-drop__panel" id="drop-diensten" role="menu">
+          <div class="mi-drop__grid">
+            {services.map((s) => (
+              <a class="mi-mega__item" role="menuitem" href={s.href}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18" stroke="currentColor" stroke-width="2"/></svg>
+                <span><b>{s.name}</b><span>{s.desc}</span></span>
+              </a>
+            ))}
+          </div>
+          <a class="mi-drop__all mi-arrowp" role="menuitem" href="#">Bekijk alle diensten <span class="mi-arrow">→</span></a>
         </div>
-      </details>
+      </div>
       {links.map((l) => <a class="mi-navbar__link" href={l.href}>{l.name}</a>)}
     </div>
 

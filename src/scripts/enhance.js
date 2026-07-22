@@ -18,6 +18,20 @@ if (sheet) {
   sheet.querySelectorAll('[data-menu-close], a').forEach((b) => b.addEventListener('click', close));
 }
 
+/* ---- services dropdown: hover-intent on desktop, click + keyboard everywhere ---- */
+document.querySelectorAll('[data-drop]').forEach((drop) => {
+  const btn = drop.querySelector('.mi-drop__btn');
+  let timer;
+  const open = () => { clearTimeout(timer); drop.classList.add('is-open'); if (btn) btn.setAttribute('aria-expanded', 'true'); };
+  const shut = () => { drop.classList.remove('is-open'); if (btn) btn.setAttribute('aria-expanded', 'false'); };
+  const shutSoon = () => { clearTimeout(timer); timer = setTimeout(shut, 140); };
+  drop.addEventListener('mouseenter', open);
+  drop.addEventListener('mouseleave', shutSoon);
+  if (btn) btn.addEventListener('click', () => (drop.classList.contains('is-open') ? shut() : open()));
+  drop.addEventListener('keydown', (e) => { if (e.key === 'Escape') { shut(); if (btn) btn.focus(); } });
+  document.addEventListener('click', (e) => { if (!drop.contains(e.target)) shut(); });
+});
+
 /* ---- scroll progress bar ---- */
 const bar = document.querySelector('.mi-progress');
 if (bar) {
