@@ -28,16 +28,16 @@ const route = await OGImageRoute({
   getImageOptions: (_path, page) => ({
     title: page.title,
     description: page.description,
-    logo: { path: './public/logo-horizontal-white.png', size: [300] },
+    logo: { path: './public/logo-horizontal.png', size: [360] },
     bgGradient: [
-      [11, 31, 58],
-      [22, 48, 79],
+      [255, 255, 255],
+      [238, 241, 246],
     ],
-    border: { color: [242, 96, 12], width: 14, side: 'inline-start' },
+    border: { color: [242, 96, 12], width: 16, side: 'inline-start' },
     padding: 70,
     font: {
-      title: { color: [255, 255, 255], size: 62, weight: 'Bold', lineHeight: 1.15, families: ['Space Grotesk'] },
-      description: { color: [174, 187, 205], size: 30, lineHeight: 1.4, families: ['Instrument Sans'] },
+      title: { color: [11, 31, 58], size: 62, weight: 'Bold', lineHeight: 1.15, families: ['Space Grotesk'] },
+      description: { color: [91, 107, 130], size: 30, lineHeight: 1.4, families: ['Instrument Sans'] },
     },
     fonts: ['./src/assets/og/SpaceGrotesk.ttf', './src/assets/og/InstrumentSans.ttf'],
     format: 'PNG',
