@@ -1,20 +1,26 @@
 ---
 import DesignLayout from '../../layouts/DesignLayout.astro';
-import Showcase from '../../components/design/Showcase.astro';
+import HeroAdManager from '../../components/design/heroes/HeroAdManager.astro';
+import Sections from '../../components/design/Sections.astro';
+import '@fontsource-variable/space-grotesk';
+import '@fontsource-variable/instrument-sans';
 ---
-<DesignLayout title="Richting 1 — Bold & Energiek | Meer Impact" active={1}>
-  <Showcase
-    id={1}
-    name="Bold & Energiek"
-    variant="energetic"
-    tagline="De huidige identiteit, strakker en consistenter. Oranje leidt, marineblauw ondersteunt, met energieke micro-interacties. Herkenbaar voor Lars, laagste risico."
-    fontNote="Systeem-sans, extra bold (900) — krachtig en direct."
-    palette={[
-      { hex: '#ea580c', label: 'Oranje (primair)' },
-      { hex: '#c2410e', label: 'Oranje diep' },
-      { hex: '#1e3a8a', label: 'Marineblauw' },
-      { hex: '#fff7ed', label: 'Zacht oranje' },
-      { hex: '#0f172a', label: 'Inkt' },
-    ]}
-  />
+<DesignLayout title="Richting 1 — Ad Manager | Meer Impact" active={1}>
+  <div data-dir="admanager">
+    <HeroAdManager />
+    <Sections
+      id={1}
+      name="Ad Manager"
+      signature="De hero ís een live Meta Ads-dashboard — campagne, stijgende ROAS-grafiek, doelgroep-targeting."
+      tagline="Performance-marketing look: voelt als de tool die Lars beheerst. Dashboard-esthetiek, tabulaire cijfers, strak en zakelijk. Vertrouwen via data."
+      fontNote="Space Grotesk (display) + Instrument Sans (body)"
+      palette={[
+        { hex: '#f2600c', label: 'Oranje (primair)' },
+        { hex: '#0b1f3a', label: 'Diep navy' },
+        { hex: '#2563eb', label: 'Chart-blauw' },
+        { hex: '#eef1f6', label: 'Canvas' },
+        { hex: '#ffffff', label: 'Panel' },
+      ]}
+    />
+  </div>
 </DesignLayout>

@@ -1,0 +1,27 @@
+  .kn-head { border-bottom: 1px solid var(--card-br); }
+  .kn-head-in { display: flex; align-items: center; justify-content: space-between; padding-block: 1rem; }
+  .kn-word { font-family: var(--font-display); font-size: 1.5rem; letter-spacing: 0.02em; color: var(--ink); }
+  .kn-word-2 { color: var(--brand); margin-left: 0.15em; }
+  .kn-nav { display: flex; align-items: center; gap: 1.5rem; }
+  .kn-nav a { text-decoration: none; font-weight: 600; font-size: 0.95rem; color: var(--muted); font-family: var(--font-body); }
+  .kn-nav a:hover { color: var(--brand); }
+  .kn-nav a.btn { color: var(--band-ink); }
+  @media (max-width: 780px) { .kn-nav a:not(.btn) { display: none; } }
+
+  .kn-hero { position: relative; overflow: hidden; padding-top: clamp(2.5rem, 6vw, 4.5rem); }
+  .kn-grain { position: absolute; inset: 0; pointer-events: none; opacity: 0.5; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E"); }
+  .kn-inner { position: relative; z-index: 1; }
+  .kn-type { font-family: var(--font-display); font-weight: var(--disp-weight); font-size: clamp(3rem, 13vw, 9.5rem); line-height: 0.92; letter-spacing: 0.005em; color: var(--ink); margin: 1.5rem 0 0; text-transform: uppercase; }
+  .kn-type .ln { display: block; }
+  .kn-type .hot { color: var(--brand); }
+  .kn-bottom { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1.5rem; margin: 2rem 0 2.5rem; }
+  .kn-lede { color: var(--muted); font-size: 1.2rem; max-width: 42ch; }
+  .btn-sm { padding: 0.55rem 1rem; font-size: 0.9rem; }
+  .btn-lg { padding: 1rem 1.8rem; font-size: 1.05rem; }
+
+  .marquee { border-block: 1px solid var(--card-br); overflow: hidden; padding-block: 0.9rem; }
+  .marquee-track { display: inline-flex; align-items: center; gap: 1.5rem; white-space: nowrap; font-family: var(--font-display); font-size: 1.4rem; letter-spacing: 0.06em; color: var(--ink); animation: kn-scroll 22s linear infinite; }
+  .marquee .sep { color: var(--brand); }
+  @keyframes kn-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }

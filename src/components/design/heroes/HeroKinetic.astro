@@ -1,0 +1,39 @@
+---
+// Signature: oversized kinetic type that fills the viewport, on warm-dark with
+// a single hot orange + a running marquee. Type IS the hero. Motion respects
+// prefers-reduced-motion. (On dark the coloured logo lacks contrast → wordmark;
+// a light logo variant is a to-do, noted for Tim.)
+import './HeroKinetic.css';
+---
+<header class="kn-head">
+  <div class="wrap kn-head-in">
+    <span class="kn-word">MEER<span class="kn-word-2">IMPACT</span></span>
+    <nav class="kn-nav">
+      <a href="#">Diensten</a><a href="#">Cases</a><a href="#">Kennisbank</a>
+      <a href="#" class="btn btn-primary btn-sm">Gratis analyse</a>
+    </nav>
+  </div>
+</header>
+
+<section class="kn-hero">
+  <div class="kn-grain" aria-hidden="true"></div>
+  <div class="wrap kn-inner">
+    <span class="badge"><i class="dot"></i> Meta Ads &amp; SEO voor de fitnessbranche</span>
+    <h1 class="kn-type">
+      <span class="ln"><span class="hot">MEER</span> GROEI.</span>
+      <span class="ln"><span class="hot">MEER</span> KLANTEN.</span>
+      <span class="ln"><span class="hot">MEER</span> IMPACT.</span>
+    </h1>
+    <div class="kn-bottom">
+      <p class="kn-lede">Advertenties die je terugziet in je agenda. Voor personal trainers, sportscholen en coaches — gegarandeerd.</p>
+      <a href="#" class="btn btn-primary btn-lg">Start jouw groei →</a>
+    </div>
+  </div>
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>GEGARANDEERD</span><span class="sep">◆</span><span>META ADS</span><span class="sep">◆</span><span>SEO</span><span class="sep">◆</span><span>MEEKIJKSESSIE</span><span class="sep">◆</span>
+      <span>GEGARANDEERD</span><span class="sep">◆</span><span>META ADS</span><span class="sep">◆</span><span>SEO</span><span class="sep">◆</span><span>MEEKIJKSESSIE</span><span class="sep">◆</span>
+    </div>
+  </div>
+</section>
+

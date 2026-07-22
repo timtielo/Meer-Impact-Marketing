@@ -1,20 +1,26 @@
 ---
 import DesignLayout from '../../layouts/DesignLayout.astro';
-import Showcase from '../../components/design/Showcase.astro';
+import HeroVoorNa from '../../components/design/heroes/HeroVoorNa.astro';
+import Sections from '../../components/design/Sections.astro';
+import '@fontsource-variable/archivo';
+import '@fontsource-variable/instrument-sans';
 ---
-<DesignLayout title="Richting 2 — Strak & Zakelijk | Meer Impact" active={2}>
-  <Showcase
-    id={2}
-    name="Strak & Zakelijk"
-    variant="corporate"
-    tagline="Marineblauw voorop, oranje als scherp accent. Vlakke cards, strak grid, cijfer-gedreven. Straalt autoriteit en performance uit — sterk voor de Meta Ads / ROAS-positionering."
-    fontNote="Systeem-sans, bold (800), ruime witruimte — premium en betrouwbaar."
-    palette={[
-      { hex: '#1e3a8a', label: 'Marineblauw (primair)' },
-      { hex: '#152a63', label: 'Marine diep' },
-      { hex: '#ea580c', label: 'Oranje (accent)' },
-      { hex: '#f1f5f9', label: 'Leisteen' },
-      { hex: '#0f172a', label: 'Inkt' },
-    ]}
-  />
+<DesignLayout title="Richting 2 — Voor / Na | Meer Impact" active={2}>
+  <div data-dir="voorna">
+    <HeroVoorNa />
+    <Sections
+      id={2}
+      name="Voor / Na"
+      signature="Een harde VOOR/NA-split — grijs & vlak versus kleurrijk & stijgend. De transformatie zelf."
+      tagline="De personal-trainer before/after, vertaald naar bedrijfsresultaat. Contrastrijk, verhalend, meteen te snappen."
+      fontNote="Archivo (display, expanded/black) + Instrument Sans"
+      palette={[
+        { hex: '#ea580c', label: 'Oranje (na)' },
+        { hex: '#12224e', label: 'Navy' },
+        { hex: '#e5e7eb', label: 'Voor-grijs' },
+        { hex: '#f6f7f9', label: 'Vlak' },
+        { hex: '#0f172a', label: 'Inkt' },
+      ]}
+    />
+  </div>
 </DesignLayout>

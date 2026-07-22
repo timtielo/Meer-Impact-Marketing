@@ -1,20 +1,26 @@
 ---
 import DesignLayout from '../../layouts/DesignLayout.astro';
-import Showcase from '../../components/design/Showcase.astro';
+import HeroCoach from '../../components/design/heroes/HeroCoach.astro';
+import Sections from '../../components/design/Sections.astro';
+import '@fontsource-variable/bricolage-grotesque';
+import '@fontsource-variable/instrument-sans';
 ---
-<DesignLayout title="Richting 4 — Warm & Menselijk | Meer Impact" active={4}>
-  <Showcase
-    id={4}
-    name="Warm & Menselijk"
-    variant="warm"
-    tagline="Crème basis, serif-koppen, ronde pill-knoppen. Warm en benaderbaar — sluit aan op 'persoonlijk' als kernwaarde. Verhaal- en reviewgericht in plaats van corporate."
-    fontNote="Serif display-koppen + humanist body — persoonlijk en benaderbaar."
-    palette={[
-      { hex: '#e2661f', label: 'Warm oranje' },
-      { hex: '#24405e', label: 'Gedempt blauw' },
-      { hex: '#fffaf3', label: 'Crème (basis)' },
-      { hex: '#fdf1e7', label: 'Perzik' },
-      { hex: '#2b2118', label: 'Warm inkt' },
-    ]}
-  />
+<DesignLayout title="Richting 4 — Coach | Meer Impact" active={4}>
+  <div data-dir="coach">
+    <HeroCoach />
+    <Sections
+      id={4}
+      name="Coach / Direct"
+      signature="Color-block editorial met een confronterende coach-vraag — direct en menselijk."
+      tagline="No-nonsense, spreekt je persoonlijk aan. Oranje/navy kleurblokken, karaktervolle display, scherpe hoeken. Persoonlijk maar stevig."
+      fontNote="Bricolage Grotesque (display) + Instrument Sans"
+      palette={[
+        { hex: '#ea580c', label: 'Oranje' },
+        { hex: '#101a3a', label: 'Navy' },
+        { hex: '#fbfaf7', label: 'Off-white' },
+        { hex: '#12131a', label: 'Inkt' },
+        { hex: '#f3efe7', label: 'Vlak' },
+      ]}
+    />
+  </div>
 </DesignLayout>

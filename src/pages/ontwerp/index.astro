@@ -4,45 +4,45 @@ import DesignLayout from '../../layouts/DesignLayout.astro';
 const dirs = [
   {
     id: 1,
-    name: 'Bold & Energiek',
-    blurb: 'De huidige identiteit, strakker en consistenter gemaakt. Oranje leidt, marineblauw ondersteunt. Herkenbaar, laagste risico.',
-    palette: ['#ea580c', '#1e3a8a', '#fff7ed', '#0f172a'],
-    bg: 'linear-gradient(135deg,#fff7ed,#eff6ff)',
+    name: 'Ad Manager',
+    blurb: 'De hero is een live Meta Ads-dashboard. Performance-look, dashboard-esthetiek, cijfers voorop. Vertrouwen via data.',
+    palette: ['#f2600c', '#0b1f3a', '#2563eb', '#eef1f6'],
+    bg: 'linear-gradient(135deg,#eef1f6,#dbe5f5)',
   },
   {
     id: 2,
-    name: 'Strak & Zakelijk',
-    blurb: 'Marineblauw voorop, oranje als scherp accent. Vlak, strak grid, cijfer-gedreven. Autoriteit en performance.',
-    palette: ['#1e3a8a', '#ea580c', '#f1f5f9', '#0f172a'],
-    bg: 'linear-gradient(135deg,#f1f5f9,#ffffff)',
+    name: 'Voor / Na',
+    blurb: 'Harde VOOR/NA-split: grijs & vlak versus kleurrijk & stijgend. De before/after-transformatie als hele concept.',
+    palette: ['#ea580c', '#12224e', '#e5e7eb', '#0f172a'],
+    bg: 'linear-gradient(90deg,#e5e7eb 0 50%, #ea580c 50% 100%)',
   },
   {
     id: 3,
-    name: 'Donker & Premium',
-    blurb: 'Donkere hero + footer met oranje glow, lichte content ertussen. Hoog contrast, dashboard-energie. Onderscheidend.',
-    palette: ['#f97316', '#0b1120', '#1e293b', '#f8fafc'],
-    bg: 'linear-gradient(135deg,#0b1120,#1e293b)',
+    name: 'Kinetic',
+    blurb: 'Oversized bewegende typografie, warm-donker met hete oranje + marquee. Het meest gedurfd en onderscheidend.',
+    palette: ['#ff5a1f', '#14100e', '#f7f2ea', '#1b1613'],
+    bg: 'linear-gradient(135deg,#14100e,#2a2019)',
     dark: true,
   },
   {
     id: 4,
-    name: 'Warm & Menselijk',
-    blurb: 'Crème basis, serif-koppen, ronde knoppen. Warm en benaderbaar — sluit aan op "persoonlijk". Verhaalgericht.',
-    palette: ['#e2661f', '#24405e', '#fdf1e7', '#2b2118'],
-    bg: 'linear-gradient(135deg,#fffaf3,#fce7d3)',
+    name: 'Coach / Direct',
+    blurb: 'Color-block editorial met een confronterende coach-vraag. No-nonsense, persoonlijk, karaktervolle display.',
+    palette: ['#ea580c', '#101a3a', '#fbfaf7', '#12131a'],
+    bg: 'linear-gradient(135deg,#ea580c,#101a3a)',
+    dark: true,
   },
 ];
 ---
 <DesignLayout title="Designrichtingen — Meer Impact Marketing" active={0}>
   <main class="hub">
     <header class="hub-head">
-      <span class="kicker">Meer Impact Marketing · rebuild</span>
-      <h1>Vier designrichtingen</h1>
+      <span class="kicker">Meer Impact Marketing · rebuild · ronde 2</span>
+      <h1>Vier gedurfde richtingen</h1>
       <p>
-        Allemaal een evolutie van de huidige Meer Impact-stijl (oranje + marineblauw, resultaatgericht),
-        elk met een andere persoonlijkheid. Zelfde content in elke richting, zodat je zuiver de look
-        vergelijkt. Klik een richting voor de volledige stijlgids: hero, diensten (gekoppeld aan cases),
-        succesverhalen, componenten en kleuren.
+        Meer lef dan de eerste ronde: elke richting neemt één echt risico en heeft een eigen "signature",
+        gegrond in de wereld van Meta-ads en de fitnessbranche — geen brave oppoets-variant. Oranje + navy
+        blijven het anker. Zelfde content per richting, zodat je puur de art-direction vergelijkt.
       </p>
     </header>
 
@@ -65,13 +65,13 @@ const dirs = [
     </div>
 
     <footer class="hub-foot">
-      <p>Kies je favoriet (of een mix). Daarna bouw ik de gekozen richting uit tot het echte designsysteem en migreer ik alle pagina's.</p>
+      <p>Zeg welke het beste voelt (of een mix / specifieke tweaks). Daarna bouw ik die richting uit tot het echte designsysteem en migreer ik alle pagina's — inclusief Meekijksessie-dienst, kennisbank en zoekfunctie.</p>
     </footer>
   </main>
 
   <style>
     .hub { max-width: 1120px; margin: 0 auto; padding: 3.5rem 1.5rem 5rem; font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif; color: #0f172a; }
-    .hub-head { max-width: 720px; margin-bottom: 3rem; }
+    .hub-head { max-width: 760px; margin-bottom: 3rem; }
     .kicker { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: #ea580c; }
     .hub-head h1 { font-size: clamp(2.4rem, 5vw, 3.4rem); font-weight: 900; letter-spacing: -0.03em; margin: 0.5rem 0 1rem; line-height: 1.05; }
     .hub-head p { color: #475569; font-size: 1.1rem; line-height: 1.6; }
@@ -80,8 +80,8 @@ const dirs = [
     .card { display: flex; flex-direction: column; text-decoration: none; color: inherit; border: 1px solid #e2e8f0; border-radius: 18px; overflow: hidden; background: #fff; transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; }
     .card:hover { transform: translateY(-5px); box-shadow: 0 24px 48px -24px rgba(15, 23, 42, 0.35); border-color: #cbd5e1; }
     .card-preview { position: relative; height: 150px; background: var(--card-bg); display: flex; align-items: flex-end; justify-content: space-between; padding: 1.25rem; }
-    .card-num { font-size: 3.5rem; font-weight: 900; letter-spacing: -0.05em; color: rgba(15, 23, 42, 0.15); line-height: 1; }
-    .card.dark .card-num { color: rgba(255, 255, 255, 0.25); }
+    .card-num { font-size: 3.5rem; font-weight: 900; letter-spacing: -0.05em; color: rgba(15, 23, 42, 0.18); line-height: 1; }
+    .card.dark .card-num { color: rgba(255, 255, 255, 0.3); }
     .dots { display: flex; gap: 0.4rem; }
     .dots .dot { width: 22px; height: 22px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.6); }
     .card-body { padding: 1.5rem; }

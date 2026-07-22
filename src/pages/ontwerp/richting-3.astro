@@ -1,20 +1,26 @@
 ---
 import DesignLayout from '../../layouts/DesignLayout.astro';
-import Showcase from '../../components/design/Showcase.astro';
+import HeroKinetic from '../../components/design/heroes/HeroKinetic.astro';
+import Sections from '../../components/design/Sections.astro';
+import '@fontsource/anton';
+import '@fontsource-variable/instrument-sans';
 ---
-<DesignLayout title="Richting 3 — Donker & Premium | Meer Impact" active={3}>
-  <Showcase
-    id={3}
-    name="Donker & Premium"
-    variant="dark"
-    tagline="Donkere hero en footer met oranje glow, lichte contentsecties ertussen. Hoog contrast, dashboard-energie. Onderscheidt zich direct van elke andere marketingsite."
-    fontNote="Systeem-sans, extra bold (900), grote cijfers — modern performance."
-    palette={[
-      { hex: '#f97316', label: 'Oranje (glow)' },
-      { hex: '#fb923c', label: 'Oranje licht' },
-      { hex: '#0b1120', label: 'Nachtblauw' },
-      { hex: '#1e293b', label: 'Leisteen donker' },
-      { hex: '#f8fafc', label: 'Licht (content)' },
-    ]}
-  />
+<DesignLayout title="Richting 3 — Kinetic | Meer Impact" active={3}>
+  <div data-dir="kinetic">
+    <HeroKinetic />
+    <Sections
+      id={3}
+      name="Kinetic"
+      signature="Oversized bewegende typografie die het scherm vult — warm-donker met één hete oranje + marquee."
+      tagline="Maximalistische type-hero. Modern, energiek, onmiskenbaar. Het meest gedurfd en het verst van de huidige site af."
+      fontNote="Anton (display) + Instrument Sans. Let op: donkere bg vraagt een lichte logovariant."
+      palette={[
+        { hex: '#ff5a1f', label: 'Oranje (hot)' },
+        { hex: '#14100e', label: 'Warm zwart' },
+        { hex: '#f7f2ea', label: 'Off-white' },
+        { hex: '#1b1613', label: 'Panel' },
+        { hex: '#b8ada0', label: 'Muted' },
+      ]}
+    />
+  </div>
 </DesignLayout>

@@ -29,3 +29,6 @@ dist-ssr
 
 # Astro
 .astro
+
+# Netlify adapter artifact
+deno.lock
