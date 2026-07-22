@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import Navbar from '../../components/ui/Navbar.astro';
+import Footer from '../../components/ui/Footer.astro';
+import '../../styles/sections.css';
+
+export const prerender = true;
+
+const cases = (await getCollection('cases')).sort((a, b) => a.data.order - b.data.order);
+---
+<SiteLayout
+  title="Cases, resultaten voor trainers en sportscholen | Meer Impact"
+  description="Echte resultaten uit Meta Ads en SEO voor personal trainers, sportscholen en coaches. Elke case gekoppeld aan de dienst die het mogelijk maakte."
+>
+  <Navbar />
+  <main>
+    <section class="mi-section mi-wrap">
+      <nav aria-label="Kruimelpad"><ol class="mi-breadcrumb"><li><a href="/">Home</a></li><li>Cases</li></ol></nav>
+      <div class="sec-head" style="max-width:640px;margin:1.5rem 0 2.5rem">
+        <span class="mi-overline">Succesverhalen</span>
+        <h1 class="mi-display" style="font-size:var(--fs-h1);margin-top:.5rem">Resultaten die tellen</h1>
+        <p class="mi-lede" style="margin-top:.6rem">Elke case linkt terug naar de dienst die het mogelijk maakte.</p>
+      </div>
+      <div class="mi-cardgrid" data-stagger>
+        {cases.map((c) => (
+          <a class="mi-card mi-mediacard mi-lift mi-glow mi-reveal mi-arrowp" href={`/cases/${c.id}`} style="text-decoration:none">
+            <div class="mi-mediacard__img mi-ph">resultaat</div>
+            <div class="mi-mediacard__body">
+              <span class="mi-tag mi-tag--ink" style="align-self:flex-start">{c.data.segment}</span>
+              <div class="mi-mediacard__metric">{c.data.metric}</div>
+              <h2 class="mi-h3" style="font-size:1.1rem">{c.data.client}</h2>
+              <p class="mi-muted" style="font-size:var(--fs-body-s)">{c.data.summary}</p>
+              <div class="mi-mediacard__foot"><span>Dienst: {c.data.service}</span><span class="mi-arrow" style="margin-left:auto;color:var(--mi-orange)">→</span></div>
+            </div>
+          </a>
+        ))}
+      </div>
+      <p class="ph-note" style="font-size:var(--fs-caption);color:var(--mi-faint);font-style:italic;margin-top:1.5rem">Voorbeeldcases, echte cijfers volgen bij oplevering.</p>
+    </section>
+  </main>
+  <Footer />
+</SiteLayout>

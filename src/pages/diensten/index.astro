@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import Navbar from '../../components/ui/Navbar.astro';
+import Footer from '../../components/ui/Footer.astro';
+import '../../styles/sections.css';
+
+export const prerender = true;
+
+const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+const svcIcon = (name: string) =>
+  name === 'Meta Ads' ? '◈' : name === 'Meekijksessie' ? '⧉' : name === 'SEO' ? '⌕' : name === 'Email Marketing' ? '✉' : name === 'Copywriting' ? '✎' : '◐';
+---
+<SiteLayout
+  title="Diensten, Meta Ads en SEO voor de fitnessbranche | Meer Impact"
+  description="Meta Ads, meekijksessies, SEO, e-mail en copywriting. Elke dienst gekoppeld aan een echte case, zodat je ziet wat het oplevert."
+>
+  <Navbar />
+  <main>
+    <section class="mi-section mi-wrap">
+      <nav aria-label="Kruimelpad"><ol class="mi-breadcrumb"><li><a href="/">Home</a></li><li>Diensten</li></ol></nav>
+      <div class="sec-head" style="max-width:640px;margin:1.5rem 0 2.5rem">
+        <span class="mi-overline">Diensten</span>
+        <h1 class="mi-display" style="font-size:var(--fs-h1);margin-top:.5rem">Waar we het verschil maken</h1>
+        <p class="mi-lede" style="margin-top:.6rem">Van advertenties tot vindbaarheid. Elke dienst is gekoppeld aan een echte case.</p>
+      </div>
+      <div class="mi-cardgrid" data-stagger>
+        {services.map((s) => (
+          <article class:list={['mi-card', 'mi-svc', 'mi-lift', 'mi-glow', 'mi-reveal', 'mi-arrowp', { 'mi-card--feature': s.data.hero }]}>
+            <div class="mi-svc__icon">{svcIcon(s.data.name)}</div>
+            <span class="mi-tag">{s.data.tag}</span>
+            <h2 class="mi-h3" style="margin-top:.5rem">{s.data.name}</h2>
+            <p>{s.data.summary}</p>
+            <a class="mi-svc__link" href={`/diensten/${s.id}`}>Meer over {s.data.name} <span class="mi-arrow">→</span></a>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="mi-section mi-wrap">
+      <div class="mi-cta mi-reveal">
+        <div class="mi-cta__glow"></div>
+        <div class="mi-cta__inner">
+          <h2>Niet zeker welke dienst bij je past?</h2>
+          <p>Vraag een gratis analyse aan, dan adviseren we op basis van jouw situatie.</p>
+          <a href="/marketing-analyse" class="mi-btn mi-btn--primary mi-btn--lg mi-arrowp">Gratis analyse <span class="mi-arrow">→</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</SiteLayout>

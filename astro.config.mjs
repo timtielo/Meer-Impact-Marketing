@@ -3,8 +3,9 @@ import netlify from '@astrojs/netlify';
 import tailwindcss from '@tailwindcss/vite';
 
 // SSR on Netlify — production stack for Meer Impact Marketing.
-// Content collections, React islands, SEO + sitemap integrations are wired in
-// during the full migration (after the design direction is picked).
+// Marketing pages are prerendered. Kennisbank search is client-side (see
+// src/pages/kennisbank/index.astro); full-text Pagefind is a later option if we
+// move to static output.
 export default defineConfig({
   output: 'server',
   adapter: netlify(),

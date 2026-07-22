@@ -1,5 +1,6 @@
 ---
 // Site footer: newsletter, link columns, oversized wordmark, dynamic year.
+import TieloCredit from './TieloCredit.astro';
 const year = new Date().getFullYear();
 const cols = [
   { h: 'Diensten', links: ['Meta Ads', 'Meekijksessie', 'SEO', 'Email Marketing'] },
@@ -38,7 +39,7 @@ const cols = [
     <div class="mi-sitefooter__bottom">
       <span>© {year} Meer Impact Marketing · KvK 00000000</span>
       <span class="mi-live" style="color:#7ee2a8">Beschikbaar voor nieuwe klanten</span>
-      <span>Website door <strong style="color:#fff">Tielo Digital</strong> ◆</span>
+      <TieloCredit variant="inline" />
     </div>
   </div>
 </footer>

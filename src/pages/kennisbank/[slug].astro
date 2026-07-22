@@ -1,0 +1,71 @@
+---
+import { getCollection, render } from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import Navbar from '../../components/ui/Navbar.astro';
+import Footer from '../../components/ui/Footer.astro';
+import '../../styles/sections.css';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('blog')).filter((p) => !p.data.draft);
+  return posts.map((p) => ({
+    params: { slug: p.id },
+    props: { post: p, related: posts.filter((x) => x.id !== p.id).slice(0, 3) },
+  }));
+}
+
+const { post, related } = Astro.props;
+const d = post.data;
+const { Content } = await render(post);
+const fmt = (x: Date) => x.toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<SiteLayout
+  title={`${d.title} | Kennisbank | Meer Impact`}
+  description={d.description}
+  ogImage={`/og/kennisbank/${post.id}.png`}
+>
+  <div class="mi-progress"></div>
+  <Navbar />
+  <main>
+    <article class="mi-section mi-wrap" data-pagefind-body>
+      <nav aria-label="Kruimelpad"><ol class="mi-breadcrumb"><li><a href="/">Home</a></li><li><a href="/kennisbank">Kennisbank</a></li><li>{d.title}</li></ol></nav>
+      <header style="max-width:var(--maxw-prose);margin:1.5rem auto 2rem">
+        <span class="mi-tag mi-tag--blue" data-pagefind-filter="categorie">{d.category}</span>
+        <h1 class="mi-display" style="font-size:var(--fs-h1);margin:.75rem 0 .75rem">{d.title}</h1>
+        <p class="mi-lede">{d.description}</p>
+        <div class="mi-mediacard__foot" style="margin-top:1rem"><span class="av"></span><span>{d.author} · {fmt(d.publishDate)}</span></div>
+      </header>
+      <div class="mi-prose" style="margin-inline:auto"><Content /></div>
+    </article>
+
+    {related.length > 0 && (
+      <section class="mi-section mi-wrap" style="padding-top:0">
+        <h2 class="mi-h3" style="margin-bottom:1.5rem">Lees ook</h2>
+        <div class="mi-cardgrid" data-stagger>
+          {related.map((p) => (
+            <a class="mi-card mi-mediacard mi-lift mi-glow mi-reveal mi-arrowp" href={`/kennisbank/${p.id}`} style="text-decoration:none">
+              <div class="mi-mediacard__body">
+                <span class="mi-tag mi-tag--blue" style="align-self:flex-start">{p.data.category}</span>
+                <h3 style="font-size:1rem">{p.data.title}</h3>
+                <div class="mi-mediacard__foot"><span class="mi-arrow" style="margin-left:auto;color:var(--mi-orange)">→</span></div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <section class="mi-section mi-wrap">
+      <div class="mi-cta mi-reveal">
+        <div class="mi-cta__glow"></div>
+        <div class="mi-cta__inner">
+          <h2>Liever samen doen?</h2>
+          <p>In een meekijksessie zetten we het live op, en snap je daarna zelf hoe het werkt.</p>
+          <a href="/diensten/meekijksessie" class="mi-btn mi-btn--primary mi-btn--lg mi-arrowp">Meekijksessie <span class="mi-arrow">→</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</SiteLayout>

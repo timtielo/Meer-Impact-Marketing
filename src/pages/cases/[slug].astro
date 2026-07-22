@@ -1,0 +1,76 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import Navbar from '../../components/ui/Navbar.astro';
+import Footer from '../../components/ui/Footer.astro';
+import '../../styles/sections.css';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const cases = await getCollection('cases');
+  return cases.map((c) => ({ params: { slug: c.id }, props: { entry: c } }));
+}
+
+const { entry } = Astro.props;
+const d = entry.data;
+const { Content } = await render(entry);
+const service = await getEntry('services', d.service);
+---
+<SiteLayout
+  title={`${d.client}: ${d.metric} | Case | Meer Impact`}
+  description={d.summary}
+  ogImage={`/og/cases/${entry.id}.png`}
+>
+  <Navbar />
+  <main>
+    <section class="mi-section mi-wrap" style="padding-bottom:0">
+      <nav aria-label="Kruimelpad"><ol class="mi-breadcrumb"><li><a href="/">Home</a></li><li><a href="/cases">Cases</a></li><li>{d.client}</li></ol></nav>
+      <div class="sec-head" style="max-width:720px;margin:1.5rem 0 2rem">
+        <div class="mi-casefeat__meta" style="margin-bottom:1rem">
+          <span class="mi-tag mi-tag--ink">{d.segment}</span>
+          {service && <a class="mi-tag" href={`/diensten/${service.id}`} style="text-decoration:none">Dienst: {service.data.name}</a>}
+        </div>
+        <h1 class="mi-display" style="font-size:var(--fs-h1)">{d.client}</h1>
+        <p class="mi-lede" style="margin-top:.6rem">{d.summary}</p>
+      </div>
+    </section>
+
+    <section class="mi-wrap"><div class="mi-casefeat mi-reveal">
+      <div class="mi-casefeat__banner">
+        {d.results.map((r, i) => (
+          <div class="mi-casefeat__kpi"><div class:list={['n', { accent: i === 0 }]} data-count>{r.value}</div><div class="l">{r.label}</div></div>
+        ))}
+      </div>
+      <div class="mi-casefeat__body">
+        {d.before && d.after && (
+          <div class="mi-beforeafter" style="margin-top:0">
+            <div class="mi-beforeafter__side before"><div class="mi-beforeafter__tag">Voor</div><div class="mi-beforeafter__val">{d.before}</div></div>
+            <div class="mi-beforeafter__arrow">→</div>
+            <div class="mi-beforeafter__side after"><div class="mi-beforeafter__tag">Na</div><div class="mi-beforeafter__val">{d.after}</div></div>
+          </div>
+        )}
+        <div class="mi-prose" style="margin-top:1.5rem"><Content /></div>
+        {d.quote && (
+          <>
+            <blockquote class="mi-casefeat__quote" style="margin-top:1.5rem">{d.quote}</blockquote>
+            <div class="mi-casefeat__byline"><span class="av"></span><div>{d.quoteBy}</div></div>
+          </>
+        )}
+        <p class="ph-note" style="font-size:var(--fs-caption);color:var(--mi-faint);font-style:italic;margin-top:1rem">Voorbeeldcijfers, worden vervangen door de echte resultaten.</p>
+      </div>
+    </div></section>
+
+    <section class="mi-section mi-wrap">
+      <div class="mi-cta mi-reveal">
+        <div class="mi-cta__glow"></div>
+        <div class="mi-cta__inner">
+          <h2>Zulke resultaten voor jouw bedrijf?</h2>
+          <p>Vraag een gratis analyse aan en ontdek wat er mogelijk is.</p>
+          <a href="/marketing-analyse" class="mi-btn mi-btn--primary mi-btn--lg mi-arrowp">Gratis analyse <span class="mi-arrow">→</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</SiteLayout>
