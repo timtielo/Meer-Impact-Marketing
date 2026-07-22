@@ -1,11 +1,14 @@
 [build]
   command = "npm run build"
-  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
 
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
+# PostHog reverse proxy (cookieless, EU) — carried over 1:1 from the live site.
 [[redirects]]
   from = "/ph/static/*"
   to = "https://eu-assets.i.posthog.com/static/:splat"

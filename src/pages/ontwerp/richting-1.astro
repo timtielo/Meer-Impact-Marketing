@@ -1,0 +1,20 @@
+---
+import DesignLayout from '../../layouts/DesignLayout.astro';
+import Showcase from '../../components/design/Showcase.astro';
+---
+<DesignLayout title="Richting 1 — Bold & Energiek | Meer Impact" active={1}>
+  <Showcase
+    id={1}
+    name="Bold & Energiek"
+    variant="energetic"
+    tagline="De huidige identiteit, strakker en consistenter. Oranje leidt, marineblauw ondersteunt, met energieke micro-interacties. Herkenbaar voor Lars, laagste risico."
+    fontNote="Systeem-sans, extra bold (900) — krachtig en direct."
+    palette={[
+      { hex: '#ea580c', label: 'Oranje (primair)' },
+      { hex: '#c2410e', label: 'Oranje diep' },
+      { hex: '#1e3a8a', label: 'Marineblauw' },
+      { hex: '#fff7ed', label: 'Zacht oranje' },
+      { hex: '#0f172a', label: 'Inkt' },
+    ]}
+  />
+</DesignLayout>

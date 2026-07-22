@@ -1,0 +1,94 @@
+---
+import DesignLayout from '../../layouts/DesignLayout.astro';
+
+const dirs = [
+  {
+    id: 1,
+    name: 'Bold & Energiek',
+    blurb: 'De huidige identiteit, strakker en consistenter gemaakt. Oranje leidt, marineblauw ondersteunt. Herkenbaar, laagste risico.',
+    palette: ['#ea580c', '#1e3a8a', '#fff7ed', '#0f172a'],
+    bg: 'linear-gradient(135deg,#fff7ed,#eff6ff)',
+  },
+  {
+    id: 2,
+    name: 'Strak & Zakelijk',
+    blurb: 'Marineblauw voorop, oranje als scherp accent. Vlak, strak grid, cijfer-gedreven. Autoriteit en performance.',
+    palette: ['#1e3a8a', '#ea580c', '#f1f5f9', '#0f172a'],
+    bg: 'linear-gradient(135deg,#f1f5f9,#ffffff)',
+  },
+  {
+    id: 3,
+    name: 'Donker & Premium',
+    blurb: 'Donkere hero + footer met oranje glow, lichte content ertussen. Hoog contrast, dashboard-energie. Onderscheidend.',
+    palette: ['#f97316', '#0b1120', '#1e293b', '#f8fafc'],
+    bg: 'linear-gradient(135deg,#0b1120,#1e293b)',
+    dark: true,
+  },
+  {
+    id: 4,
+    name: 'Warm & Menselijk',
+    blurb: 'Crème basis, serif-koppen, ronde knoppen. Warm en benaderbaar — sluit aan op "persoonlijk". Verhaalgericht.',
+    palette: ['#e2661f', '#24405e', '#fdf1e7', '#2b2118'],
+    bg: 'linear-gradient(135deg,#fffaf3,#fce7d3)',
+  },
+];
+---
+<DesignLayout title="Designrichtingen — Meer Impact Marketing" active={0}>
+  <main class="hub">
+    <header class="hub-head">
+      <span class="kicker">Meer Impact Marketing · rebuild</span>
+      <h1>Vier designrichtingen</h1>
+      <p>
+        Allemaal een evolutie van de huidige Meer Impact-stijl (oranje + marineblauw, resultaatgericht),
+        elk met een andere persoonlijkheid. Zelfde content in elke richting, zodat je zuiver de look
+        vergelijkt. Klik een richting voor de volledige stijlgids: hero, diensten (gekoppeld aan cases),
+        succesverhalen, componenten en kleuren.
+      </p>
+    </header>
+
+    <div class="grid">
+      {dirs.map((d) => (
+        <a href={`/ontwerp/richting-${d.id}`} class:list={['card', { dark: d.dark }]} style={`--card-bg:${d.bg}`}>
+          <div class="card-preview">
+            <span class="card-num">{d.id}</span>
+            <div class="dots">
+              {d.palette.map((c) => <span class="dot" style={`background:${c}`}></span>)}
+            </div>
+          </div>
+          <div class="card-body">
+            <h2>{d.name}</h2>
+            <p>{d.blurb}</p>
+            <span class="go">Bekijk richting {d.id} →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <footer class="hub-foot">
+      <p>Kies je favoriet (of een mix). Daarna bouw ik de gekozen richting uit tot het echte designsysteem en migreer ik alle pagina's.</p>
+    </footer>
+  </main>
+
+  <style>
+    .hub { max-width: 1120px; margin: 0 auto; padding: 3.5rem 1.5rem 5rem; font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif; color: #0f172a; }
+    .hub-head { max-width: 720px; margin-bottom: 3rem; }
+    .kicker { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: #ea580c; }
+    .hub-head h1 { font-size: clamp(2.4rem, 5vw, 3.4rem); font-weight: 900; letter-spacing: -0.03em; margin: 0.5rem 0 1rem; line-height: 1.05; }
+    .hub-head p { color: #475569; font-size: 1.1rem; line-height: 1.6; }
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+    .card { display: flex; flex-direction: column; text-decoration: none; color: inherit; border: 1px solid #e2e8f0; border-radius: 18px; overflow: hidden; background: #fff; transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 24px 48px -24px rgba(15, 23, 42, 0.35); border-color: #cbd5e1; }
+    .card-preview { position: relative; height: 150px; background: var(--card-bg); display: flex; align-items: flex-end; justify-content: space-between; padding: 1.25rem; }
+    .card-num { font-size: 3.5rem; font-weight: 900; letter-spacing: -0.05em; color: rgba(15, 23, 42, 0.15); line-height: 1; }
+    .card.dark .card-num { color: rgba(255, 255, 255, 0.25); }
+    .dots { display: flex; gap: 0.4rem; }
+    .dots .dot { width: 22px; height: 22px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.6); }
+    .card-body { padding: 1.5rem; }
+    .card-body h2 { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 0.5rem; }
+    .card-body p { color: #475569; font-size: 0.98rem; line-height: 1.55; margin: 0 0 1rem; }
+    .go { font-weight: 700; color: #ea580c; }
+    .hub-foot { margin-top: 3rem; padding: 1.5rem; background: #f8fafc; border-radius: 14px; border: 1px solid #e2e8f0; }
+    .hub-foot p { margin: 0; color: #475569; }
+  </style>
+</DesignLayout>

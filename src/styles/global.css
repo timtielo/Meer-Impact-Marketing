@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: #ffffff;
+  color: #0f172a;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}

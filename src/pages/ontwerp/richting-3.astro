@@ -1,0 +1,20 @@
+---
+import DesignLayout from '../../layouts/DesignLayout.astro';
+import Showcase from '../../components/design/Showcase.astro';
+---
+<DesignLayout title="Richting 3 — Donker & Premium | Meer Impact" active={3}>
+  <Showcase
+    id={3}
+    name="Donker & Premium"
+    variant="dark"
+    tagline="Donkere hero en footer met oranje glow, lichte contentsecties ertussen. Hoog contrast, dashboard-energie. Onderscheidt zich direct van elke andere marketingsite."
+    fontNote="Systeem-sans, extra bold (900), grote cijfers — modern performance."
+    palette={[
+      { hex: '#f97316', label: 'Oranje (glow)' },
+      { hex: '#fb923c', label: 'Oranje licht' },
+      { hex: '#0b1120', label: 'Nachtblauw' },
+      { hex: '#1e293b', label: 'Leisteen donker' },
+      { hex: '#f8fafc', label: 'Licht (content)' },
+    ]}
+  />
+</DesignLayout>

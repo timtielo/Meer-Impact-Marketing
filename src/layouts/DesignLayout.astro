@@ -1,0 +1,87 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  active?: number; // which richting is active (0 = hub)
+}
+const { title, active = 0 } = Astro.props;
+
+const dirs = [
+  { id: 1, label: 'Bold & Energiek' },
+  { id: 2, label: 'Strak & Zakelijk' },
+  { id: 3, label: 'Donker & Premium' },
+  { id: 4, label: 'Warm & Menselijk' },
+];
+---
+
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <!-- Review chrome — NOT part of the site design. Lets Tim jump between directions. -->
+    <div class="review-bar">
+      <a class="review-brand" href="/ontwerp">◆ Meer Impact — designrichtingen</a>
+      <nav class="review-nav">
+        {dirs.map((d) => (
+          <a href={`/ontwerp/richting-${d.id}`} class:list={['review-link', { on: active === d.id }]}>
+            {d.id}. {d.label}
+          </a>
+        ))}
+      </nav>
+    </div>
+    <slot />
+
+    <style>
+      .review-bar {
+        position: sticky;
+        top: 0;
+        z-index: 200;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5rem 1.25rem;
+        padding: 0.6rem 1.25rem;
+        background: #0b1120;
+        color: #e2e8f0;
+        font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+        font-size: 0.82rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .review-brand {
+        font-weight: 700;
+        color: #fff;
+        text-decoration: none;
+        letter-spacing: -0.01em;
+      }
+      .review-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+      }
+      .review-link {
+        color: #94a3b8;
+        text-decoration: none;
+        padding: 0.25rem 0.6rem;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        transition: all 0.15s ease;
+        white-space: nowrap;
+      }
+      .review-link:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.06);
+      }
+      .review-link.on {
+        color: #fff;
+        background: #f97316;
+        border-color: #f97316;
+      }
+    </style>
+  </body>
+</html>
