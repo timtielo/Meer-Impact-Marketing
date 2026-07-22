@@ -1,0 +1,29 @@
+---
+// Foundation layout for the Ad Manager system. Loads fonts + tokens + the
+// component system once. Becomes the real site layout (SEO/schema added later).
+import '@fontsource-variable/space-grotesk';
+import '@fontsource-variable/instrument-sans';
+import '../styles/tokens.css';
+import '../styles/system.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  noindex?: boolean;
+}
+const { title, description = '', noindex = false } = Astro.props;
+---
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="icon" href="/favicon.svg" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

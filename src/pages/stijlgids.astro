@@ -1,0 +1,429 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import '../styles/styleguide.css';
+
+const colorGroups = [
+  {
+    name: 'Merk',
+    swatches: [
+      { hex: '#f2600c', name: 'Orange', v: '--mi-orange' },
+      { hex: '#d24e08', name: 'Orange strong', v: '--mi-orange-strong' },
+      { hex: '#fff1e7', name: 'Orange tint', v: '--mi-orange-tint' },
+    ],
+  },
+  {
+    name: 'Ink / navy',
+    swatches: [
+      { hex: '#0b1f3a', name: 'Ink', v: '--mi-ink' },
+      { hex: '#3a4a63', name: 'Slate', v: '--mi-slate' },
+      { hex: '#5b6b82', name: 'Muted', v: '--mi-muted' },
+      { hex: '#8695a9', name: 'Faint', v: '--mi-faint' },
+    ],
+  },
+  {
+    name: 'Data & surfaces',
+    swatches: [
+      { hex: '#2563eb', name: 'Chart blue', v: '--mi-blue' },
+      { hex: '#eef1f6', name: 'Canvas', v: '--mi-canvas' },
+      { hex: '#ffffff', name: 'Surface', v: '--mi-surface' },
+      { hex: '#e3e9f1', name: 'Border', v: '--mi-border' },
+    ],
+  },
+  {
+    name: 'Functioneel',
+    swatches: [
+      { hex: '#16a34a', name: 'Up', v: '--mi-up' },
+      { hex: '#dc2626', name: 'Down', v: '--mi-down' },
+      { hex: '#d97706', name: 'Warn', v: '--mi-warn' },
+    ],
+  },
+];
+
+const typeScale = [
+  { cls: 'mi-display', label: 'Display · Space Grotesk 700', text: 'Meer klanten.' },
+  { cls: 'mi-h1', label: 'H1 · clamp 2.1–3.1rem', text: 'Adverteren dat je terugziet' },
+  { cls: 'mi-h2', label: 'H2 · clamp 1.65–2.35rem', text: 'Waar we het verschil maken' },
+  { cls: 'mi-h3', label: 'H3 · 1.3–1.6rem', text: 'Meta Ads voor personal trainers' },
+  { cls: 'mi-lede', label: 'Lede · 1.15rem · Instrument Sans', text: 'Wij sturen je advertenties op één cijfer: leads die klant worden.' },
+  { cls: '', label: 'Body · 1rem', text: 'Bodytekst in Instrument Sans. Rustig, leesbaar, tutoyerend — zo leest de hele site.' },
+];
+
+const nav = [
+  { g: 'Fundament', items: [['tokens', 'Tokens'], ['kleuren', 'Kleuren'], ['type', 'Typografie']] },
+  { g: 'Elementen', items: [['buttons', 'Buttons'], ['badges', 'Badges & labels'], ['forms', 'Formulieren']] },
+  { g: 'Componenten', items: [['cards', 'Cards'], ['dataviz', 'Data-viz'], ['panel', 'Dashboard-paneel']] },
+  { g: 'Patronen', items: [['nav', 'Navigatie'], ['accordion', 'FAQ / accordion'], ['feedback', 'Feedback'], ['table', 'Tabel'], ['prose', 'Content']] },
+];
+---
+<SiteLayout title="Stijlgids — Ad Manager | Meer Impact" noindex>
+  <header class="sg-top">
+    <div class="mi-wrap sg-top__in">
+      <div class="sg-top__title">
+        <b>Meer Impact</b>
+        <span class="mi-mono">designsysteem · Ad Manager</span>
+      </div>
+      <a class="mi-btn mi-btn--ghost mi-btn--sm" href="/ontwerp">Terug naar richtingen</a>
+    </div>
+  </header>
+
+  <div class="sg-shell">
+    <aside class="sg-side">
+      {nav.map((grp) => (
+        <div>
+          <div class="sg-side__group">{grp.g}</div>
+          {grp.items.map(([id, label]) => <a href={`#${id}`}>{label}</a>)}
+        </div>
+      ))}
+    </aside>
+
+    <main class="sg-main">
+      <!-- INTRO -->
+      <section class="sg-sec" style="border-top:none;padding-top:0">
+        <span class="mi-overline">Component library</span>
+        <h2 class="mi-display" style="font-size:var(--fs-h1);margin-top:.5rem">Ad Manager designsysteem</h2>
+        <p class="sg-intro">De bouwstenen voor de Meer Impact-website. Alles ademt de taal van een advertentie-dashboard: afleesbare cijfers, KPI-tegels en sparklines. Oranje voor actie, navy voor structuur, blauw voor data.</p>
+      </section>
+
+      <!-- TOKENS -->
+      <section class="sg-sec" id="tokens">
+        <h2>Tokens</h2>
+        <p class="sg-intro">Spacing (4px-basis), radius en elevatie. Alles verwijst naar CSS-variabelen, dus themawijzigingen zijn één plek.</p>
+        <div class="sg-label">Radius &amp; shadow</div>
+        <div class="sg-demo">
+          <table class="sg-tokens">
+            <tr><td>--radius-sm</td><td><span class="sg-shadowbox" style="border-radius:8px;border:1px solid var(--mi-border)"></span></td><td>8px · inputs, chips</td></tr>
+            <tr><td>--radius</td><td><span class="sg-shadowbox" style="border:1px solid var(--mi-border)"></span></td><td>12px · cards</td></tr>
+            <tr><td>--radius-lg</td><td><span class="sg-shadowbox" style="border-radius:16px;border:1px solid var(--mi-border)"></span></td><td>16px · panelen</td></tr>
+            <tr><td>--shadow-sm</td><td><span class="sg-shadowbox" style="box-shadow:var(--shadow-sm)"></span></td><td>rust · standaard card</td></tr>
+            <tr><td>--shadow-lg</td><td><span class="sg-shadowbox" style="box-shadow:var(--shadow-lg)"></span></td><td>lift · dashboard-paneel</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- KLEUREN -->
+      <section class="sg-sec" id="kleuren">
+        <h2>Kleuren</h2>
+        <p class="sg-intro">Oranje is schaars — alleen voor actie en de belangrijkste cijfers. Navy draagt de structuur, blauw hoort bij data, groen/rood bij deltas.</p>
+        {colorGroups.map((grp) => (
+          <>
+            <div class="sg-label">{grp.name}</div>
+            <div class="sg-grid sg-grid--4">
+              {grp.swatches.map((s) => (
+                <div class="sg-swatch">
+                  <span class="sg-swatch__chip" style={`background:${s.hex}`}></span>
+                  <span class="sg-swatch__name">{s.name}</span>
+                  <span class="sg-swatch__hex">{s.hex}</span>
+                </div>
+              ))}
+            </div>
+          </>
+        ))}
+      </section>
+
+      <!-- TYPOGRAFIE -->
+      <section class="sg-sec" id="type">
+        <h2>Typografie</h2>
+        <p class="sg-intro">Space Grotesk voor koppen en cijfers (tabulair), Instrument Sans voor tekst, system-mono voor micro data-labels.</p>
+        <div class="sg-demo">
+          {typeScale.map((t) => (
+            <div class="sg-type">
+              <div class="sg-type__meta">{t.label}</div>
+              <div class={t.cls}>{t.text}</div>
+            </div>
+          ))}
+          <div class="sg-type">
+            <div class="sg-type__meta">Cijfers · tabular-nums</div>
+            <div class="mi-num" style="font-size:1.8rem;font-weight:700">€1.240 · 4,2× · +124 · 61%</div>
+          </div>
+          <div class="sg-type">
+            <div class="sg-type__meta">Mono · data-label</div>
+            <div class="mi-mono">ROAS · CPL · CTR · 30D</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BUTTONS -->
+      <section class="sg-sec" id="buttons">
+        <h2>Buttons</h2>
+        <p class="sg-intro">Eén primaire actie per scherm (oranje). Navy voor de sterke tweede keuze, ghost en link voor de rest.</p>
+        <div class="sg-label">Varianten</div>
+        <div class="sg-demo"><div class="sg-row">
+          <a href="#" class="mi-btn mi-btn--primary">Vraag gratis analyse aan</a>
+          <a href="#" class="mi-btn mi-btn--secondary">Bekijk cases</a>
+          <a href="#" class="mi-btn mi-btn--ghost">Meer over ons</a>
+          <a href="#" class="mi-btn mi-btn--link">Lees de case →</a>
+        </div></div>
+        <div class="sg-label">Maten &amp; icoon &amp; disabled</div>
+        <div class="sg-demo"><div class="sg-row">
+          <a href="#" class="mi-btn mi-btn--primary mi-btn--sm">Small</a>
+          <a href="#" class="mi-btn mi-btn--primary">Medium</a>
+          <a href="#" class="mi-btn mi-btn--primary mi-btn--lg">Large</a>
+          <button class="mi-btn mi-btn--ghost mi-btn--icon" aria-label="Zoeken"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <button class="mi-btn mi-btn--primary" disabled>Verstuurd</button>
+        </div></div>
+      </section>
+
+      <!-- BADGES -->
+      <section class="sg-sec" id="badges">
+        <h2>Badges &amp; labels</h2>
+        <p class="sg-intro">Kleine signalen: status, categorie, en de delta-chips die groei of daling tonen.</p>
+        <div class="sg-demo"><div class="sg-row">
+          <span class="mi-badge"><i class="mi-dot"></i> Boost je aanwezigheid</span>
+          <span class="mi-tag">Hoofddienst</span>
+          <span class="mi-tag mi-tag--blue">Groei</span>
+          <span class="mi-tag mi-tag--ink">Done-with-you</span>
+          <span class="mi-pill">Personal trainers</span>
+          <span class="mi-live">live</span>
+          <span class="mi-delta mi-delta--up">▲ 61%</span>
+          <span class="mi-delta mi-delta--down">▼ 12%</span>
+        </div></div>
+      </section>
+
+      <!-- FORMULIEREN -->
+      <section class="sg-sec" id="forms">
+        <h2>Formulieren</h2>
+        <p class="sg-intro">De velden van het lead-formulier (voornaam, e-mail, bedrijf) sturen via de bestaande Netlify-proxy naar Make. Inclusief zoekbalk voor de kennisbank.</p>
+        <div class="sg-grid sg-grid--2 sg-row--top">
+          <div class="sg-demo">
+            <form class="mi-stack" onsubmit="return false">
+              <div class="mi-field">
+                <label class="mi-label" for="f1">Voornaam <span class="mi-req">*</span></label>
+                <input class="mi-input" id="f1" placeholder="Bijv. Lars" />
+              </div>
+              <div class="mi-field">
+                <label class="mi-label" for="f2">E-mailadres <span class="mi-req">*</span></label>
+                <input class="mi-input" id="f2" type="email" placeholder="jij@bedrijf.nl" />
+                <span class="mi-help">We sturen je binnen 1 werkdag een concreet plan.</span>
+              </div>
+              <div class="mi-field">
+                <label class="mi-label" for="f3">Bedrijf <span class="mi-req">*</span></label>
+                <input class="mi-input" id="f3" aria-invalid="true" placeholder="Studio / sportschool" />
+                <span class="mi-error">Vul je bedrijfsnaam in.</span>
+              </div>
+              <button class="mi-btn mi-btn--primary" type="submit">Vraag gratis analyse aan</button>
+            </form>
+          </div>
+          <div class="sg-demo">
+            <div class="mi-stack">
+              <div class="mi-field">
+                <span class="mi-label">Zoeken in de kennisbank</span>
+                <div class="mi-search">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                  <input type="search" placeholder="Bijv. Meta Pixel installeren" />
+                </div>
+              </div>
+              <div class="mi-field">
+                <label class="mi-label" for="s1">Dienst</label>
+                <select class="mi-select" id="s1"><option>Meta Ads</option><option>Meekijksessie</option><option>SEO</option></select>
+              </div>
+              <div class="mi-field">
+                <label class="mi-label" for="t1">Bericht</label>
+                <textarea class="mi-textarea" id="t1" rows="2" placeholder="Waar loop je tegenaan?"></textarea>
+              </div>
+              <label class="mi-check"><input type="checkbox" checked /> Stuur me de maandelijkse tips</label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CARDS -->
+      <section class="sg-sec" id="cards">
+        <h2>Cards</h2>
+        <p class="sg-intro">Diensten linken naar hun case; cases linken terug naar de dienst. Stat-tegels tonen resultaat.</p>
+        <div class="sg-label">Dienst · case · stat</div>
+        <div class="sg-grid sg-grid--3">
+          <article class="mi-card mi-card--hover mi-svc mi-card--feature">
+            <div class="mi-svc__icon"><svg viewBox="0 0 24 24" width="22" fill="none"><rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18" stroke="currentColor" stroke-width="2"/></svg></div>
+            <span class="mi-tag">Hoofddienst</span>
+            <h3>Meta Ads</h3>
+            <p>Facebook &amp; Instagram advertenties die je ideale klant bereiken en meetbaar leads opleveren.</p>
+            <a class="mi-svc__link" href="#">Bekijk case: PT Studio Amsterdam →</a>
+          </article>
+          <article class="mi-card mi-case">
+            <div class="mi-case__top"><span class="mi-case__seg">Personal training</span><span class="mi-case__metric">4,2×</span></div>
+            <h3>PT Studio Amsterdam</h3>
+            <p class="mi-muted">+38 nieuwe klanten in 3 maanden</p>
+            <a class="mi-case__link" href="#">Dienst: Meta Ads →</a>
+          </article>
+          <div class="mi-stat mi-stat--hot">
+            <div class="mi-stat__label"><span>ROAS</span><span class="mi-delta mi-delta--up">▲ 0,6</span></div>
+            <div class="mi-stat__value">4,2×</div>
+          </div>
+        </div>
+        <div class="sg-label">Artikel (kennisbank)</div>
+        <div class="sg-grid sg-grid--3">
+          <article class="mi-card mi-card--hover">
+            <span class="mi-tag mi-tag--blue">Instructie</span>
+            <h3 style="font-size:1.1rem;margin-top:.6rem">Zo zet je de Meta Pixel in 10 minuten goed op</h3>
+            <p class="mi-muted" style="font-size:var(--fs-body-s);margin-top:.4rem">Stap voor stap, zonder technische kennis.</p>
+            <a class="mi-svc__link" href="#">Lees verder →</a>
+          </article>
+        </div>
+      </section>
+
+      <!-- DATA-VIZ -->
+      <section class="sg-sec" id="dataviz">
+        <h2>Data-viz</h2>
+        <p class="sg-intro">De signatuur van dit systeem: KPI-tegels, sparklines, meters en doelgroep-pills. Cijfers zijn altijd tabulair.</p>
+        <div class="sg-label">KPI-tegels</div>
+        <div class="sg-grid sg-grid--3">
+          <div class="mi-stat"><div class="mi-stat__label"><span>Besteed</span></div><div class="mi-stat__value">€1.240</div></div>
+          <div class="mi-stat"><div class="mi-stat__label"><span>Leads</span><span class="mi-delta mi-delta--up">▲ 61%</span></div><div class="mi-stat__value">73</div></div>
+          <div class="mi-stat mi-stat--hot"><div class="mi-stat__label"><span>ROAS</span></div><div class="mi-stat__value">4,2×</div></div>
+        </div>
+        <div class="sg-label">Sparkline &amp; meter</div>
+        <div class="sg-grid sg-grid--2">
+          <div class="mi-chart">
+            <div class="mi-chart__cap"><span>Leads · 30 dagen</span><span class="mi-delta mi-delta--up">▲ 61%</span></div>
+            <svg class="mi-spark" viewBox="0 0 320 90" preserveAspectRatio="none">
+              <defs><linearGradient id="sgfill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#f2600c" stop-opacity="0.28"/><stop offset="1" stop-color="#f2600c" stop-opacity="0"/></linearGradient></defs>
+              <path d="M0,78 L46,72 L92,74 L138,58 L184,48 L230,32 L276,20 L320,8 L320,90 L0,90 Z" fill="url(#sgfill)"/>
+              <path class="line" d="M0,78 L46,72 L92,74 L138,58 L184,48 L230,32 L276,20 L320,8" fill="none" stroke="#f2600c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="mi-card" style="display:flex;flex-direction:column;justify-content:center;gap:1rem">
+            <div>
+              <div class="mi-stat__label" style="margin-bottom:.4rem"><span>Budget besteed</span><span class="mi-num">62%</span></div>
+              <div class="mi-meter"><span class="mi-meter__fill" style="width:62%"></span></div>
+            </div>
+            <div>
+              <div class="mi-stat__label" style="margin-bottom:.4rem"><span>Doel behaald</span><span class="mi-num">84%</span></div>
+              <div class="mi-meter"><span class="mi-meter__fill" style="width:84%;background:var(--mi-up)"></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="sg-label">Doelgroep-pills</div>
+        <div class="sg-demo"><div class="sg-row">
+          <span class="mi-pill">Personal trainers</span>
+          <span class="mi-pill">Sportscholen · 25 km</span>
+          <span class="mi-pill">25–45 jr</span>
+          <span class="mi-pill">Interesse: fitness</span>
+        </div></div>
+      </section>
+
+      <!-- DASHBOARD PANEL -->
+      <section class="sg-sec" id="panel">
+        <h2>Dashboard-paneel</h2>
+        <p class="sg-intro">Het herkenningspunt van de site: een live-ogend campagne-paneel. Wordt de held van de homepage.</p>
+        <div class="sg-demo sg-demo--canvas">
+          <div class="mi-panel" style="max-width:520px;margin-inline:auto">
+            <div class="mi-panel__bar">
+              <span class="mi-tl mi-tl--r"></span><span class="mi-tl mi-tl--y"></span><span class="mi-tl mi-tl--g"></span>
+              <span class="mi-panel__title">Campagne · Personal Trainers NL</span>
+              <span class="mi-panel__live"><span class="mi-live">live</span></span>
+            </div>
+            <div class="mi-panel__body">
+              <div class="mi-kpis">
+                <div class="mi-stat"><div class="mi-stat__label"><span>Besteed</span></div><div class="mi-stat__value" style="font-size:1.4rem">€1.240</div></div>
+                <div class="mi-stat"><div class="mi-stat__label"><span>Leads</span></div><div class="mi-stat__value" style="font-size:1.4rem">73</div></div>
+                <div class="mi-stat mi-stat--hot"><div class="mi-stat__label"><span>ROAS</span></div><div class="mi-stat__value" style="font-size:1.4rem">4,2×</div></div>
+              </div>
+              <div class="mi-chart">
+                <div class="mi-chart__cap"><span>Leads · laatste 30 dagen</span><span class="mi-delta mi-delta--up">▲ 61%</span></div>
+                <svg class="mi-spark" viewBox="0 0 320 90" preserveAspectRatio="none">
+                  <defs><linearGradient id="pnfill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#f2600c" stop-opacity="0.28"/><stop offset="1" stop-color="#f2600c" stop-opacity="0"/></linearGradient></defs>
+                  <path d="M0,78 L46,72 L92,74 L138,58 L184,48 L230,32 L276,20 L320,8 L320,90 L0,90 Z" fill="url(#pnfill)"/>
+                  <path class="line" d="M0,78 L46,72 L92,74 L138,58 L184,48 L230,32 L276,20 L320,8" fill="none" stroke="#f2600c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="sg-row" style="gap:.4rem"><span class="mi-mono" style="color:var(--mi-faint)">DOELGROEP</span><span class="mi-pill">Personal trainers</span><span class="mi-pill">25 km</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- NAVIGATIE -->
+      <section class="sg-sec" id="nav">
+        <h2>Navigatie</h2>
+        <div class="sg-label">Header</div>
+        <div class="sg-demo" style="padding:0;overflow:hidden">
+          <div class="mi-header" style="position:static">
+            <div class="mi-wrap mi-header__in">
+              <img class="mi-header__logo" src="/logo-horizontal.svg" alt="Meer Impact Marketing" onerror="this.onerror=null;this.src='/Meer%20Impact%20Marketing%20logo%20horizontal.png'" />
+              <nav class="mi-nav">
+                <a href="#">Diensten</a><a href="#">Cases</a><a href="#">Kennisbank</a>
+                <a href="#" class="mi-btn mi-btn--primary mi-btn--sm">Gratis analyse</a>
+              </nav>
+            </div>
+          </div>
+        </div>
+        <div class="sg-label">Breadcrumb &amp; dropdown</div>
+        <div class="sg-demo"><div class="sg-row" style="justify-content:space-between">
+          <ul class="mi-breadcrumb"><li><a href="#">Home</a></li><li><a href="#">Diensten</a></li><li>Meta Ads</li></ul>
+          <details class="mi-menu">
+            <summary>Diensten ▾</summary>
+            <div class="mi-menu__list"><a href="#">Meta Ads</a><a href="#">Meekijksessie</a><a href="#">SEO</a><a href="#">Email Marketing</a></div>
+          </details>
+        </div></div>
+        <div class="sg-label">Footer</div>
+        <div class="sg-demo" style="padding:0;overflow:hidden">
+          <div class="mi-footer" style="padding-block:1.5rem">
+            <div class="mi-wrap sg-row" style="justify-content:space-between">
+              <span style="font-family:var(--font-display);color:#fff;font-weight:700">Meer Impact Marketing</span>
+              <span class="mi-mono">Website door Tielo Digital ◆</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ACCORDION -->
+      <section class="sg-sec" id="accordion">
+        <h2>FAQ / accordion</h2>
+        <p class="sg-intro">Native <code>&lt;details&gt;</code> — toegankelijk, geen JavaScript.</p>
+        <div class="sg-demo" style="background:transparent;border:none;padding:0">
+          <details class="mi-acc" open><summary>Wat kost een Meta Ads-campagne?</summary><div class="mi-acc__body">Je betaalt een vast maandbedrag plus je eigen advertentiebudget. Geen setup-risico.</div></details>
+          <details class="mi-acc"><summary>Wat is een meekijksessie?</summary><div class="mi-acc__body">Live meekijken terwijl jij zelf de pixel en campagnes aanzet, met de juiste instructies.</div></details>
+          <details class="mi-acc"><summary>Werken jullie alleen voor de fitnessbranche?</summary><div class="mi-acc__body">Nee, maar we zijn er wél in gespecialiseerd — daar maken we de meeste impact.</div></details>
+        </div>
+      </section>
+
+      <!-- FEEDBACK -->
+      <section class="sg-sec" id="feedback">
+        <h2>Feedback</h2>
+        <div class="sg-label">Meldingen</div>
+        <div class="sg-demo mi-stack">
+          <div class="mi-alert mi-alert--success"><span>✓</span><div><strong>Aanvraag verstuurd</strong>We nemen binnen 1 werkdag contact op.</div></div>
+          <div class="mi-alert mi-alert--info"><span>ℹ</span><div><strong>Meekijksessie ingepland</strong>Je krijgt een agenda-uitnodiging per mail.</div></div>
+          <div class="mi-alert mi-alert--warn"><span>!</span><div><strong>Budget bijna op</strong>Nog 2 dagen op het huidige advertentiebudget.</div></div>
+          <div class="mi-alert mi-alert--error"><span>✕</span><div><strong>Er ging iets mis</strong>Controleer je e-mailadres en probeer opnieuw.</div></div>
+        </div>
+        <div class="sg-label">Toast &amp; lege staat</div>
+        <div class="sg-grid sg-grid--2 sg-row--top">
+          <div class="sg-demo"><span class="mi-toast">✓ Opgeslagen</span></div>
+          <div class="sg-demo"><div class="mi-empty"><strong>Nog geen cases</strong><p class="mi-muted" style="margin-top:.3rem">Zodra we resultaten hebben, verschijnen ze hier.</p></div></div>
+        </div>
+      </section>
+
+      <!-- TABEL -->
+      <section class="sg-sec" id="table">
+        <h2>Tabel</h2>
+        <p class="sg-intro">Voor resultaten en vergelijkingen. Cijfers rechts uitgelijnd en tabulair.</p>
+        <div class="sg-demo" style="padding:0;overflow:auto">
+          <table class="mi-table">
+            <thead><tr><th>Klant</th><th>Dienst</th><th>ROAS</th><th>Leads/mnd</th></tr></thead>
+            <tbody>
+              <tr><td>PT Studio Amsterdam</td><td>Meta Ads</td><td class="mi-num">4,2×</td><td class="mi-num">38</td></tr>
+              <tr><td>Sportschool Utrecht</td><td>SEO</td><td class="mi-num">3,1×</td><td class="mi-num">27</td></tr>
+              <tr><td>Coach Rotterdam</td><td>Email</td><td class="mi-num">5,4×</td><td class="mi-num">19</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- PROSE -->
+      <section class="sg-sec" id="prose">
+        <h2>Content</h2>
+        <p class="sg-intro">De opmaak voor kennisbank-artikelen en langere teksten.</p>
+        <div class="sg-demo">
+          <div class="mi-prose">
+            <h2>Waarom de Meta Pixel cruciaal is</h2>
+            <p>De pixel meet wat mensen op je site doen nadat ze je advertentie zagen. Zonder pixel adverteer je blind — mét pixel weet je precies welke euro een klant oplevert.</p>
+            <blockquote>Meten is niet het doel. Meer klanten is het doel — meten is hoe je er komt.</blockquote>
+            <h3>In het kort</h3>
+            <ul><li>Installeer de pixel op elke pagina</li><li>Stel de belangrijkste <code>events</code> in (lead, aankoop)</li><li>Controleer met de Meta-testtool</li></ul>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</SiteLayout>
