@@ -1,0 +1,60 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Navbar from '../components/ui/Navbar.astro';
+import Footer from '../components/ui/Footer.astro';
+import LeadForm from '../components/ui/LeadForm.astro';
+import '../styles/sections.css';
+
+export const prerender = true;
+
+const punten = [
+  'Waar je nu leads laat liggen, concreet benoemd',
+  'Wat je concurrenten doen dat jij nog niet doet',
+  'Een realistisch advertentiebudget voor jouw doel',
+  'De eerste drie stappen die het meeste opleveren',
+];
+---
+<SiteLayout
+  title="Gratis marketinganalyse aanvragen | Meer Impact Marketing"
+  description="Vraag een gratis marketinganalyse aan. Binnen 1 werkdag een concreet plan voor meer leads uit Meta Ads en SEO. Geen verplichtingen."
+>
+  <Navbar />
+  <main>
+    <section class="mi-section mi-wrap">
+      <nav aria-label="Kruimelpad"><ol class="mi-breadcrumb"><li><a href="/">Home</a></li><li>Gratis analyse</li></ol></nav>
+      <div class="mi-hero__grid" style="margin-top:1.5rem">
+        <div>
+          <span class="mi-badge"><i class="mi-dot"></i> Binnen 1 werkdag antwoord</span>
+          <h1 class="mi-display" style="font-size:var(--fs-h1);margin:1rem 0 .75rem">Gratis marketinganalyse</h1>
+          <p class="mi-lede">We kijken naar je huidige online aanwezigheid en sturen je een concreet plan. Geen verkooppraatje, geen verplichtingen.</p>
+
+          <h2 class="mi-h3" style="margin:2rem 0 1rem">Wat je krijgt</h2>
+          <ul class="mi-plan__list">
+            {punten.map((p) => <li>{p}</li>)}
+          </ul>
+
+          <div class="mi-card" style="margin-top:2rem;background:var(--mi-surface-2)">
+            <p class="mi-muted" style="font-size:var(--fs-body-s)">Liever even bellen of mailen? Dat kan ook via de <a href="/contact" style="color:var(--mi-orange);font-weight:600">contactpagina</a>.</p>
+          </div>
+        </div>
+
+        <div class="mi-card" style="padding:var(--sp-6)">
+          <h2 class="mi-h3" style="margin-bottom:1.25rem">Vraag je analyse aan</h2>
+          <LeadForm
+            formType="analyse"
+            submitLabel="Vraag gratis analyse aan"
+            successUrl="/marketing-analyse-bedankt"
+            note="We gebruiken je gegevens alleen om contact op te nemen over deze aanvraag."
+            fields={[
+              { name: 'voornaam', label: 'Voornaam', autocomplete: 'given-name', placeholder: 'Bijv. Lars' },
+              { name: 'email', label: 'E-mailadres', type: 'email', autocomplete: 'email', placeholder: 'jij@bedrijf.nl' },
+              { name: 'bedrijf', label: 'Bedrijf', autocomplete: 'organization', placeholder: 'Studio, sportschool of praktijk' },
+              { name: 'bericht', label: 'Waar loop je tegenaan?', type: 'textarea', required: false, placeholder: 'Optioneel' },
+            ]}
+          />
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</SiteLayout>

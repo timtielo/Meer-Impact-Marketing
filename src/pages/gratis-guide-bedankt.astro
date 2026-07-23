@@ -1,0 +1,35 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Navbar from '../components/ui/Navbar.astro';
+import Footer from '../components/ui/Footer.astro';
+import '../styles/sections.css';
+
+export const prerender = true;
+---
+<SiteLayout
+  title="Bedankt, de guide is onderweg | Meer Impact Marketing"
+  description="Je aanvraag is ontvangen. De gratis guide komt eraan per mail."
+  noindex
+>
+  <Navbar />
+  <main>
+    <section class="mi-section mi-wrap">
+      <div style="max-width:640px">
+        <span class="mi-live" style="font-size:var(--fs-body-s)">Aanvraag ontvangen</span>
+        <h1 class="mi-display" style="font-size:var(--fs-h1);margin:.75rem 0">De guide is onderweg.</h1>
+        <p class="mi-lede">Check je inbox. Zit er niets in? Kijk dan even in je spam- of promotiemap, en voeg ons toe aan je contacten.</p>
+
+        <div class="mi-alert mi-alert--info" style="margin-top:1.5rem">
+          <span>ℹ</span>
+          <div><strong>Kom je er zelf niet uit?</strong>In een meekijksessie zetten we het samen live op, en snap je daarna precies hoe het werkt.</div>
+        </div>
+
+        <div class="mi-hero__cta" style="margin-top:2rem">
+          <a href="/diensten/meekijksessie" class="mi-btn mi-btn--primary mi-arrowp">Bekijk de meekijksessie <span class="mi-arrow">→</span></a>
+          <a href="/marketing-analyse" class="mi-btn mi-btn--ghost">Vraag een gratis analyse aan</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</SiteLayout>

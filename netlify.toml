@@ -1,11 +1,40 @@
 [build]
   command = "npm run build"
-  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
 
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
+# --- Legacy URL's van de oude site -------------------------------------------
+# De meeste oude URL's blijven ongewijzigd (/diensten/*, /contact, /privacy,
+# /voorwaarden, /gratis-guide, /marketing-analyse, /guide, /marketing). Die
+# hoeven niet omgeleid, alleen gebouwd voordat we live gaan.
+# Alleen deze twee veranderen van adres:
+
+# Blog is Kennisbank geworden.
+[[redirects]]
+  from = "/blog"
+  to = "/kennisbank"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/*"
+  to = "/kennisbank/:splat"
+  status = 301
+  force = true
+
+# Succesverhalen zitten nu onder Cases.
+[[redirects]]
+  from = "/testimonials"
+  to = "/cases"
+  status = 301
+  force = true
+
+# PostHog reverse proxy (cookieless, EU) — carried over 1:1 from the live site.
 [[redirects]]
   from = "/ph/static/*"
   to = "https://eu-assets.i.posthog.com/static/:splat"

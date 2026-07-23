@@ -1,0 +1,74 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import Navbar from '../../components/ui/Navbar.astro';
+import Footer from '../../components/ui/Footer.astro';
+import '../../styles/sections.css';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const services = await getCollection('services');
+  return services.map((s) => ({ params: { slug: s.id }, props: { service: s } }));
+}
+
+const { service } = Astro.props;
+const { Content } = await render(service);
+const linkedCase = service.data.caseSlug ? await getEntry('cases', service.data.caseSlug) : undefined;
+---
+<SiteLayout
+  title={`${service.data.name}, ${service.data.tagline} | Meer Impact`}
+  description={service.data.summary}
+  ogImage={`/og/diensten/${service.id}.png`}
+>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: service.data.name,
+    description: service.data.summary,
+    provider: { '@type': 'ProfessionalService', name: 'Meer Impact Marketing', url: 'https://www.meerimpactmarketing.nl' },
+    areaServed: 'NL',
+  })} />
+
+  <Navbar />
+  <main>
+    <section class="mi-section mi-wrap">
+      <nav aria-label="Kruimelpad"><ol class="mi-breadcrumb"><li><a href="/">Home</a></li><li><a href="/diensten">Diensten</a></li><li>{service.data.name}</li></ol></nav>
+      <div class="sec-head" style="max-width:720px;margin:1.5rem 0 0">
+        <span class="mi-tag">{service.data.tag}</span>
+        <h1 class="mi-display" style="font-size:var(--fs-h1);margin:.75rem 0 .5rem">{service.data.name}</h1>
+        <p class="mi-lede">{service.data.tagline}</p>
+        <div style="margin-top:1.5rem"><a href="/marketing-analyse" class="mi-btn mi-btn--primary mi-arrowp">Gratis analyse <span class="mi-arrow">→</span></a></div>
+      </div>
+    </section>
+
+    <section class="mi-section mi-wrap" style="padding-top:0">
+      <div class="mi-prose"><Content /></div>
+    </section>
+
+    {linkedCase && (
+      <section class="mi-section mi-wrap" style="padding-top:0">
+        <span class="mi-overline">Zo pakt het uit</span>
+        <h2 class="mi-h2" style="margin:.5rem 0 1.5rem">Gekoppelde case</h2>
+        <a class="mi-card mi-case mi-lift mi-glow mi-arrowp" href={`/cases/${linkedCase.id}`} style="text-decoration:none;max-width:520px">
+          <div class="mi-case__top"><span class="mi-case__seg">{linkedCase.data.segment}</span><span class="mi-case__metric">{linkedCase.data.metric}</span></div>
+          <h3>{linkedCase.data.client}</h3>
+          <p class="mi-muted" style="font-size:var(--fs-body-s)">{linkedCase.data.summary}</p>
+          <span class="mi-case__link">Bekijk case <span class="mi-arrow">→</span></span>
+        </a>
+      </section>
+    )}
+
+    <section class="mi-section mi-wrap">
+      <div class="mi-cta mi-reveal">
+        <div class="mi-cta__glow"></div>
+        <div class="mi-cta__inner">
+          <h2>Aan de slag met {service.data.name}?</h2>
+          <p>Vraag een gratis analyse aan. Geen verplichtingen, wel een concreet plan.</p>
+          <a href="/marketing-analyse" class="mi-btn mi-btn--primary mi-btn--lg mi-magnetic mi-arrowp">Gratis analyse aanvragen <span class="mi-arrow">→</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</SiteLayout>

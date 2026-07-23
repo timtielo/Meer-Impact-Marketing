@@ -1,0 +1,63 @@
+---
+// Site navbar: transparent over the hero, solid on scroll (JS adds .is-scrolled).
+// Mega dropdown for services (hover + click + keyboard), full-screen mobile sheet.
+// Every href points at a real route. Do not put placeholders here.
+const services = [
+  { name: 'Meta Ads', desc: 'Advertenties die leads opleveren', href: '/diensten/meta-ads' },
+  { name: 'Meekijksessie', desc: 'Zelf leren, live begeleid', href: '/diensten/meekijksessie' },
+  { name: 'SEO', desc: 'Beter vindbaar in Google', href: '/diensten/seo' },
+  { name: 'Email Marketing', desc: 'Flows die klanten terugbrengen', href: '/diensten/email-marketing' },
+];
+const links = [
+  { name: 'Cases', href: '/cases' },
+  { name: 'Kennisbank', href: '/kennisbank' },
+  { name: 'Contact', href: '/contact' },
+];
+---
+<nav class="mi-navbar">
+  <div class="mi-wrap mi-navbar__in">
+    <a href="/" aria-label="Meer Impact Marketing home">
+      <img class="mi-navbar__logo" src="/logo-horizontal.png" alt="Meer Impact Marketing" width="75" height="34" />
+    </a>
+
+    <div class="mi-navbar__links">
+      <div class="mi-drop" data-drop>
+        <button type="button" class="mi-drop__btn" aria-expanded="false" aria-haspopup="true" aria-controls="drop-diensten">
+          Diensten
+          <svg class="mi-drop__caret" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="mi-drop__panel" id="drop-diensten" role="menu">
+          <div class="mi-drop__grid">
+            {services.map((s) => (
+              <a class="mi-mega__item" role="menuitem" href={s.href}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18" stroke="currentColor" stroke-width="2"/></svg>
+                <span><b>{s.name}</b><span>{s.desc}</span></span>
+              </a>
+            ))}
+          </div>
+          <a class="mi-drop__all mi-arrowp" role="menuitem" href="/diensten">Bekijk alle diensten <span class="mi-arrow">→</span></a>
+        </div>
+      </div>
+      {links.map((l) => <a class="mi-navbar__link" href={l.href}>{l.name}</a>)}
+    </div>
+
+    <div class="mi-navbar__actions">
+      <a class="mi-btn mi-btn--ghost mi-btn--sm" href="/contact">Contact</a>
+      <a class="mi-btn mi-btn--primary mi-btn--sm mi-arrowp" href="/marketing-analyse">Gratis analyse <span class="mi-arrow">→</span></a>
+      <button class="mi-navbar__toggle" data-menu-open aria-label="Menu openen" aria-controls="mobile-menu">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="mi-mobile" id="mobile-menu">
+  <div class="mi-mobile__backdrop" data-menu-close></div>
+  <div class="mi-mobile__sheet">
+    <button class="mi-mobile__close" data-menu-close aria-label="Menu sluiten">&times;</button>
+    <a href="/diensten">Alle diensten</a>
+    {services.map((s) => <a href={s.href}>{s.name}</a>)}
+    {links.map((l) => <a href={l.href}>{l.name}</a>)}
+    <a class="mi-btn mi-btn--primary" href="/marketing-analyse" style="margin-top:auto">Gratis analyse →</a>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Navbar from '../components/ui/Navbar.astro';
+import Footer from '../components/ui/Footer.astro';
+import '../styles/sections.css';
+
+export const prerender = true;
+
+const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order).slice(0, 4);
+---
+<SiteLayout
+  title="Pagina niet gevonden | Meer Impact Marketing"
+  description="Deze pagina bestaat niet of is verplaatst. Bekijk onze diensten, cases of de kennisbank."
+  noindex
+>
+  <Navbar />
+  <main>
+    <section class="mi-section mi-wrap">
+      <div style="max-width:640px">
+        <span class="mi-overline">Foutje</span>
+        <h1 class="mi-display" style="font-size:var(--fs-h1);margin:.5rem 0">Deze pagina bestaat niet.</h1>
+        <p class="mi-lede">De link klopt niet meer, of de pagina is verplaatst. Hieronder kom je snel weer op weg.</p>
+        <div class="mi-hero__cta" style="margin-top:1.5rem">
+          <a href="/" class="mi-btn mi-btn--primary mi-arrowp">Naar de homepage <span class="mi-arrow">→</span></a>
+          <a href="/kennisbank" class="mi-btn mi-btn--ghost">Zoek in de kennisbank</a>
+        </div>
+      </div>
+
+      <div style="margin-top:3rem">
+        <h2 class="mi-h3" style="margin-bottom:1.25rem">Waar je waarschijnlijk naar zocht</h2>
+        <div class="mi-cardgrid">
+          {services.map((s) => (
+            <a class="mi-card mi-svc mi-lift mi-glow mi-arrowp" href={`/diensten/${s.id}`} style="text-decoration:none">
+              <span class="mi-tag">{s.data.tag}</span>
+              <h3 style="margin-top:.5rem">{s.data.name}</h3>
+              <p>{s.data.summary}</p>
+              <span class="mi-svc__link">Bekijk dienst <span class="mi-arrow">→</span></span>
+            </a>
+          ))}
+        </div>
+        <div class="mi-hero__cta" style="margin-top:1.5rem">
+          <a href="/cases" class="mi-btn mi-btn--ghost mi-btn--sm">Alle cases</a>
+          <a href="/diensten" class="mi-btn mi-btn--ghost mi-btn--sm">Alle diensten</a>
+          <a href="/marketing-analyse" class="mi-btn mi-btn--ghost mi-btn--sm">Gratis analyse</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</SiteLayout>

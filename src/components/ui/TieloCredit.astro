@@ -1,0 +1,138 @@
+---
+/**
+ * Tielo credit — the "Website door Tielo Digital" footer stamp.
+ *
+ * Goes on EVERY client site. Two jobs at once:
+ *   1. A subtle, tasteful credit in/under the footer.
+ *   2. A real dofollow backlink to tielo-digital.nl — the single biggest
+ *      backlink asset for Tielo's own local SEO (see the marketing area's
+ *      eigen-site-backlinks-nap.md). So: plain <a>, NO rel="nofollow".
+ *
+ * The icon is the REAL Tielo Digital mark (the TD monogram, td-transp.png),
+ * embedded as a CSS mask: the mask gives the shape, `background-color` gives
+ * the colour. The whole stamp is MONOCHROME and inherits `currentColor`, so it
+ * is black on a light footer, white on a dark one, mid on anything between —
+ * transparent, no chip, reads on any background. Override with `ink` if you
+ * ever need to force a colour.
+ *
+ * DELIBERATELY NOT client-themeable in the brand-* sense — it's the fixed Tielo
+ * stamp. Anchor text is the brand name "Tielo Digital" (not a keyword phrase).
+ *
+ * Props:
+ *   variant  'badge' | 'bar' | 'inline'   default 'badge'
+ *              badge  — ghost outline pill for a footer CORNER (recommended).
+ *              bar    — full-width centered strip, hairline top border, the
+ *                       sub-footer line UNDER the main footer.
+ *              inline — just the link; drop it anywhere.
+ *   prefix   string   caption lead-in, default 'Website door'
+ *   href     string   default 'https://www.tielo-digital.nl'
+ *   newTab   boolean  open in a new tab, default true
+ *   ink      string   optional fixed colour (any CSS colour); default = inherit
+ *                      the footer's currentColor (auto black/white/between).
+ *                      CONTRAST CAVEAT: if the footer container's default text
+ *                      colour is dark (light set per-element, not on the
+ *                      container), the badge inherits dark-on-dark and can
+ *                      disappear — pass an explicit readable `ink` then.
+ *   class    string   extra classes on the root (positioning, etc.)
+ */
+interface Props {
+  variant?: 'badge' | 'bar' | 'inline'
+  prefix?: string
+  href?: string
+  newTab?: boolean
+  ink?: string
+  class?: string
+}
+const {
+  variant = 'badge',
+  prefix = 'Website door',
+  href = 'https://www.tielo-digital.nl',
+  newTab = true,
+  ink,
+  class: extra = '',
+} = Astro.props
+
+const target = newTab ? '_blank' : undefined
+const rel = newTab ? 'noopener' : undefined
+const style = ink ? `color:${ink}` : undefined
+---
+
+{variant === 'bar' ? (
+  <div class:list={['tielo-credit-bar', extra]} style={style}>
+    <a class="tielo-credit" href={href} target={target} rel={rel}>
+      <span class="tielo-mark" aria-hidden="true" />
+      <span class="tielo-credit__text">{prefix} <strong>Tielo Digital</strong></span>
+    </a>
+  </div>
+) : (
+  <a
+    class:list={['tielo-credit', variant === 'badge' && 'tielo-credit--badge', extra]}
+    style={style}
+    href={href}
+    target={target}
+    rel={rel}
+  >
+    <span class="tielo-mark" aria-hidden="true" />
+    <span class="tielo-credit__text">{prefix} <strong>Tielo Digital</strong></span>
+  </a>
+)}
+
+<style>
+  /* Monochrome, inherits currentColor. Transparent — reads on any background. */
+  .tielo-credit {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-size: 0.8125rem; /* 13px */
+    line-height: 1;
+    color: currentColor;
+    text-decoration: none;
+    transition: opacity 0.15s ease, background-color 0.15s ease;
+  }
+  .tielo-credit:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+    border-radius: 999px;
+  }
+  .tielo-credit__text { white-space: nowrap; }
+  .tielo-credit__text strong { font-weight: 600; }
+  .tielo-credit:hover .tielo-credit__text strong { text-decoration: underline; text-underline-offset: 2px; }
+
+  /* The real TD mark: mask = shape, currentColor = colour. */
+  .tielo-mark {
+    display: block;
+    flex: none;
+    height: 1.2em;
+    aspect-ratio: 104 / 66;
+    background-color: currentColor;
+    --td: url("data:image/png;base64,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");
+    -webkit-mask: var(--td) center / contain no-repeat;
+    mask: var(--td) center / contain no-repeat;
+  }
+
+  /* bar + inline read as a quiet credit (muted); badge is a full-strength stamp */
+  .tielo-credit:not(.tielo-credit--badge) { opacity: 0.6; }
+  .tielo-credit:not(.tielo-credit--badge):hover,
+  .tielo-credit:focus-visible { opacity: 1; }
+
+  /* variant: badge — ghost outline pill for a footer corner */
+  .tielo-credit--badge {
+    padding: 0.4rem 0.82rem 0.4rem 0.72rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, currentColor 26%, transparent);
+    background: transparent;
+  }
+  .tielo-credit--badge:hover { background: color-mix(in srgb, currentColor 7%, transparent); }
+
+  /* variant: bar — centered sub-footer strip */
+  .tielo-credit-bar {
+    display: flex;
+    justify-content: center;
+    padding: 1rem 1.25rem;
+    border-top: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tielo-credit { transition: none; }
+  }
+</style>

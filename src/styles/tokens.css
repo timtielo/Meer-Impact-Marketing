@@ -1,0 +1,105 @@
+/* ============================================================================
+   Meer Impact Marketing, "Ad Manager" design system tokens
+   Performance-marketing identity: dashboard-grade data legibility.
+   Orange + deep navy + data-blue on cool light. Space Grotesk × Instrument Sans.
+   ========================================================================== */
+
+:root {
+  /* ---- Brand ---- */
+  --mi-orange: #f2600c;
+  --mi-orange-strong: #d24e08;
+  --mi-orange-tint: #fff1e7;
+  --mi-orange-tint-2: #ffe4d3;
+
+  /* ---- Ink / navy ---- */
+  --mi-ink: #0b1f3a;        /* headings, dark panels */
+  --mi-ink-2: #16304f;      /* dark panel gradient end */
+  --mi-slate: #3a4a63;      /* body on light where stronger needed */
+  --mi-muted: #5b6b82;      /* secondary text */
+  --mi-faint: #8695a9;      /* tertiary / captions */
+
+  /* ---- Data ---- */
+  --mi-blue: #2563eb;       /* chart / info accent */
+  --mi-blue-tint: #e8effd;
+
+  /* ---- Surfaces ---- */
+  --mi-canvas: #eef1f6;     /* page background */
+  --mi-surface: #ffffff;    /* cards / panels */
+  --mi-surface-2: #f6f8fb;  /* inset / alt rows */
+  --mi-border: #e3e9f1;
+  --mi-border-strong: #cbd5e3;
+
+  /* ---- Functional ---- */
+  --mi-up: #16a34a;         /* positive delta */
+  --mi-up-tint: #e7f6ed;
+  --mi-down: #dc2626;       /* negative delta */
+  --mi-down-tint: #fdeaea;
+  --mi-warn: #d97706;
+  --mi-warn-tint: #fdf3e5;
+
+  /* ---- Semantic roles ---- */
+  --color-bg: var(--mi-canvas);
+  --color-surface: var(--mi-surface);
+  --color-text: var(--mi-ink);
+  --color-text-muted: var(--mi-muted);
+  --color-primary: var(--mi-orange);
+  --color-primary-hover: var(--mi-orange-strong);
+  --color-border: var(--mi-border);
+  --color-focus: var(--mi-orange);
+
+  /* ---- Typography ---- */
+  --font-display: 'Space Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Instrument Sans Variable', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, monospace;
+
+  /* fluid type scale */
+  --fs-display: clamp(2.7rem, 5.5vw, 4.5rem);
+  --fs-h1: clamp(2.1rem, 4vw, 3.1rem);
+  --fs-h2: clamp(1.65rem, 3vw, 2.35rem);
+  --fs-h3: clamp(1.3rem, 2vw, 1.6rem);
+  --fs-h4: 1.15rem;
+  --fs-body-l: 1.15rem;
+  --fs-body: 1rem;
+  --fs-body-s: 0.9rem;
+  --fs-caption: 0.8rem;
+  --fs-overline: 0.75rem;
+  --fs-data-xl: clamp(2rem, 3.5vw, 2.75rem);
+
+  --lh-tight: 1.05;
+  --lh-snug: 1.25;
+  --lh-body: 1.6;
+  --tracking-tight: -0.02em;
+  --tracking-overline: 0.14em;
+
+  /* ---- Spacing (4px base) ---- */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4rem;
+  --sp-9: 6rem;
+
+  /* ---- Radius ---- */
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  /* ---- Elevation ---- */
+  --shadow-sm: 0 1px 2px rgba(11, 31, 58, 0.06);
+  --shadow: 0 4px 16px -6px rgba(11, 31, 58, 0.14);
+  --shadow-lg: 0 24px 48px -30px rgba(11, 31, 58, 0.4);
+  --shadow-panel: 0 30px 60px -34px rgba(11, 31, 58, 0.45);
+
+  /* ---- Layout ---- */
+  --maxw: 1180px;
+  --maxw-prose: 68ch;
+
+  /* ---- Motion ---- */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur: 0.18s;
+}

@@ -23,3 +23,12 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# Local Netlify folder
+.netlify
+
+# Astro
+.astro
+
+# Netlify adapter artifact
+deno.lock
