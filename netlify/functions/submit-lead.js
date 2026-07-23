@@ -55,27 +55,77 @@ const DROP = json(200, { ok: true, dropped: true });
 const escapeHtml = (s) =>
   String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 
-/** Render the submitted fields as a readable email body. */
+// Which site this lead came from. Set LEAD_SITE_NAME when reusing this function
+// on another client site, so the same template works everywhere.
+// (Not SITE_NAME: that one is reserved by Netlify and cannot be overridden.)
+const SITE_NAME = process.env.LEAD_SITE_NAME || 'Meer Impact Marketing';
+
+// Tielo Digital brand tokens (canonical: tielo-brand-kit/package/tokens/tokens.json)
+const BRAND = { navy: '#0b2027', orange: '#e96020', cream: '#f6f1d1', offwhite: '#f7f7f7', steel: '#40798c' };
+
+const LABELS = { voornaam: 'Voornaam', achternaam: 'Achternaam', email: 'E-mailadres', bedrijf: 'Bedrijf', telefoon: 'Telefoon', bericht: 'Bericht', dienst: 'Dienst' };
+const pretty = (k) => LABELS[k] || k.charAt(0).toUpperCase() + k.slice(1);
+
+/**
+ * Lead notification in the Tielo Digital house style. Email-safe: tables,
+ * inline styles, no flexbox/grid, 600px max width.
+ */
 function buildEmail(label, data) {
   const rows = Object.entries(data).filter(([, v]) => String(v ?? '').trim() !== '');
-  const text = [`Nieuwe aanvraag via de website (${label})`, '', ...rows.map(([k, v]) => `${k}: ${v}`)].join('\n');
-  const html = `
-    <div style="font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:#0b1f3a;line-height:1.6">
-      <p style="margin:0 0 4px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#5b6b82">Nieuwe aanvraag</p>
-      <h2 style="margin:0 0 16px;font-size:20px">${escapeHtml(label)}</h2>
-      <table cellpadding="0" cellspacing="0" style="border-collapse:collapse">
-        ${rows
-          .map(
-            ([k, v]) =>
-              `<tr>
-                 <td style="padding:6px 16px 6px 0;color:#5b6b82;vertical-align:top">${escapeHtml(k)}</td>
-                 <td style="padding:6px 0;font-weight:600">${escapeHtml(v)}</td>
-               </tr>`
-          )
-          .join('')}
-      </table>
-      <p style="margin:20px 0 0;font-size:13px;color:#5b6b82">Antwoorden gaat rechtstreeks naar de aanvrager.</p>
-    </div>`;
+  const text = [
+    `Nieuwe aanvraag via ${SITE_NAME} (${label})`,
+    '',
+    ...rows.map(([k, v]) => `${pretty(k)}: ${v}`),
+    '',
+    'Antwoorden gaat rechtstreeks naar de aanvrager.',
+  ].join('\n');
+
+  const font = "Rubik,'Helvetica Neue',Helvetica,Arial,sans-serif";
+  const html = `<!doctype html>
+<html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:24px 12px;background:${BRAND.offwhite};font-family:${font}">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #e6e6e6">
+    <tr>
+      <td style="background:${BRAND.navy};padding:20px 28px">
+        <p style="margin:0;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:${BRAND.cream};opacity:.75">Nieuwe aanvraag</p>
+        <p style="margin:4px 0 0;font-size:20px;font-weight:700;color:#ffffff">${escapeHtml(label)}</p>
+        <p style="margin:2px 0 0;font-size:13px;color:${BRAND.cream};opacity:.8">via ${escapeHtml(SITE_NAME)}</p>
+      </td>
+    </tr>
+    <tr><td style="height:4px;background:${BRAND.orange};font-size:0;line-height:0">&nbsp;</td></tr>
+    <tr>
+      <td style="padding:24px 28px">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+          ${rows
+            .map(
+              ([k, v]) =>
+                `<tr>
+                   <td style="padding:10px 16px 10px 0;font-size:13px;color:${BRAND.steel};vertical-align:top;white-space:nowrap;border-bottom:1px solid #f0f0f0">${escapeHtml(pretty(k))}</td>
+                   <td style="padding:10px 0;font-size:15px;font-weight:600;color:${BRAND.navy};border-bottom:1px solid #f0f0f0">${escapeHtml(v)}</td>
+                 </tr>`
+            )
+            .join('')}
+        </table>
+        ${
+          data.email
+            ? `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:24px">
+                 <tr><td style="background:${BRAND.orange};border-radius:8px">
+                   <a href="mailto:${escapeHtml(String(data.email).trim())}" style="display:inline-block;padding:12px 22px;font-size:15px;font-weight:600;color:#ffffff;text-decoration:none">Beantwoorden</a>
+                 </td></tr>
+               </table>`
+            : ''
+        }
+        <p style="margin:20px 0 0;font-size:13px;color:${BRAND.steel}">Je kunt ook gewoon op deze mail antwoorden, dat gaat rechtstreeks naar de aanvrager.</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding:16px 28px;background:${BRAND.cream};font-size:12px;color:${BRAND.navy}">
+        Verstuurd via je website, gebouwd door
+        <a href="https://www.tielo-digital.nl" style="color:${BRAND.navy};font-weight:700">Tielo Digital</a>
+      </td>
+    </tr>
+  </table>
+</body></html>`;
   return { text, html };
 }
 
