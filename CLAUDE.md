@@ -28,11 +28,14 @@ Full docs: [`docs/DESIGN.md`](docs/DESIGN.md) · [`docs/CONTENT.md`](docs/CONTEN
 
 ## Guardrails (do not break)
 
-1. **Forms.** Every lead form posts to the Netlify function `submit-lead`, which forwards to
-   Make.com. The webhook URLs live in **server-only env vars** (`MAKE_ANALYSE_WEBHOOK`,
-   `MAKE_GUIDE_WEBHOOK`), never in client code. Do not move webhook calls into the browser,
-   do not rename the form fields (`voornaam`, `email`, `bedrijf`), and keep the honeypot
-   (`_hp`) + timing (`_ts`) + `_form` router intact. This stops bot spam.
+1. **Forms.** Every lead form posts to the Netlify function `submit-lead`. It validates, then
+   **always emails the lead** to `LEAD_EMAIL_TO` (via Resend) and **optionally** posts it to a
+   webhook when `MAKE_ANALYSE_WEBHOOK` / `MAKE_GUIDE_WEBHOOK` is set. The email is the guaranteed
+   path; the webhook is a pass-through you can add or remove by changing an env var only.
+   All keys and webhook URLs are **server-only env vars**, never in client code. Do not move these
+   calls into the browser, do not rename the form fields (`voornaam`, `email`, `bedrijf`), and keep
+   the honeypot (`_hp`) + timing (`_ts`) + `_form` router intact. This stops bot spam.
+   Changing who receives the leads is an env-var change (`LEAD_EMAIL_TO`), not a code change.
 2. **Secrets.** Never commit `.env`. Never print or hardcode a key. `.env.example` holds placeholders.
 3. **Design system.** Style with the `.mi-*` classes and CSS variables. Do not add ad-hoc colours,
    fonts or one-off components; extend `system.css`/`sections.css` and document it in `/stijlgids`.

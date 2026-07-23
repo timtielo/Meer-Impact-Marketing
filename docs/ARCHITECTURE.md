@@ -44,9 +44,22 @@ geprerenderde pagina's.
 
 ## Formulieren
 
-Browser → `POST /.netlify/functions/submit-lead` → validatie (verplichte velden, honeypot, timing) →
-door naar de juiste Make-webhook. Webhook-URL's staan als **server-only env vars** in Netlify
-(`MAKE_ANALYSE_WEBHOOK`, `MAKE_GUIDE_WEBHOOK`), nooit in de client-bundle. Zie `netlify/functions/submit-lead.js`.
+Browser → `POST /.netlify/functions/submit-lead` → validatie (verplichte velden, honeypot `_hp`,
+timing `_ts`, `_form`-router) → **altijd een e-mail** naar `LEAD_EMAIL_TO` via Resend → **optioneel**
+ook doorsturen naar een webhook als `MAKE_ANALYSE_WEBHOOK` / `MAKE_GUIDE_WEBHOOK` gezet is.
+
+Waarom zo: de e-mail is het pad dat niet kan omvallen en dat de eigenaar zelf bezit. De webhook is
+een doorgifte voor Make, Zapier of een CRM, aan en uit te zetten met alleen een env-var. Faalt de
+e-mail, dan geeft de functie een 502 zodat de bezoeker een foutmelding ziet en opnieuw kan proberen,
+in plaats van dat de lead stil verdwijnt. Faalt alleen de webhook terwijl de mail wel aankwam, dan
+blijft het een succes (er wordt gelogd).
+
+Alle keys en webhook-URL's zijn **server-only env vars** in Netlify, nooit in de client-bundle.
+Zie `netlify/functions/submit-lead.js` en `.env.example`.
+
+**Overdracht:** de mailstroom loopt nu via het Resend-account van Tielo Digital. Overzetten naar het
+eigen Resend-account van Meer Impact is later alleen `RESEND_API_KEY` en `LEAD_EMAIL_FROM` vervangen,
+geen codewijziging.
 
 ## Analytics
 
