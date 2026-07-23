@@ -1,0 +1,58 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Navbar from '../components/ui/Navbar.astro';
+import Footer from '../components/ui/Footer.astro';
+import LeadForm from '../components/ui/LeadForm.astro';
+import '../styles/sections.css';
+
+export const prerender = true;
+
+const inhoud = [
+  'De opzet van een Meta-campagne die proeflessen oplevert',
+  'Welk budget je nodig hebt, met een simpele rekensom',
+  'De vijf fouten die de meeste trainers maken',
+  'Een checklist om je pixel goed te zetten',
+];
+---
+<SiteLayout
+  title="Gratis guide voor personal trainers en sportscholen | Meer Impact"
+  description="Ontvang de gratis guide: zo haal je met Meta Ads structureel nieuwe klanten binnen als personal trainer, sportschool of coach."
+>
+  <Navbar />
+  <main>
+    <section class="mi-section mi-wrap">
+      <nav aria-label="Kruimelpad"><ol class="mi-breadcrumb"><li><a href="/">Home</a></li><li>Gratis guide</li></ol></nav>
+      <div class="mi-hero__grid" style="margin-top:1.5rem">
+        <div>
+          <span class="mi-badge"><i class="mi-dot"></i> Direct in je inbox</span>
+          <h1 class="mi-display" style="font-size:var(--fs-h1);margin:1rem 0 .75rem">De gratis guide voor meer klanten</h1>
+          <p class="mi-lede">Praktisch, geen theorie. Geschreven voor personal trainers, sportscholen en coaches die zelf willen begrijpen wat werkt.</p>
+
+          <h2 class="mi-h3" style="margin:2rem 0 1rem">Wat erin staat</h2>
+          <ul class="mi-plan__list">
+            {inhoud.map((p) => <li>{p}</li>)}
+          </ul>
+
+          <div class="mi-card" style="margin-top:2rem;background:var(--mi-surface-2)">
+            <p class="mi-muted" style="font-size:var(--fs-body-s)">Liever meteen sparren over jouw situatie? Vraag dan een <a href="/marketing-analyse" style="color:var(--mi-orange);font-weight:600">gratis analyse</a> aan.</p>
+          </div>
+        </div>
+
+        <div class="mi-card" style="padding:var(--sp-6)">
+          <h2 class="mi-h3" style="margin-bottom:1.25rem">Stuur me de guide</h2>
+          <LeadForm
+            formType="guide"
+            submitLabel="Stuur de gratis guide"
+            successUrl="/gratis-guide-bedankt"
+            note="Je krijgt de guide per mail. Geen spam, uitschrijven kan altijd."
+            fields={[
+              { name: 'voornaam', label: 'Voornaam', autocomplete: 'given-name', placeholder: 'Bijv. Lars' },
+              { name: 'email', label: 'E-mailadres', type: 'email', autocomplete: 'email', placeholder: 'jij@bedrijf.nl' },
+            ]}
+          />
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</SiteLayout>

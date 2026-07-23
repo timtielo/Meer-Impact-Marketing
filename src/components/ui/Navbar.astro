@@ -1,22 +1,23 @@
 ---
 // Site navbar: transparent over the hero, solid on scroll (JS adds .is-scrolled).
-// Mega dropdown for services (native <details>), full-screen mobile sheet.
+// Mega dropdown for services (hover + click + keyboard), full-screen mobile sheet.
+// Every href points at a real route. Do not put placeholders here.
 const services = [
-  { name: 'Meta Ads', desc: 'Advertenties die leads opleveren', href: '#' },
-  { name: 'Meekijksessie', desc: 'Zelf leren, live begeleid', href: '#' },
-  { name: 'SEO', desc: 'Beter vindbaar in Google', href: '#' },
-  { name: 'Email Marketing', desc: 'Flows die klanten terugbrengen', href: '#' },
+  { name: 'Meta Ads', desc: 'Advertenties die leads opleveren', href: '/diensten/meta-ads' },
+  { name: 'Meekijksessie', desc: 'Zelf leren, live begeleid', href: '/diensten/meekijksessie' },
+  { name: 'SEO', desc: 'Beter vindbaar in Google', href: '/diensten/seo' },
+  { name: 'Email Marketing', desc: 'Flows die klanten terugbrengen', href: '/diensten/email-marketing' },
 ];
 const links = [
-  { name: 'Cases', href: '#' },
-  { name: 'Kennisbank', href: '#' },
-  { name: 'Over ons', href: '#' },
+  { name: 'Cases', href: '/cases' },
+  { name: 'Kennisbank', href: '/kennisbank' },
+  { name: 'Contact', href: '/contact' },
 ];
 ---
 <nav class="mi-navbar">
   <div class="mi-wrap mi-navbar__in">
     <a href="/" aria-label="Meer Impact Marketing home">
-      <img class="mi-navbar__logo" src="/logo-horizontal.png" alt="Meer Impact Marketing" width="150" height="34" />
+      <img class="mi-navbar__logo" src="/logo-horizontal.png" alt="Meer Impact Marketing" width="75" height="34" />
     </a>
 
     <div class="mi-navbar__links">
@@ -34,15 +35,15 @@ const links = [
               </a>
             ))}
           </div>
-          <a class="mi-drop__all mi-arrowp" role="menuitem" href="#">Bekijk alle diensten <span class="mi-arrow">→</span></a>
+          <a class="mi-drop__all mi-arrowp" role="menuitem" href="/diensten">Bekijk alle diensten <span class="mi-arrow">→</span></a>
         </div>
       </div>
       {links.map((l) => <a class="mi-navbar__link" href={l.href}>{l.name}</a>)}
     </div>
 
     <div class="mi-navbar__actions">
-      <a class="mi-btn mi-btn--ghost mi-btn--sm" href="tel:+31000000000">Bel ons</a>
-      <a class="mi-btn mi-btn--primary mi-btn--sm mi-arrowp" href="#analyse">Gratis analyse <span class="mi-arrow">→</span></a>
+      <a class="mi-btn mi-btn--ghost mi-btn--sm" href="/contact">Contact</a>
+      <a class="mi-btn mi-btn--primary mi-btn--sm mi-arrowp" href="/marketing-analyse">Gratis analyse <span class="mi-arrow">→</span></a>
       <button class="mi-navbar__toggle" data-menu-open aria-label="Menu openen" aria-controls="mobile-menu">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </button>
@@ -54,8 +55,9 @@ const links = [
   <div class="mi-mobile__backdrop" data-menu-close></div>
   <div class="mi-mobile__sheet">
     <button class="mi-mobile__close" data-menu-close aria-label="Menu sluiten">&times;</button>
+    <a href="/diensten">Alle diensten</a>
     {services.map((s) => <a href={s.href}>{s.name}</a>)}
     {links.map((l) => <a href={l.href}>{l.name}</a>)}
-    <a class="mi-btn mi-btn--primary" href="#analyse" style="margin-top:auto">Gratis analyse →</a>
+    <a class="mi-btn mi-btn--primary" href="/marketing-analyse" style="margin-top:auto">Gratis analyse →</a>
   </div>
 </div>

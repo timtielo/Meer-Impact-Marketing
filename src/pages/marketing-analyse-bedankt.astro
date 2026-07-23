@@ -1,0 +1,55 @@
+---
+import { getCollection } from 'astro:content';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Navbar from '../components/ui/Navbar.astro';
+import Footer from '../components/ui/Footer.astro';
+import '../styles/sections.css';
+
+export const prerender = true;
+
+const posts = (await getCollection('blog')).filter((p) => !p.data.draft).slice(0, 2);
+---
+<SiteLayout
+  title="Bedankt voor je aanvraag | Meer Impact Marketing"
+  description="We hebben je aanvraag ontvangen en nemen binnen 1 werkdag contact op."
+  noindex
+>
+  <Navbar />
+  <main>
+    <section class="mi-section mi-wrap">
+      <div style="max-width:640px">
+        <span class="mi-live" style="font-size:var(--fs-body-s)">Aanvraag ontvangen</span>
+        <h1 class="mi-display" style="font-size:var(--fs-h1);margin:.75rem 0">Bedankt, we gaan ermee aan de slag.</h1>
+        <p class="mi-lede">Je aanvraag staat bij ons binnen. Je hoort binnen 1 werkdag van ons, met een concreet plan in plaats van een standaardmailtje.</p>
+
+        <div class="mi-alert mi-alert--success" style="margin-top:1.5rem">
+          <span>✓</span>
+          <div><strong>Wat er nu gebeurt</strong>We bekijken je site, je vindbaarheid en je advertenties, en mailen je onze bevindingen.</div>
+        </div>
+
+        <div class="mi-hero__cta" style="margin-top:2rem">
+          <a href="/cases" class="mi-btn mi-btn--primary mi-arrowp">Bekijk onze cases <span class="mi-arrow">→</span></a>
+          <a href="/kennisbank" class="mi-btn mi-btn--ghost">Lees de kennisbank</a>
+        </div>
+      </div>
+
+      {posts.length > 0 && (
+        <div style="margin-top:3rem">
+          <h2 class="mi-h3" style="margin-bottom:1.25rem">Alvast iets om te lezen</h2>
+          <div class="mi-cardgrid">
+            {posts.map((p) => (
+              <a class="mi-card mi-mediacard mi-lift mi-glow mi-arrowp" href={`/kennisbank/${p.id}`} style="text-decoration:none">
+                <div class="mi-mediacard__body">
+                  <span class="mi-tag mi-tag--blue" style="align-self:flex-start">{p.data.category}</span>
+                  <h3 style="font-size:1rem">{p.data.title}</h3>
+                  <div class="mi-mediacard__foot"><span class="mi-arrow" style="margin-left:auto;color:var(--mi-orange)">→</span></div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </section>
+  </main>
+  <Footer />
+</SiteLayout>

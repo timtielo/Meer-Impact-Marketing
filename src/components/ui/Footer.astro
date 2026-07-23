@@ -1,11 +1,36 @@
 ---
 // Site footer: newsletter, link columns, oversized wordmark, dynamic year.
+// The Tielo credit is the shared TieloCredit component (real TD mark + dofollow
+// backlink). Keep it: it ships on every Tielo-built site. Do not replace it with
+// plain text. `ink` is forced to white because this footer is dark navy.
 import TieloCredit from './TieloCredit.astro';
 const year = new Date().getFullYear();
 const cols = [
-  { h: 'Diensten', links: ['Meta Ads', 'Meekijksessie', 'SEO', 'Email Marketing'] },
-  { h: 'Bedrijf', links: ['Cases', 'Over ons', 'Contact', 'Werken bij'] },
-  { h: 'Kennisbank', links: ['Alle artikelen', 'Meta Pixel', 'SEO voor PTs', 'Gratis guide'] },
+  {
+    h: 'Diensten',
+    links: [
+      { t: 'Meta Ads', href: '/diensten/meta-ads' },
+      { t: 'Meekijksessie', href: '/diensten/meekijksessie' },
+      { t: 'SEO', href: '/diensten/seo' },
+      { t: 'Email Marketing', href: '/diensten/email-marketing' },
+    ],
+  },
+  {
+    h: 'Bedrijf',
+    links: [
+      { t: 'Cases', href: '/cases' },
+      { t: 'Kennisbank', href: '/kennisbank' },
+      { t: 'Contact', href: '/contact' },
+    ],
+  },
+  {
+    h: 'Aanvragen',
+    links: [
+      { t: 'Gratis analyse', href: '/marketing-analyse' },
+      { t: 'Gratis guide', href: '/gratis-guide' },
+      { t: 'Alle diensten', href: '/diensten' },
+    ],
+  },
 ];
 ---
 <footer class="mi-sitefooter">
@@ -15,21 +40,18 @@ const cols = [
         <h3>Marketing-tips voor trainers &amp; sportscholen</h3>
         <p style="color:rgba(255,255,255,0.7);margin-top:.4rem">Eén mail per maand. Concrete tactieken, geen ruis.</p>
       </div>
-      <form class="mi-sitefooter__form" onsubmit="return false">
-        <input type="email" placeholder="jij@bedrijf.nl" aria-label="E-mailadres" />
-        <button class="mi-btn mi-btn--primary" type="submit">Inschrijven</button>
-      </form>
+      <a class="mi-btn mi-btn--primary mi-arrowp" href="/gratis-guide">Ontvang de gratis guide <span class="mi-arrow">→</span></a>
     </div>
 
     <div class="mi-sitefooter__cols">
       <div class="mi-sitefooter__col">
-        <img src="/logo-horizontal-white.png" alt="Meer Impact Marketing" width="160" height="36" style="height:34px;width:auto" />
+        <img src="/logo-horizontal-white.png" alt="Meer Impact Marketing" width="75" height="34" style="height:34px;width:auto" />
         <p style="margin-top:.75rem;font-size:.9rem;max-width:32ch">Meta Ads &amp; SEO die groei opleveren. Specialist in de fitnessbranche.</p>
       </div>
       {cols.map((c) => (
         <div class="mi-sitefooter__col">
           <h4>{c.h}</h4>
-          {c.links.map((l) => <a href="#">{l}</a>)}
+          {c.links.map((l) => <a href={l.href}>{l.t}</a>)}
         </div>
       ))}
     </div>
@@ -37,9 +59,9 @@ const cols = [
     <div class="mi-sitefooter__word" aria-hidden="true">MEER IMPACT</div>
 
     <div class="mi-sitefooter__bottom">
-      <span>© {year} Meer Impact Marketing · KvK 00000000</span>
+      <span>© {year} Meer Impact Marketing</span>
       <span class="mi-live" style="color:#7ee2a8">Beschikbaar voor nieuwe klanten</span>
-      <TieloCredit variant="inline" />
+      <TieloCredit variant="badge" ink="#ffffff" />
     </div>
   </div>
 </footer>

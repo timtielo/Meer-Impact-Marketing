@@ -83,9 +83,9 @@ Alles wat vandaag live staat moet blijven werken. Status:
 | `/diensten`, `/diensten/meta-ads`, `/email-marketing`, `/copywriting`, `/social-media-management` | zelfde URL | ✅ gebouwd |
 | `/blog`, `/blog/:slug` | `/kennisbank`, `/kennisbank/:slug` | ✅ redirect 301 in `netlify.toml` |
 | `/testimonials` | `/cases` | ✅ redirect 301 |
-| `/contact` | zelfde URL | ❌ nog bouwen |
-| `/marketing-analyse` + `/marketing-analyse-bedankt` | zelfde URL | ❌ nog bouwen |
-| `/gratis-guide` + `/gratis-guide-bedankt` | zelfde URL | ❌ nog bouwen |
+| `/contact` | zelfde URL | ✅ gebouwd, formulier op `submit-lead` |
+| `/marketing-analyse` + `/marketing-analyse-bedankt` | zelfde URL | ✅ gebouwd, formulier op `submit-lead` |
+| `/gratis-guide` + `/gratis-guide-bedankt` | zelfde URL | ✅ gebouwd, formulier op `submit-lead` |
 | `/guide`, `/marketing` (ad-landers zonder header/footer) | zelfde URL | ❌ nog bouwen, **staan onder Meta-advertenties** |
 | `/privacy`, `/voorwaarden` | zelfde URL | ❌ nog bouwen |
 | `/visitekaartje`, `/visitekaartje-success` | zelfde URL aanhouden (QR op gedrukte kaartjes) | ❌ nog bouwen |

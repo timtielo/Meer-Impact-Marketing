@@ -1,0 +1,66 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Navbar from '../components/ui/Navbar.astro';
+import Footer from '../components/ui/Footer.astro';
+import LeadForm from '../components/ui/LeadForm.astro';
+import '../styles/sections.css';
+
+export const prerender = true;
+
+const email = 'lars@meerimpactmarketing.nl';
+---
+<SiteLayout
+  title="Contact | Meer Impact Marketing"
+  description="Neem contact op met Meer Impact Marketing. Meta Ads en SEO voor personal trainers, sportscholen en coaches. Reactie binnen 1 werkdag."
+>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: 'Contact, Meer Impact Marketing',
+    url: 'https://www.meerimpactmarketing.nl/contact',
+  })} />
+
+  <Navbar />
+  <main>
+    <section class="mi-section mi-wrap">
+      <nav aria-label="Kruimelpad"><ol class="mi-breadcrumb"><li><a href="/">Home</a></li><li>Contact</li></ol></nav>
+      <div class="mi-hero__grid" style="margin-top:1.5rem">
+        <div>
+          <span class="mi-overline">Contact</span>
+          <h1 class="mi-display" style="font-size:var(--fs-h1);margin:.5rem 0 .75rem">Even sparren over jouw groei?</h1>
+          <p class="mi-lede">Stel je vraag, of vraag meteen een gratis analyse aan. Je krijgt binnen 1 werkdag antwoord van Lars zelf.</p>
+
+          <div class="mi-card" style="margin-top:2rem">
+            <div class="mi-stat__label"><span>E-mail</span></div>
+            <p style="margin-top:.4rem"><a href={`mailto:${email}`} style="color:var(--mi-orange);font-weight:600;font-size:1.05rem">{email}</a></p>
+            <hr class="mi-hr" style="margin:1.25rem 0" />
+            <div class="mi-stat__label"><span>Waar we voor gaan</span></div>
+            <p class="mi-muted" style="font-size:var(--fs-body-s);margin-top:.4rem">Meta Ads en SEO voor personal trainers, sportscholen en coaches. Korte lijnen, geen accountmanagers.</p>
+          </div>
+
+          <div class="mi-hero__cta" style="margin-top:1.5rem">
+            <a href="/marketing-analyse" class="mi-btn mi-btn--ghost mi-btn--sm">Gratis analyse</a>
+            <a href="/cases" class="mi-btn mi-btn--ghost mi-btn--sm">Bekijk cases</a>
+          </div>
+        </div>
+
+        <div class="mi-card" style="padding:var(--sp-6)">
+          <h2 class="mi-h3" style="margin-bottom:1.25rem">Stuur een bericht</h2>
+          <LeadForm
+            formType="analyse"
+            submitLabel="Verstuur bericht"
+            successUrl="/marketing-analyse-bedankt"
+            note="We gebruiken je gegevens alleen om te reageren op je bericht."
+            fields={[
+              { name: 'voornaam', label: 'Voornaam', autocomplete: 'given-name', placeholder: 'Bijv. Lars' },
+              { name: 'email', label: 'E-mailadres', type: 'email', autocomplete: 'email', placeholder: 'jij@bedrijf.nl' },
+              { name: 'bedrijf', label: 'Bedrijf', autocomplete: 'organization', placeholder: 'Studio, sportschool of praktijk' },
+              { name: 'bericht', label: 'Je bericht', type: 'textarea', required: false, placeholder: 'Waar kunnen we mee helpen?' },
+            ]}
+          />
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</SiteLayout>

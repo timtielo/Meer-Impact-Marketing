@@ -1,0 +1,116 @@
+---
+// Lead form wired to the submit-lead Netlify function.
+// Includes the anti-spam pieces the backend expects: a hidden honeypot (_hp),
+// a render timestamp (_ts) and the form router key (_form). Do not rename these.
+interface Field {
+  name: string;
+  label: string;
+  type?: string;
+  required?: boolean;
+  placeholder?: string;
+  autocomplete?: string;
+}
+interface Props {
+  formType: 'analyse' | 'guide' | 'visitekaartje';
+  fields: Field[];
+  submitLabel: string;
+  successUrl: string;
+  note?: string;
+}
+const { formType, fields, submitLabel, successUrl, note } = Astro.props;
+---
+<form class="mi-leadform mi-stack" data-lead-form data-form-type={formType} data-success={successUrl} novalidate>
+  {fields.map((f) => (
+    <div class="mi-field">
+      <label class="mi-label" for={`f-${formType}-${f.name}`}>
+        {f.label} {f.required !== false && <span class="mi-req">*</span>}
+      </label>
+      {f.type === 'textarea' ? (
+        <textarea class="mi-textarea" id={`f-${formType}-${f.name}`} name={f.name} rows="4" placeholder={f.placeholder} required={f.required !== false}></textarea>
+      ) : (
+        <input
+          class="mi-input"
+          id={`f-${formType}-${f.name}`}
+          name={f.name}
+          type={f.type || 'text'}
+          placeholder={f.placeholder}
+          autocomplete={f.autocomplete}
+          required={f.required !== false}
+        />
+      )}
+      <span class="mi-error" data-error-for={f.name} hidden></span>
+    </div>
+  ))}
+
+  {/* Honeypot: hidden from people, irresistible to bots. */}
+  <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">
+    <label>Laat dit veld leeg<input type="text" name="_hp" tabindex="-1" autocomplete="off" /></label>
+  </div>
+
+  <button class="mi-btn mi-btn--primary mi-btn--lg mi-arrowp" type="submit" data-submit>
+    <span data-submit-label>{submitLabel}</span> <span class="mi-arrow">→</span>
+  </button>
+
+  {note && <p class="mi-help">{note}</p>}
+
+  <div class="mi-alert mi-alert--error" data-form-error hidden>
+    <span>✕</span><div><strong>Er ging iets mis</strong><span data-form-error-text>Probeer het opnieuw.</span></div>
+  </div>
+</form>
+
+<script>
+  document.querySelectorAll('[data-lead-form]').forEach((form) => {
+    const started = Date.now();
+    const btn = form.querySelector('[data-submit]');
+    const label = form.querySelector('[data-submit-label]');
+    const errBox = form.querySelector('[data-form-error]');
+    const errText = form.querySelector('[data-form-error-text]');
+    const original = label ? label.textContent : '';
+
+    const showFieldErrors = () => {
+      let firstBad = null;
+      form.querySelectorAll('input[name], textarea[name]').forEach((el) => {
+        if (el.name.startsWith('_')) return;
+        const slot = form.querySelector(`[data-error-for="${el.name}"]`);
+        const bad = el.required && !el.value.trim();
+        const badEmail = el.type === 'email' && el.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value);
+        if (slot) {
+          slot.hidden = !(bad || badEmail);
+          slot.textContent = badEmail ? 'Vul een geldig e-mailadres in.' : 'Dit veld is verplicht.';
+        }
+        el.setAttribute('aria-invalid', bad || badEmail ? 'true' : 'false');
+        if ((bad || badEmail) && !firstBad) firstBad = el;
+      });
+      return firstBad;
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (errBox) errBox.hidden = true;
+
+      const bad = showFieldErrors();
+      if (bad) { bad.focus(); return; }
+
+      const data = { _form: form.dataset.formType, _ts: started };
+      new FormData(form).forEach((v, k) => { data[k] = typeof v === 'string' ? v.trim() : v; });
+
+      if (btn) btn.disabled = true;
+      if (label) label.textContent = 'Versturen...';
+
+      try {
+        const res = await fetch('/.netlify/functions/submit-lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        if (!res.ok) throw new Error('bad status');
+        window.location.href = form.dataset.success;
+      } catch {
+        if (btn) btn.disabled = false;
+        if (label) label.textContent = original;
+        if (errBox) errBox.hidden = false;
+        if (errText) errText.textContent = 'We konden je aanvraag niet versturen. Probeer het nog eens, of mail ons direct.';
+      }
+    });
+  });
+</script>
