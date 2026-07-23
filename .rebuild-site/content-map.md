@@ -74,5 +74,28 @@ NIEUW, structuur nu klaarzetten (data-driven), later vullen. Bijv. "voor persona
   tot Lars echte beeld levert. OG-image nog te genereren.
 - Blog-beeld: stond in Contentful; bij migratie los ophalen of vervangen.
 
+## Legacy URL's en redirects (kritiek voor livegang)
+
+Alles wat vandaag live staat moet blijven werken. Status:
+
+| Oude URL | Nieuw | Status |
+|---|---|---|
+| `/diensten`, `/diensten/meta-ads`, `/email-marketing`, `/copywriting`, `/social-media-management` | zelfde URL | ✅ gebouwd |
+| `/blog`, `/blog/:slug` | `/kennisbank`, `/kennisbank/:slug` | ✅ redirect 301 in `netlify.toml` |
+| `/testimonials` | `/cases` | ✅ redirect 301 |
+| `/contact` | zelfde URL | ❌ nog bouwen |
+| `/marketing-analyse` + `/marketing-analyse-bedankt` | zelfde URL | ❌ nog bouwen |
+| `/gratis-guide` + `/gratis-guide-bedankt` | zelfde URL | ❌ nog bouwen |
+| `/guide`, `/marketing` (ad-landers zonder header/footer) | zelfde URL | ❌ nog bouwen, **staan onder Meta-advertenties** |
+| `/privacy`, `/voorwaarden` | zelfde URL | ❌ nog bouwen |
+| `/visitekaartje`, `/visitekaartje-success` | zelfde URL aanhouden (QR op gedrukte kaartjes) | ❌ nog bouwen |
+
+De pagina's zonder redirect houden bewust hun oude adres, dus die hoeven alleen gebouwd te worden.
+**Niet live zetten zolang hier nog een ❌ staat**, anders breken bestaande links en advertenties.
+`/visitekaartje` niet hernoemen: die URL staat op gedrukte visitekaartjes.
+
+Een eigen 404-pagina staat er (`src/pages/404.astro`) met doorverwijzingen naar diensten, cases en
+de kennisbank, zodat een verdwaalde bezoeker niet doodloopt.
+
 ## Migratie-volgorde
 1. Homepage (op designsysteem). 2. Content collections (services, cases, blog) + config. 3. Diensten + cases + kennisbank + zoek. 4. Funnels + ad-landers + backend-wiring. 5. Contact/juridisch/kaartje. 6. Nichepagina-structuur. 7. SEO (astro-seo + schema + sitemap + llms.txt) + PostHog. 8. /oplever-check.
